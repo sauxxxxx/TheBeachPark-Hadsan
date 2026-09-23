@@ -1,0 +1,146 @@
+/* Scroll choreography — the CSS half of useScrollChoreography.js.
+   Every effect rests in its finished state; the armed class is what hides it.
+
+   Timing follows one rule borrowed from sites that do this well: each reveal
+   holds completely still for its first ~14% before moving, and items in a group
+   are spaced far apart (240ms) rather than tumbling out together. The dead beat
+   at the start is what makes the motion read as weighted instead of eager. */
+
+:root {
+  --ease-reveal: cubic-bezier(0.33, 1, 0.45, 1);
+  --reveal-duration: 1250ms;
+  --line-duration: 1150ms;
+  --stagger: 240ms;
+  --line-stagger: 200ms;
+}
+
+/* --- Typeset line reveal ------------------------------------------------- */
+
+[data-lines] .line {
+  display: block;
+  overflow: hidden;
+  /* Cormorant's descenders sit well below the baseline; give the mask room
+     so the clip never shaves a 'y' or 'g'. */
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+[data-lines] .line__inner {
+  display: block;
+  will-change: transform;
+}
+.line-probe { display: inline; }
+
+[data-lines].reveal-armed .line__inner { transform: translate3d(0, 108%, 0); }
+[data-lines].is-revealed .line__inner {
+  animation: line-rise var(--line-duration) var(--ease-reveal) both;
+  animation-delay: calc(var(--line-index, 0) * var(--line-stagger));
+}
+
+@keyframes line-rise {
+  0%, 14% { transform: translate3d(0, 108%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* --- One-time image entrance -------------------------------------------- */
+
+/* The final layout never reflows and the photograph never scales. A centred
+   square viewing window opens on all four sides to reveal the final frame. */
+[data-image-expand] {
+  overflow: hidden;
+  clip-path: inset(
+    var(--image-expand-y, 0px)
+    var(--image-expand-x, 0px)
+  );
+}
+[data-image-expand].image-expand-armed {
+  transition: clip-path 1100ms var(--ease-reveal);
+  will-change: clip-path;
+}
+
+/* --- Staggered sequences ------------------------------------------------- */
+
+[data-sequence].reveal-armed .sequence-item {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+}
+[data-sequence].is-revealed .sequence-item {
+  animation: item-rise var(--reveal-duration) var(--ease-reveal) both;
+  animation-delay: calc(var(--sequence-index, 0) * var(--stagger));
+}
+
+/* The opacity ramp is hand-set rather than eased: the item stays faint until
+   it is most of the way home, so arrival reads as settling, not fading in. */
+@keyframes item-rise {
+  0%, 14% { opacity: 0; transform: translate3d(0, 22px, 0); }
+  34% { opacity: 0.18; }
+  56% { opacity: 0.62; }
+  72%, 100% { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* --- Plain section reveal (the quiet default) ---------------------------- */
+
+[data-reveal].reveal-armed { opacity: 0; transform: translate3d(0, 26px, 0); }
+[data-reveal].is-revealed { animation: item-rise var(--reveal-duration) var(--ease-reveal) both; }
+
+/* --- Parallax ------------------------------------------------------------ */
+
+[data-parallax] {
+  transform: translate3d(0, var(--parallax-shift, 0), 0);
+  will-change: transform;
+}
+
+/* --- The opening film settles into the page ------------------------------ */
+
+.proposal-hero {
+  height: 128svh;
+  min-height: 128svh;
+}
+.proposal-hero__stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  transform: scale(calc(1 - var(--pin-progress, 0) * .055));
+  transform-origin: center;
+  will-change: transform;
+}
+.proposal-hero__wash { opacity: calc(0.9 + var(--pin-progress, 0) * 0.1); }
+
+/* --- Hero entrance ------------------------------------------------------- */
+
+.proposal-hero__content > *,
+.proposal-hero__note {
+  animation: hero-arrive 1150ms var(--ease-reveal) backwards;
+}
+.proposal-hero h1 { animation-delay: 120ms; }
+.proposal-hero__intro { animation-delay: 320ms; }
+.proposal-hero__actions { animation-delay: 480ms; }
+.proposal-hero__note { animation-delay: 820ms; }
+
+@keyframes hero-arrive {
+  0%, 14% { opacity: 0; transform: translate3d(0, 26px, 0); }
+  100% { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proposal-hero { height: auto; min-height: 100svh; }
+  .proposal-hero__stage { position: relative; height: 100svh; transform: none; }
+  .scroll-story { min-height: auto; }
+  .scroll-story__stage { position: relative; min-height: 88svh; }
+  .scroll-story__word { color: var(--ink); transition: none; }
+  .adventure-feature { height: auto; min-height: min(88vh, 860px); }
+  .adventure-feature__bed { position: absolute; inset: 0; height: auto; }
+  .proposal-hero__poster,
+  .proposal-hero__content,
+  .proposal-hero__note,
+  .adventure-feature__bed .editorial-image img,
+  [data-parallax] { transform: none; }
+  .proposal-hero__wash { opacity: 1; }
+  .proposal-hero__content > *,
+  .proposal-hero__note,
+  [data-lines] .line__inner,
+  [data-sequence].is-revealed .sequence-item,
+  [data-reveal].is-revealed { animation: none; }
+  [data-reveal], [data-sequence] .sequence-item { opacity: 1; transform: none; }
+  [data-image-expand] { clip-path: none; }
+}

@@ -1,0 +1,306 @@
+.experiences-hero {
+  position: relative;
+  min-height: min(760px, 78svh);
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  background: var(--navy-deep);
+  color: white;
+}
+
+.experiences-hero__media,
+.experiences-hero__media img,
+.experiences-hero__wash {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.experiences-hero__media img {
+  object-fit: cover;
+  object-position: center 54%;
+  filter: saturate(.88) contrast(1.03);
+}
+
+.experiences-hero__wash {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(3, 31, 53, .74), rgba(3, 31, 53, .12) 70%),
+    linear-gradient(0deg, rgba(3, 31, 53, .72), transparent 62%);
+}
+
+.experiences-hero__content {
+  position: relative;
+  z-index: 2;
+  padding-bottom: clamp(3.75rem, 8vh, 6.25rem);
+}
+
+.experiences-hero h1 {
+  max-width: 11ch;
+  margin: 0 0 1.8rem;
+  font-size: clamp(38px, 4.1vw, 54px);
+}
+
+.experiences-hero__content > a {
+  display: inline-flex;
+  align-items: center;
+  gap: .85rem;
+  color: white;
+  font-size: var(--control-size);
+  font-weight: var(--control-weight);
+  text-decoration: none;
+}
+
+.experiences-hero__content > a span {
+  width: 3.5rem;
+  height: 1px;
+  background: currentColor;
+  transition: width 300ms var(--ease);
+}
+
+.experiences-hero__content > a:hover span,
+.experiences-hero__content > a:focus-visible span { width: 5rem; }
+
+.experiences-intro {
+  padding-block: var(--space-section);
+}
+
+.experiences-discovery__head h2 {
+  font-size: clamp(28px, 2.6vw, 38px);
+}
+
+.experiences-intro p {
+  max-width: 70ch;
+  margin: 0 auto;
+  color: var(--muted);
+  text-align: center;
+}
+
+.experiences-discovery {
+  padding-block: clamp(4.5rem, 7vw, 7rem);
+  background: var(--paper);
+}
+
+.experiences-discovery__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.experiences-discovery__head h2 { margin: 0; }
+
+.experiences-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: .3rem 1.25rem;
+}
+
+.experiences-filters button {
+  min-height: 44px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  padding: .45rem 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: var(--control-size);
+  cursor: pointer;
+  transition: border-color 220ms ease, color 220ms ease;
+}
+
+.experiences-filters button:hover,
+.experiences-filters button:focus-visible,
+.experiences-filters button.is-active {
+  border-color: var(--coral);
+  color: var(--ink);
+}
+
+.experience-journal {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: .75rem;
+}
+
+.experience-card { min-width: 0; height: 23rem; overflow: hidden; }
+.experience-card--feature { grid-column: span 8; height: 30rem; }
+.experience-card--tall { grid-column: span 4; height: 30rem; }
+.experience-card--wide { grid-column: span 8; }
+.experience-card--standard { grid-column: span 4; }
+
+.experience-card > a {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: hidden;
+  background: var(--navy);
+  color: white;
+  text-decoration: none;
+}
+
+.experience-card .editorial-image,
+.experience-card .editorial-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.experience-card .editorial-image img {
+  object-fit: cover;
+  object-position: var(--experience-position, center);
+  filter: saturate(.88) contrast(1.03);
+  transition: transform 850ms var(--ease), filter 500ms ease;
+}
+
+.experience-card__wash {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(0deg, rgba(4, 32, 43, .9), rgba(4, 32, 43, .15) 58%, transparent 78%);
+  transition: background 500ms ease;
+}
+
+.experience-card__content {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: clamp(1.35rem, 2.4vw, 2rem);
+}
+
+.experience-card h3 {
+  max-width: 13ch;
+  margin: 0;
+  font-size: clamp(1.65rem, 2.4vw, 2.2rem);
+  line-height: 1;
+}
+
+.experience-card__detail {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(.8rem);
+  transition: max-height 450ms var(--ease), opacity 350ms ease, transform 450ms var(--ease);
+}
+
+.experience-card__detail > span {
+  display: block;
+  max-width: 33rem;
+  margin: .9rem 0 1rem;
+  color: rgba(255, 255, 255, .82);
+  font-size: .82rem;
+  line-height: 1.55;
+}
+
+.experience-card__detail strong {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: var(--control-size);
+  font-weight: var(--control-weight);
+}
+
+.experience-card__detail svg {
+  width: .95rem;
+  height: .95rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+}
+
+.experience-card > a:hover .editorial-image img,
+.experience-card > a:focus-visible .editorial-image img {
+  transform: scale(1.035);
+  filter: saturate(1) contrast(1.03);
+}
+
+.experience-card > a:hover .experience-card__wash,
+.experience-card > a:focus-visible .experience-card__wash {
+  background: linear-gradient(0deg, rgba(4, 32, 43, .94), rgba(4, 32, 43, .34) 66%, rgba(4, 32, 43, .05));
+}
+
+.experience-card > a:hover .experience-card__detail,
+.experience-card > a:focus-visible .experience-card__detail {
+  max-height: 10rem;
+  opacity: 1;
+  transform: none;
+}
+
+.experience-card__type {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.experience-card__type span {
+  max-width: 8ch;
+  color: rgba(255, 255, 255, .08);
+  font-family: var(--display);
+  font-size: clamp(5rem, 10vw, 9rem);
+  font-weight: 300;
+  letter-spacing: -.04em;
+  line-height: .72;
+  text-align: center;
+  transform: rotate(-5deg);
+}
+
+.experience-card--deep > a { background: var(--navy-deep); }
+.experience-card--sunset > a { background: var(--coral-deep); }
+.experience-card--sunset .experience-card__wash,
+.experience-card--deep .experience-card__wash { background: linear-gradient(0deg, rgba(4, 32, 43, .52), transparent 70%); }
+
+.experiences-discovery__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+}
+
+.experiences-discovery__foot p { margin: 0; color: var(--muted); font-size: .75rem; }
+.experiences-discovery__foot a { color: var(--ink); font-size: var(--control-size); text-underline-offset: .4rem; }
+
+@media (max-width: 900px) {
+  .experiences-discovery__head { align-items: flex-start; flex-direction: column; }
+  .experiences-filters { justify-content: flex-start; }
+}
+
+@media (max-width: 640px) {
+  .experiences-hero { min-height: max(34rem, 78svh); }
+  .experiences-hero__media img { object-position: 62% center; }
+  .experiences-hero__content { padding-bottom: 3.5rem; }
+  .experiences-hero h1 { max-width: 10ch; margin-bottom: 1.4rem; }
+  .experiences-intro { padding-block: 4.75rem; }
+  .experiences-discovery { padding-block: 4.5rem; }
+  .experiences-discovery__head { margin-bottom: 2rem; }
+  .experiences-filters { gap: .15rem 1rem; }
+  .experience-journal { grid-template-columns: 1fr; gap: .6rem; }
+  .experience-card,
+  .experience-card--feature,
+  .experience-card--tall,
+  .experience-card--wide,
+  .experience-card--standard { grid-column: 1; height: 23rem; }
+  .experience-card__detail { max-height: 10rem; opacity: 1; transform: none; }
+  .experience-card__content { padding: 1.4rem; }
+  .experience-card__type span { font-size: 5.5rem; }
+  .experiences-discovery__foot { align-items: flex-start; flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experiences-hero__content > a span,
+  .experience-card .editorial-image img,
+  .experience-card__detail { transition: none; }
+}

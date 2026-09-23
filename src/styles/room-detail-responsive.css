@@ -1,0 +1,97 @@
+@media (max-width: 980px) {
+  .room-hero {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .room-hero__media {
+    aspect-ratio: 16 / 10;
+  }
+
+  .room-intro {
+    padding: clamp(3.5rem, 8vw, 6rem) max(1.25rem, 6vw);
+  }
+
+  .room-intro__back {
+    margin-bottom: 2.75rem;
+  }
+
+  .room-story,
+  .room-amenities__inner,
+  .room-booking {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  .room-experience {
+    grid-template-columns: 1fr;
+  }
+
+  .room-experience__image {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 760px) {
+  .room-visual-lead {
+    padding-top: 5.25rem;
+  }
+
+  .room-hero__media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .room-intro h1 {
+    font-size: clamp(2.4rem, 11vw, 3.2rem);
+  }
+
+  .room-intro li + li::before {
+    margin-right: 0.65rem;
+  }
+
+  .room-gallery__open {
+    top: 1.1rem;
+    right: 0.55rem;
+  }
+
+  .room-gallery__grid,
+  .room-gallery__grid.has-1,
+  .room-gallery__grid.has-2,
+  .room-gallery__grid.has-3,
+  .room-gallery__grid.has-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    height: auto;
+  }
+
+  .room-gallery__grid.has-3 > :first-child,
+  .room-gallery__grid.has-4 > :first-child,
+  .room-gallery__grid > :first-child {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .room-gallery__grid button:not(:first-child) {
+    aspect-ratio: 1 / 1;
+  }
+
+  .room-story__facts > div,
+  .room-booking__notes li {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
+  .room-experience__image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .room-experience__copy {
+    padding-inline: max(1.25rem, 6vw);
+  }
+
+  .room-related__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}

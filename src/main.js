@@ -1,0 +1,16 @@
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+import './styles/base.css'
+import './styles/home.css'
+import './styles/interactions.css'
+import './styles/pages.css'
+import './styles/adventures.css'
+import './styles/motion.css'
+import './styles/responsive.css'
+import './styles/experiences.css'
+import './styles/stay-hero.css'
+import './styles/stay.css'
+import './styles/room-detail-responsive.css'
+
+createApp(App).use(router).mount('#app')

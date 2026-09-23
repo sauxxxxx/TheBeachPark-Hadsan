@@ -1,0 +1,240 @@
+.adventures-hero { position: relative; min-height: clamp(560px, 74svh, 760px); display: flex; align-items: flex-end; overflow: hidden; background: var(--navy); color: white; }
+.adventures-hero::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(4,32,43,.64), rgba(4,32,43,.08) 62%), linear-gradient(0deg, rgba(4,32,43,.64), transparent 58%); pointer-events: none; }
+.adventures-hero__media { position: absolute; inset: -4% 0; width: 100%; height: 108%; }
+.adventures-hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.adventures-hero__content { position: relative; z-index: 2; padding-bottom: clamp(56px, 8vh, 92px); text-align: center; }
+.waterdog-mark { width: clamp(150px, 15vw, 210px); display: inline-flex; margin-bottom: 20px; padding: 8px 11px; border: 1px solid rgba(255,255,255,.38); border-radius: 3px; background: rgba(255,255,255,.86); box-shadow: 0 8px 26px rgba(3,31,53,.16); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.waterdog-mark img { width: 100%; height: auto; display: block; }
+.waterdog-mark--overlay { position: absolute; right: 12px; bottom: 12px; z-index: 2; width: clamp(82px, 8vw, 112px); margin: 0; padding: 5px 7px; border-color: rgba(255,255,255,.42); background: rgba(255,255,255,.82); box-shadow: 0 5px 18px rgba(3,31,53,.14); }
+.adventures-hero h1 { max-width: 13ch; margin: 0 auto 20px; font-size: var(--type-hero); line-height: 1.02; text-wrap: balance; }
+.adventures-hero__content > p { max-width: 520px; margin: 0 auto 30px; color: rgba(255,255,255,.84); }
+.adventures-hero__jump { display: inline-flex; align-items: center; gap: 14px; color: white; font-size: var(--control-size); font-weight: var(--control-weight); letter-spacing: var(--control-tracking); text-decoration: none; }
+.adventures-hero__jump span { width: 42px; height: 1px; background: currentColor; transform-origin: left; transition: transform 300ms var(--ease); }
+.adventures-hero__jump:hover span, .adventures-hero__jump:focus-visible span { transform: scaleX(1.35); }
+
+.adventures-intro { padding-block: var(--space-section); }
+.adventures-intro > p { max-width: 70ch; margin: 0 auto; color: var(--muted); text-align: center; }
+
+.adventure-chapter { position: relative; overflow: hidden; }
+.adventure-chapter__media { position: relative; display: block; overflow: hidden; background: var(--ivory); }
+.adventure-chapter__media .editorial-image { position: absolute; inset: 0; width: 100%; height: 100%; }
+.adventure-chapter__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease), filter 500ms ease; }
+.adventure-chapter__media:hover img, .adventure-chapter__media:focus-visible img { transform: scale(1.018); filter: saturate(1.04); }
+.adventure-chapter__copy h2 { margin: 0 0 14px; font-size: var(--type-headline); }
+.adventure-chapter__copy > p { max-width: 44ch; margin: 0 0 28px; color: var(--muted); }
+.adventure-chapter__foot { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 18px; border-top: 1px solid var(--line); }
+.adventure-chapter__foot > span { color: var(--muted); font-size: var(--control-size); text-transform: capitalize; }
+.adventure-chapter__link { display: inline-flex; align-items: center; gap: 10px; color: inherit; font-size: var(--control-size); font-weight: var(--control-weight); letter-spacing: var(--control-tracking); text-decoration: none; }
+.adventure-chapter__link svg { width: 18px; height: 18px; stroke-width: 1.25; transition: transform 280ms var(--ease); }
+.adventure-chapter__link:hover svg, .adventure-chapter__link:focus-visible svg { transform: translateX(4px); }
+
+.adventure-chapter--immersive { min-height: min(860px, 88svh); color: white; }
+.adventure-chapter--immersive .adventure-chapter__media,
+.adventure-chapter--dark .adventure-chapter__media { background: var(--navy); }
+.adventure-chapter--immersive::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(4,32,43,.78), rgba(4,32,43,.02) 68%); pointer-events: none; }
+.adventure-chapter--immersive .adventure-chapter__media { position: absolute; inset: 0; }
+.adventure-chapter--immersive .adventure-chapter__copy { position: absolute; bottom: clamp(48px, 7vw, 92px); left: max(48px, calc((100vw - 1280px) / 2)); z-index: 2; width: min(520px, calc(100vw - 96px)); }
+.adventure-chapter--immersive .adventure-chapter__copy > p { color: rgba(255,255,255,.82); }
+.adventure-chapter--immersive .adventure-chapter__foot { border-color: rgba(255,255,255,.28); }
+.adventure-chapter--immersive .adventure-chapter__foot > span { color: rgba(255,255,255,.68); }
+
+.adventure-chapter--split { width: var(--page); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1.28fr) minmax(330px, .72fr); gap: clamp(44px, 8vw, 120px); align-items: center; padding-block: var(--space-section); }
+.adventure-chapter--split .adventure-chapter__media { min-height: 660px; }
+.adventure-chapter--split .adventure-chapter__media img { object-position: center; }
+
+.adventure-chapter--offset { width: var(--page); margin-inline: auto; display: grid; grid-template-columns: minmax(300px, .68fr) minmax(0, 1.32fr); gap: clamp(44px, 8vw, 120px); align-items: center; padding: 0 0 var(--space-section); }
+.adventure-chapter--offset .adventure-chapter__media { order: 2; min-height: 610px; }
+.adventure-chapter--offset .adventure-chapter__copy { order: 1; }
+.adventure-chapter--offset .adventure-chapter__media img { object-position: center; }
+
+.adventure-chapter--dark { min-height: 720px; display: grid; grid-template-columns: minmax(340px, .8fr) minmax(0, 1.2fr); align-items: stretch; background: var(--navy); color: white; }
+.adventure-chapter--dark .adventure-chapter__media { order: 2; }
+.adventure-chapter--dark .adventure-chapter__copy { align-self: center; padding: 80px clamp(48px, 7vw, 110px) 80px max(48px, calc((100vw - 1280px) / 2)); }
+.adventure-chapter--dark .adventure-chapter__copy > p { color: rgba(255,255,255,.72); }
+.adventure-chapter--dark .adventure-chapter__foot { border-color: rgba(255,255,255,.22); }
+.adventure-chapter--dark .adventure-chapter__foot > span { color: rgba(255,255,255,.6); }
+
+.adventure-chapter--panorama { width: var(--page); margin-inline: auto; padding-block: var(--space-section); }
+.adventure-chapter--panorama .adventure-chapter__media { height: min(650px, 64vw); }
+.adventure-chapter--panorama .adventure-chapter__media img { object-position: center 54%; }
+.adventure-chapter--panorama .adventure-chapter__copy { display: grid; grid-template-columns: .72fr 1.28fr; gap: clamp(40px, 8vw, 120px); align-items: start; padding-top: 34px; }
+.adventure-chapter--panorama .adventure-chapter__copy h2 { margin: 0; }
+.adventure-chapter--panorama .adventure-chapter__copy > p { margin-bottom: 24px; }
+.adventure-chapter--panorama .adventure-chapter__foot { grid-column: 2; }
+
+.adventure-catalogue { padding-block: var(--space-section); background: var(--paper); }
+.adventure-catalogue__intro { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(48px, 10vw, 150px); align-items: end; padding-bottom: clamp(62px, 8vw, 108px); }
+.adventure-catalogue__intro h2 { max-width: 14ch; margin: 0; font-size: var(--type-headline); text-wrap: balance; }
+.adventure-catalogue__intro p { max-width: 54ch; margin: 0; color: var(--muted); }
+.adventure-catalogue__groups { border-top: 1px solid var(--line); }
+.adventure-catalogue__group { padding-block: clamp(66px, 8vw, 104px); border-bottom: 1px solid var(--line); }
+.adventure-catalogue__group-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: clamp(34px, 5vw, 58px); }
+.adventure-catalogue__group-head h3 { margin: 0; font-size: var(--type-title); font-weight: 300; }
+.adventure-catalogue__group-head .script-line { margin: 0; font-size: clamp(24px, 3.2vw, 42px); transform: rotate(-2deg); }
+.adventure-catalogue__grid { min-width: 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(24px, 3vw, 42px); align-items: start; }
+.adventure-catalogue__item { min-width: 0; display: block; color: inherit; text-decoration: none; }
+.adventure-catalogue__media { position: relative; height: clamp(220px, 24vw, 340px); overflow: hidden; background: #ded8ce; }
+.adventure-catalogue__media .editorial-image, .adventure-catalogue__media img { width: 100%; height: 100%; }
+.adventure-catalogue__media img { object-fit: cover; transition: transform 800ms var(--ease), filter 500ms ease; }
+.adventure-catalogue__copy { padding-top: 20px; }
+.adventure-catalogue__copy h4 { margin: 0 0 9px; font-family: var(--display); font-size: clamp(25px, 2.4vw, 34px); font-weight: 300; letter-spacing: -.018em; }
+.adventure-catalogue__copy > p { min-height: 3em; max-width: 38ch; margin: 0 0 20px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.adventure-catalogue__copy > div { display: grid; grid-template-columns: minmax(0, 1fr) auto 20px; gap: 16px; align-items: center; padding-top: 14px; border-top: 1px solid var(--line); }
+.adventure-catalogue__copy span { color: var(--muted); font-size: 11px; }
+.adventure-catalogue__copy strong { color: var(--coral-deep); font-size: 11px; font-weight: 600; white-space: nowrap; }
+.adventure-catalogue__copy svg { width: 20px; height: 20px; stroke-width: 1.25; transition: transform 280ms var(--ease); }
+.adventure-catalogue__item:hover img, .adventure-catalogue__item:focus-visible img { transform: scale(1.025); filter: saturate(.94); }
+.adventure-catalogue__item:hover h4, .adventure-catalogue__item:focus-visible h4 { color: var(--coral-deep); }
+.adventure-catalogue__item:hover svg, .adventure-catalogue__item:focus-visible svg { transform: translateX(4px); }
+.adventure-catalogue__group--collage .adventure-catalogue__item:first-child { grid-column: span 6; }
+.adventure-catalogue__group--collage .adventure-catalogue__item:not(:first-child) { grid-column: span 3; }
+.adventure-catalogue__group--collage .adventure-catalogue__item:not(:first-child) .adventure-catalogue__media { height: clamp(200px, 20vw, 290px); }
+.adventure-catalogue__group--steps .adventure-catalogue__item { grid-column: span 4; }
+.adventure-catalogue__group--steps .adventure-catalogue__item:nth-child(2) { margin-top: 54px; }
+.adventure-catalogue__group--steps .adventure-catalogue__item:nth-child(3) { margin-top: 18px; }
+.adventure-catalogue__group--focus .adventure-catalogue__item { grid-column: span 3; }
+.adventure-catalogue__group--focus .adventure-catalogue__item:nth-child(2) { grid-column: span 6; }
+.adventure-catalogue__group--focus .adventure-catalogue__item:not(:nth-child(2)) .adventure-catalogue__media { height: clamp(200px, 19vw, 270px); }
+.adventure-catalogue__group--drift .adventure-catalogue__item:first-child { grid-column: span 4; }
+.adventure-catalogue__group--drift .adventure-catalogue__item:nth-child(2) { grid-column: span 3; margin-top: 42px; }
+.adventure-catalogue__group--drift .adventure-catalogue__item:nth-child(3) { grid-column: span 5; }
+.adventure-catalogue__group--drift .adventure-catalogue__item:nth-child(2) .adventure-catalogue__media { height: clamp(190px, 18vw, 255px); }
+.adventure-rentals { display: grid; grid-template-columns: minmax(240px, .85fr) repeat(2, minmax(220px, 1fr)); gap: clamp(28px, 4vw, 56px); align-items: start; padding-block: clamp(58px, 7vw, 88px); }
+.adventure-rentals > div .script-line { margin: 0 0 7px; font-size: clamp(23px, 3vw, 38px); }
+.adventure-rentals h3 { margin: 0 0 10px; font-size: var(--type-title); font-weight: 300; }
+.adventure-rentals > div > p:last-child { max-width: 34ch; margin: 0; color: var(--muted); font-size: 13px; }
+.adventure-rentals > a { display: block; padding-top: 14px; border-top: 1px solid var(--line); color: inherit; text-decoration: none; }
+.adventure-rentals__media { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #ded8ce; }
+.adventure-rentals__media .editorial-image, .adventure-rentals__media img { width: 100%; height: 100%; }
+.adventure-rentals__media img { object-fit: cover; transition: transform 650ms var(--ease); }
+.adventure-rentals__copy { display: grid; grid-template-columns: 1fr auto; gap: 8px 18px; align-items: baseline; padding-top: 16px; }
+.adventure-rentals__copy span { font-family: var(--display); font-size: clamp(21px, 2vw, 27px); line-height: 1.05; }
+.adventure-rentals__copy strong { color: var(--coral-deep); font-size: 11px; }
+.adventure-rentals__copy small { grid-column: 1 / -1; color: var(--muted); }
+.adventure-rentals > a:hover img, .adventure-rentals > a:focus-visible img { transform: scale(1.025); }
+.adventure-catalogue__note { max-width: 78ch; margin-top: 42px; margin-bottom: 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+
+.activity-hero-facts { width: min(760px, 100%); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 34px 0 0; overflow: hidden; border: 1px solid rgba(255,255,255,.34); border-radius: 4px; background: rgba(3,31,53,.38); box-shadow: inset 0 1px rgba(255,255,255,.08), 0 10px 30px rgba(3,31,53,.12); backdrop-filter: blur(14px) saturate(120%); -webkit-backdrop-filter: blur(14px) saturate(120%); }
+.activity-hero-facts div { min-width: 0; padding: 15px clamp(14px, 2.4vw, 30px); border-left: 1px solid rgba(255,255,255,.3); text-align: left; }
+.activity-hero-facts div:first-child { border-left: 0; }
+.activity-hero-facts dt { margin-bottom: 5px; color: rgba(255,255,255,.64); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.activity-hero-facts dd { margin: 0; color: white; font-size: 13px; line-height: 1.4; }
+.activity-page-hero { min-height: clamp(520px, 68svh, 660px); }
+.activity-page-hero::after { background: linear-gradient(0deg, rgba(3,31,53,.78), rgba(3,31,53,.08) 72%), linear-gradient(90deg, rgba(3,31,53,.25), transparent 32%, transparent 68%, rgba(3,31,53,.25)); }
+.activity-page-hero .page-hero__content { display: flex; flex-direction: column; align-items: center; padding-bottom: clamp(42px, 6vh, 64px); text-align: center; }
+.activity-page-hero .page-hero__content h1 { max-width: 14ch; margin-inline: auto; }
+.activity-page-hero .page-hero__content > p { margin-inline: auto; }
+.activity-page-hero .activity-hero-facts { justify-content: center; }
+
+.activity-detail { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(330px, .72fr); gap: clamp(54px, 10vw, 150px); align-items: start; padding-block: var(--space-section); }
+.activity-detail__story { max-width: 650px; }
+.activity-detail__back { display: inline-block; margin-bottom: clamp(48px, 6vw, 78px); padding-bottom: 5px; border-bottom: 1px solid var(--line); color: var(--ink); font-size: 12px; text-decoration: none; }
+.activity-detail__back:hover, .activity-detail__back:focus-visible { border-color: var(--coral); color: var(--coral-deep); }
+.activity-detail__story h2 { max-width: none; margin: 0 0 24px; font-size: var(--type-headline); white-space: nowrap; }
+.activity-detail__story > p { max-width: 58ch; color: var(--muted); }
+.activity-detail__story .activity-detail__lede { color: var(--ink); font-family: var(--display); font-size: var(--type-subtitle); line-height: 1.42; }
+.activity-detail__facts { padding: clamp(28px, 3vw, 40px); border: 1px solid var(--line); background: var(--paper); }
+.activity-detail__facts > dl { margin: 0 0 30px; }
+.activity-detail__facts > dl div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 22px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+.activity-detail__facts > dl div:first-child { padding-top: 0; }
+.activity-detail__facts dt { color: var(--muted); font-size: 11px; }
+.activity-detail__facts dd { margin: 0; color: var(--ink); font-size: 13px; }
+.activity-detail__facts dd small { display: block; margin-top: 5px; color: var(--muted); }
+.activity-detail__options { margin: -2px 0 30px; }
+.activity-detail__options h3 { margin: 0 0 12px; font-size: 20px; font-weight: 400; }
+.activity-detail__options ul { margin: 0; padding: 0; list-style: none; }
+.activity-detail__options li { padding: 7px 0; color: var(--muted); font-size: 13px; }
+.activity-detail__options li::before { content: '—'; margin-right: 9px; color: var(--coral); }
+.activity-detail__facts .button { width: 100%; }
+.activity-detail__email { display: block; margin-top: 16px; color: var(--muted); font-size: 11px; overflow-wrap: anywhere; text-align: center; text-underline-offset: 4px; }
+
+.activity-related { padding-bottom: var(--space-section); }
+.activity-related > header { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 28px; }
+.activity-related h2 { max-width: 14ch; margin: 0; font-size: var(--type-title); font-weight: 300; }
+.activity-related__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 38px); }
+.activity-related__list > a { min-width: 0; padding-top: 14px; border-top: 1px solid var(--line); color: inherit; text-decoration: none; }
+.activity-related__media { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: #ded8ce; }
+.activity-related__media .editorial-image, .activity-related__media img { width: 100%; height: 100%; }
+.activity-related__media img { object-fit: cover; transition: transform 700ms var(--ease), filter 450ms ease; }
+.activity-related__copy { position: relative; min-height: 120px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; padding-top: 17px; }
+.activity-related__list span { grid-column: 1 / -1; color: var(--muted); font-size: 11px; }
+.activity-related__list strong { max-width: 12ch; font-family: var(--display); font-size: clamp(24px, 2.5vw, 34px); font-weight: 300; line-height: 1.08; }
+.activity-related__list small { align-self: end; padding-right: 28px; color: var(--coral-deep); font-size: 12px; }
+.activity-related__list svg { position: absolute; right: 0; bottom: 0; width: 20px; height: 20px; stroke-width: 1.25; transition: transform 280ms var(--ease); }
+.activity-related__list > a:hover img, .activity-related__list > a:focus-visible img { transform: scale(1.025); filter: saturate(.96); }
+.activity-related__list > a:hover svg, .activity-related__list > a:focus-visible svg { transform: translateX(4px); }
+
+.adventures-confirm { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(48px, 10vw, 150px); align-items: start; padding-block: var(--space-section); border-top: 1px solid var(--line); }
+.adventures-confirm h2 { max-width: 15ch; margin: 0; font-size: var(--type-headline); text-wrap: balance; }
+.adventures-confirm > div { max-width: 560px; }
+.adventures-confirm p { margin-bottom: 28px; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .adventures-hero { min-height: clamp(560px, 72svh, 700px); }
+  .adventures-confirm { min-height: 0; grid-template-columns: 1fr; gap: 28px; }
+  .adventures-confirm h2 { max-width: 15ch; }
+  .adventure-chapter--split, .adventure-chapter--offset { width: calc(100vw - 64px); grid-template-columns: 1fr; gap: 32px; }
+  .adventure-chapter--split .adventure-chapter__media, .adventure-chapter--offset .adventure-chapter__media { order: 1; min-height: 0; aspect-ratio: 4 / 3; }
+  .adventure-chapter--split .adventure-chapter__copy, .adventure-chapter--offset .adventure-chapter__copy { order: 2; }
+  .adventure-chapter--dark { min-height: 0; grid-template-columns: 1fr; }
+  .adventure-chapter--dark .adventure-chapter__media { order: 1; min-height: 580px; }
+  .adventure-chapter--dark .adventure-chapter__copy { order: 2; padding: 58px 32px 68px; }
+  .adventure-chapter--panorama .adventure-chapter__copy { grid-template-columns: 1fr; gap: 20px; }
+  .adventure-chapter--panorama .adventure-chapter__foot { grid-column: 1; }
+  .adventure-catalogue__intro, .activity-detail { grid-template-columns: 1fr; gap: 32px; }
+  .adventure-catalogue__group--collage .adventure-catalogue__item:first-child,
+  .adventure-catalogue__group--focus .adventure-catalogue__item:nth-child(2) { grid-column: span 6; }
+  .adventure-catalogue__group--collage .adventure-catalogue__item:not(:first-child),
+  .adventure-catalogue__group--steps .adventure-catalogue__item,
+  .adventure-catalogue__group--focus .adventure-catalogue__item:not(:nth-child(2)),
+  .adventure-catalogue__group--drift .adventure-catalogue__item { grid-column: span 6; margin-top: 0; }
+  .adventure-rentals { grid-template-columns: 1fr 1fr; }
+  .adventure-rentals > div { grid-column: 1 / -1; }
+  .activity-page-hero { min-height: 620px; }
+  .activity-detail__back { margin-bottom: 38px; }
+}
+
+@media (max-width: 560px) {
+  .adventures-hero { min-height: 620px; }
+  .adventures-hero__media img { object-position: 58% center; }
+  .adventures-hero__content { padding-bottom: 48px; }
+  .waterdog-mark { width: 145px; margin-bottom: 16px; }
+  .waterdog-mark--overlay { right: 9px; bottom: 9px; width: 82px; margin: 0; }
+  .adventures-hero h1 { max-width: 13ch; font-size: clamp(38px, 10vw, 46px); }
+  .adventures-hero__content > p { max-width: 32ch; }
+  .adventures-intro { padding-block: 74px; }
+  .adventure-chapter--immersive { min-height: 660px; }
+  .adventure-chapter--immersive .adventure-chapter__media img { object-position: 58% center; }
+  .adventure-chapter--immersive .adventure-chapter__copy { bottom: 38px; left: 24px; width: calc(100vw - 48px); }
+  .adventure-chapter__copy h2 { font-size: 34px; }
+  .adventure-chapter__foot { align-items: flex-start; flex-direction: column; gap: 13px; }
+  .adventure-chapter--split, .adventure-chapter--offset { width: calc(100vw - 48px); padding-block: 72px; }
+  .adventure-chapter--offset { padding-top: 0; }
+  .adventure-chapter--dark .adventure-chapter__media { min-height: 380px; }
+  .adventure-chapter--dark .adventure-chapter__copy { padding: 52px 24px 62px; }
+  .adventure-chapter--panorama { width: calc(100vw - 48px); padding-block: 72px; }
+  .adventure-chapter--panorama .adventure-chapter__media { height: auto; aspect-ratio: 4 / 3; }
+  .adventure-chapter--panorama .adventure-chapter__copy { padding-top: 25px; }
+  .adventure-catalogue { padding-block: 74px; }
+  .adventure-catalogue__intro { padding-bottom: 52px; }
+  .adventure-catalogue__group { padding-block: 52px; }
+  .adventure-catalogue__group-head { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .adventure-catalogue__grid { grid-template-columns: 1fr; gap: 48px; }
+  .adventure-catalogue__group .adventure-catalogue__item { grid-column: 1; margin-top: 0; }
+  .adventure-catalogue__media,
+  .adventure-catalogue__group .adventure-catalogue__item .adventure-catalogue__media { height: auto; aspect-ratio: 4 / 3; }
+  .adventure-catalogue__copy > p { min-height: 0; }
+  .adventure-rentals { grid-template-columns: 1fr; }
+  .adventure-rentals > div { grid-column: 1; }
+  .activity-page-hero { min-height: 580px; }
+  .activity-hero-facts { margin-top: 25px; }
+  .activity-hero-facts div { padding: 13px 10px; }
+  .activity-detail { padding-block: 72px; }
+  .activity-detail__facts { padding: 26px 20px; }
+  .activity-detail__facts > dl div { grid-template-columns: 100px minmax(0, 1fr); gap: 16px; }
+  .activity-related > header { align-items: flex-start; flex-direction: column; }
+  .activity-related__list { grid-template-columns: 1fr; }
+  .activity-related__list > a { padding: 14px 0 30px; border-bottom: 1px solid var(--line); }
+  .activity-related__copy { min-height: 110px; }
+  .adventures-confirm { padding-block: 74px; }
+}

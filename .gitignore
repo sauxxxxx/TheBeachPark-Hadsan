@@ -1,0 +1,15 @@
+node_modules/
+dist/
+output/
+tmp/
+.playwright-cli/
+source-assets/
+.vscode/
+
+.env
+.env.*
+!.env.example
+
+*.log
+Thumbs.db
+.DS_Store
