@@ -1,5 +1,6 @@
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import BookingEnquiryBar from '../shared/BookingEnquiryBar.vue'
 
 const posterSrc = '/media/hero-poster.webp'
 const videoSrc = '/media/hero-hadsan-last.mp4'
@@ -93,13 +94,10 @@ onBeforeUnmount(() => {
       <div class="proposal-hero__content">
         <h1>A better beach day.</h1>
         <p class="proposal-hero__intro">Come for the water. Stay for the moments.</p>
-        <div class="proposal-hero__actions">
-          <RouterLink class="button button--light" to="/booking/">Book your stay</RouterLink>
-          <RouterLink class="button button--outline-light" to="/#experiences">Discover the park</RouterLink>
-        </div>
+        <div class="proposal-hero__actions"><BookingEnquiryBar /></div>
       </div>
       <div class="proposal-hero__note" aria-hidden="true">
-        <span>Stay</span><span>Eat</span><span>Make waves</span>
+        <span>Stay</span><span>Swim</span><span>Make waves</span>
       </div>
     </div>
   </section>

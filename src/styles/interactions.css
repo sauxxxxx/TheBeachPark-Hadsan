@@ -32,7 +32,7 @@
 .room-gallery__controls { display: flex; align-items: center; gap: 10px; color: var(--ink); }
 .room-gallery__controls button { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid var(--line); padding: 0; background: transparent; color: var(--ink); cursor: pointer; transition: background 300ms ease, border-color 300ms ease, color 300ms ease; }
 .room-gallery__controls svg { width: 17px; height: 17px; display: block; }
-.room-gallery__controls button:hover, .room-gallery__controls button:focus-visible { border-color: var(--coral); background: var(--coral); color: white; }
+.room-gallery__controls button:hover, .room-gallery__controls button:focus-visible { border-color: var(--navy); background: var(--navy); color: white; }
 .room-gallery__controls span { min-width: 34px; color: var(--muted); font-size: var(--control-size); font-weight: var(--control-weight); letter-spacing: var(--control-tracking); text-align: center; }
 .stay-feature__stack button { cursor: pointer; opacity: .55; transition: opacity 220ms ease, transform 320ms var(--ease); }
 .stay-feature__stack button:hover, .stay-feature__stack button:focus-visible, .stay-feature__stack button.is-active { opacity: 1; transform: translateY(-4px); }

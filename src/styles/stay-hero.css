@@ -47,14 +47,14 @@
 }
 
 .stay-cinematic-hero h1 {
-  max-width: 12ch;
+  max-width: none;
   margin: 0 auto 1.25rem;
   font-size: var(--type-hero);
   line-height: .98;
 }
 
 .stay-cinematic-hero__lede {
-  max-width: 39rem;
+  max-width: 46rem;
   margin: 0 auto 1.85rem;
   color: rgba(255, 255, 255, .86);
   font-size: .94rem;

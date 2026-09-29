@@ -93,7 +93,7 @@ const relatedActivities = computed(() => {
 
   <EditorialCta
     title="Turn one ride into a whole day."
-    copy="Connect your activity with coffee, beach time, food, and a room if you want to stay longer."
+    copy="Connect your activity with beach time, poolside rest, and a room if you want to stay longer."
     context="activity_detail_footer"
     secondary-label="Browse every activity"
     secondary-to="/adventures/#all-activities"

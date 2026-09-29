@@ -2,7 +2,6 @@ import bananaBoatGroup from '../assets/images/real/banana-boat-group.webp'
 import bananaBoat from '../assets/images/real/banana-boat.webp'
 import beachAerial from '../assets/images/real/beach-aerial.webp'
 import beachDay from '../assets/images/real/beach-day.webp'
-import beansCafe from '../assets/images/real/beans-cafe.jpg'
 import jetski from '../assets/images/real/jetski.webp'
 import kayakFamily from '../assets/images/real/kayak-family.webp'
 import poolVilla from '../assets/images/real/pool-villa.webp'
@@ -46,7 +45,6 @@ export const waterdogContact = {
 
 export const primaryNavigation = [
   { label: 'Stay', to: '/stay/', group: '/stay/' },
-  { label: 'Eat', to: '/eat/', group: '/eat/' },
   { label: 'Adventures', to: '/adventures/', group: '/adventures/' },
   { label: 'Experiences', to: '/experiences/', group: '/experiences/' },
   { label: 'Offers', to: '/offers/', group: '/offers/' },
@@ -62,7 +60,7 @@ export const navDestinations = [
     group: '/',
     exact: true,
     title: 'The Beach Park',
-    caption: 'Hadsan, Lapu-Lapu City — a beach day that holds a room, a meal, and the water.',
+    caption: 'Hadsan, Lapu-Lapu City — a beach day with room to stay and water to explore.',
     image: beachAerial,
     alt: 'Aerial view of The Beach Park shoreline and clear Cebu water',
   },
@@ -74,15 +72,6 @@ export const navDestinations = [
     caption: 'Rooms for couples, families, and the whole barkada.',
     image: roomFamily,
     alt: 'Two-bed room with warm timber furniture at The Beach Park',
-  },
-  {
-    label: 'Eat',
-    to: '/eat/',
-    group: '/eat/',
-    title: 'Beans & Paddles',
-    caption: 'Coffee first, then an easy table as the day unfolds.',
-    image: beansCafe,
-    alt: 'Beans & Paddles Café exterior at The Beach Park',
   },
   {
     label: 'Adventures',
@@ -133,7 +122,6 @@ export const navDestinations = [
 
 export const footerNavigation = [
   { title: 'Stay', links: [{ label: 'Rooms', to: '/stay/' }, { label: 'Special offers', to: '/offers/' }] },
-  { title: 'Eat', links: [{ label: 'Eat & Drink', to: '/eat/' }, { label: 'Beans & Paddles', to: '/eat/beans-and-paddles/' }, { label: "Sharky's Café", to: '/eat/sharkys-cafe/' }] },
   { title: 'Adventures', links: [{ label: 'Waterdog Adventures', to: '/adventures/' }, { label: 'Activity details', to: '/adventures/details/jet-ski/' }] },
   { title: 'Experiences', links: [{ label: 'Plan your day', to: '/experiences/' }, { label: 'Gallery', to: '/explore/gallery/' }] },
   { title: 'Explore', links: [{ label: 'Souvenir Shop', to: '/explore/souvenir-shop/' }, { label: 'About', to: '/explore/about/' }, { label: 'Contact & Directions', to: '/explore/contact/' }] },
@@ -150,7 +138,8 @@ export { roomHeroImageUrl, roomImageFiles, roomImageSourceLabel, roomImageUrl, r
 export const roomAmenities = [
   'Air conditioning',
   'Private shower and toilet',
-  'Bath towels and toiletries',
+  'Bath towels',
+  'Toiletries',
   'Table and chair',
 ]
 
@@ -383,8 +372,8 @@ export const activities = [
 ]
 
 export const experienceTypes = [
-  { title: 'Family beach day', copy: 'Easy mornings, beach time, food, and something everyone can enjoy.', image: beachDay, alt: 'Children playing together on The Beach Park shore' },
-  { title: 'Couples escape', copy: 'A slower day by the sea, with space for coffee, water, and sunset.', image: kayakFamily, alt: 'A relaxed kayak ride at The Beach Park' },
+  { title: 'Family beach day', copy: 'Easy mornings, beach time, and something everyone can enjoy.', image: beachDay, alt: 'Children playing together on The Beach Park shore' },
+  { title: 'Couples escape', copy: 'A slower day by the sea, with space for the water and sunset.', image: kayakFamily, alt: 'A relaxed kayak ride at The Beach Park' },
   { title: 'Barkada adventure', copy: 'Bring the crew, choose a water activity, and make the day your own.', image: bananaBoatGroup, alt: 'Friends together on a banana boat at The Beach Park' },
   { title: 'Groups & gatherings', copy: 'Shared rooms and connected experiences for time spent together.', image: poolside, alt: 'Poolside grounds at The Beach Park' },
 ]
@@ -396,7 +385,6 @@ export const galleryImages = [
   { src: roomDouble, alt: 'Double room at The Beach Park' },
   { src: roomFamily, alt: 'Two-bed room at The Beach Park' },
   { src: roomBarkada, alt: 'Barkada bunk room at The Beach Park' },
-  { src: beansCafe, alt: 'Beans & Paddles café exterior' },
   { src: jetski, alt: 'Jet ski activity at The Beach Park' },
   { src: kayakFamily, alt: 'Kayaking at The Beach Park' },
   { src: bananaBoatGroup, alt: 'Banana boat group at The Beach Park' },
@@ -407,7 +395,6 @@ export const galleryImages = [
 export const verifiedImages = {
   beachAerial,
   beachDay,
-  beansCafe,
   poolVilla,
   poolside,
   roomFamily,

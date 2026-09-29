@@ -44,8 +44,8 @@
 
 .room-intro {
   flex-direction:column;
-  justify-content:center;
-  padding:clamp(2.75rem,4vw,4rem) clamp(2.5rem,4.5vw,4.5rem);
+  justify-content:flex-start;
+  padding:clamp(2rem,2.8vw,2.75rem) clamp(2.5rem,4.5vw,4.5rem);
   display:flex
 }
 
@@ -56,7 +56,7 @@
   align-self:flex-start;
   align-items:center;
   gap:.45rem;
-  margin-bottom:clamp(2rem,4vw,3.5rem);
+  margin-bottom:clamp(1.5rem,2.4vw,2.25rem);
   font-size:.7rem;
   display:inline-flex
 }
@@ -71,38 +71,59 @@
   transform:translate(-.2rem)
 }
 
+.room-intro__title-row {
+  align-items:flex-end;
+  flex-wrap:wrap;
+  gap:.85rem 1rem;
+  display:flex
+}
+
 .room-intro h1 {
-  max-width:12ch;
-  font-size:var(--type-display);
+  max-width:14ch;
+  font-size:clamp(2.75rem,3.7vw,4rem);
   letter-spacing:-.035em;
   text-wrap:balance;
   margin:0;
   line-height:.96
 }
 
+.room-intro__badge {
+  background:var(--coral);
+  color:#fff;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:.45rem .6rem;
+  margin-bottom:.25rem;
+  font-size:.6rem;
+  font-weight:700;
+  line-height:1
+}
+
 .room-intro ul {
+  grid-template-columns:repeat(2,minmax(0,1fr));
   color:var(--coral-deep);
   letter-spacing:.1em;
   text-transform:uppercase;
-  flex-wrap:wrap;
-  gap:.65rem 1.1rem;
-  margin:1.75rem 0 0;
+  gap:.75rem 1.25rem;
+  width:100%;
+  max-width:32rem;
+  margin:1.5rem 0 0;
   padding:0;
   font-size:.66rem;
   list-style:none;
-  display:flex
+  display:grid
 }
 
-.room-intro li+li:before {
-  color:var(--line);
-  content:"·";
-  margin-right:1.1rem
+.room-intro li {
+  border-top:1px solid var(--line);
+  padding-top:.7rem;
+  line-height:1.4
 }
 
 .room-intro>p {
   max-width:35rem;
   color:var(--muted);
-  margin:1.75rem 0 2rem;
+  margin:1.5rem 0 1.75rem;
   font-size:clamp(.95rem,1.15vw,1.08rem);
   line-height:1.75
 }
@@ -116,7 +137,7 @@
   position:relative
 }
 
-.room-story h2,.room-amenities h2,.room-experience h2,.room-booking h2,.room-related h2 {
+.room-story h2,.room-amenities h2,.room-booking h2,.room-related h2 {
   max-width:13ch;
   font-size:var(--type-headline);
   letter-spacing:-.03em;
@@ -295,40 +316,6 @@
 .room-amenities li svg {
   width:1.1rem;
   color:var(--sand)
-}
-
-.room-experience {
-  background:var(--clean-paper,#fbf9f4);
-  grid-template-columns:minmax(0,1.08fr) minmax(22rem,.92fr);
-  min-height:42rem;
-  display:grid
-}
-
-.room-experience__image,.room-experience__image img {
-  object-fit:cover;
-  width:100%;
-  height:100%
-}
-
-.room-experience__copy {
-  flex-direction:column;
-  justify-content:center;
-  padding:clamp(4rem,8vw,8rem) clamp(2.5rem,6vw,6.5rem);
-  display:flex
-}
-
-.room-experience__copy p {
-  max-width:36rem;
-  color:var(--muted);
-  margin:2rem 0 0;
-  line-height:1.8
-}
-
-.room-experience__links {
-  flex-wrap:wrap;
-  gap:1.5rem 2rem;
-  margin-top:2.25rem;
-  display:flex
 }
 
 .room-booking {

@@ -1,15 +1,10 @@
 <script setup>
 import hadsanLogo from '../assets/images/brands/hadsan-logo.png'
 import { primaryNavigation, property } from '../data/siteContent'
-import BookingLink from './shared/BookingLink.vue'
 </script>
 
 <template>
   <footer class="site-footer">
-    <div class="page-shell site-footer__invitation">
-      <h2>The water’s warm. Come spend the day.</h2>
-      <BookingLink label="Book your stay" context="footer" />
-    </div>
     <div class="page-shell site-footer__main">
       <RouterLink class="site-footer__brand" to="/" aria-label="The Beach Park home">
         <img class="site-footer__logo" :src="hadsanLogo" alt="" width="500" height="500" />

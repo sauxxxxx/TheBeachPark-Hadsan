@@ -1,12 +1,13 @@
 <script setup>
 import BookingLink from '../components/shared/BookingLink.vue'
 import PageHero from '../components/shared/PageHero.vue'
-import { specialOffers, verifiedImages } from '../data/siteContent'
+import oceanfrontDeck from '../assets/images/real/rooms/oceanfront-deck-room-4.webp'
+import { specialOffers } from '../data/siteContent'
 </script>
 
 <template>
-  <PageHero eyebrow="Offers" title="Stay longer, save more." lede="Direct-booking offers from The Beach Park Hadsan. Terms and availability are confirmed for your dates at booking." :image="verifiedImages.poolVilla" image-alt="Pool villa area at The Beach Park">
-    <BookingLink label="Check dates" context="offers_hero" />
+  <PageHero eyebrow="Offers" title="Current offers." lede="Find the right stay for your dates." :image="oceanfrontDeck" image-alt="Oceanfront deck overlooking the water at The Beach Park">
+    <BookingLink label="Check dates" context="offers_hero" variant="light" />
   </PageHero>
 
   <section class="offer-list page-shell" aria-label="Special offers">

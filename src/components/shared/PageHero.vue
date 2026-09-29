@@ -2,7 +2,7 @@
 import EditorialImage from '../EditorialImage.vue'
 
 defineProps({
-  eyebrow: { type: String, required: true },
+  eyebrow: { type: String, default: '' },
   title: { type: String, required: true },
   lede: { type: String, required: true },
   image: { type: String, default: '' },

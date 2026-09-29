@@ -14,16 +14,15 @@ The custom website is the public brand, content, discovery, and marketing experi
 The Beach Park is a cheerful Cebu beach clubhouse: relaxed, energetic, warm, local, family-friendly, and barkada-friendly. It should feel polished and considered without pretending to be a formal ultra-luxury resort.
 
 ## Operating Context
-Visitors use the website to understand the destination, explore authentic property photography, compare stays, discover dining and water activities, plan a day, find contact details, and continue to the Exely booking experience.
+Visitors use the website to understand the destination, explore authentic property photography, compare stays, discover water activities, plan a day, find contact details, and continue to the Exely booking experience.
 
 ## Capabilities and Constraints
-- Preserve the complete multi-page site and all existing public routes.
+- Preserve the active multi-page site and public routes. Dining and venue pages are out of scope.
 - Preserve `/booking/` and Exely property/provider ID `507010`.
 - Do not simulate, replace, or recreate Exely booking, payment, loyalty, reputation, or guest-account functions.
 - Use authentic property photographs already available in the project. Proposal imagery is mockup material, not verified property photography.
 - Do not invent prices, availability, operating rules, menus, or unconfirmed hours.
-- Beans & Paddles Café is the approved spelling. Its confirmed hours are 10:00 AM–7:00 PM; weekend differences still need operational confirmation.
-- Sharky’s current local social source, menu, and hours need confirmation.
+- Do not include Sharky’s or Beans & Paddles in the website’s public content.
 - Waterdog prices and availability need confirmation.
 - The site must remain responsive, keyboard accessible, touch friendly, and respectful of reduced-motion preferences.
 
@@ -35,7 +34,7 @@ Visitors use the website to understand the destination, explore authentic proper
 - Avoid generic card grids, oversized type everywhere, repetitive eyebrow labels, glass effects, and decorative UI clutter.
 
 ## Evidence on Hand
-- Authentic property, room, café, shoreline, and Waterdog imagery in `src/assets/images/real`.
+- Authentic property, room, shoreline, and Waterdog imagery in `src/assets/images/real`.
 - Existing Exely account screenshots confirming PMS/front-desk, room management, payment methods, cancellation rules, extra services, Website Builder, Channel Manager, Analytics, and Reputation Manager access.
 - Existing property contact details and route/content data in the repository.
 - The proposal establishes page and content direction, but its imagery and quoted commercial details are not automatically authoritative.

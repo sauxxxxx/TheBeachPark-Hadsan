@@ -13,19 +13,15 @@
 
 .scroll-story { position: relative; min-height: 145svh; background: var(--ivory); color: var(--ink); }
 .scroll-story__stage { position: sticky; top: 0; display: grid; min-height: 100svh; place-items: center; padding: clamp(96px, 11vw, 150px) max(24px, calc((100vw - var(--page)) / 2)); }
-.scroll-story__copy { width: min(940px, 100%); margin: 0; font-family: var(--display); font-size: clamp(31px, 2.8vw, 40px); font-weight: 300; line-height: 1.25; letter-spacing: -0.018em; text-align: center; text-wrap: balance; }
+.scroll-story__copy { width: min(1200px, 100%); margin: 0; font-family: var(--display); font-size: clamp(28px, 2.3vw, 33px); font-weight: 300; line-height: 1.15; letter-spacing: -0.025em; text-align: center; text-wrap: balance; }
 .scroll-story__visual { display: block; }
 .scroll-story__paragraph { width: 100%; max-width: none; margin: 0; }
-.scroll-story__paragraph + .scroll-story__paragraph { margin-top: .8em; }
+.scroll-story__paragraph + .scroll-story__paragraph { margin-top: 1em; }
 .scroll-story__word { color: var(--ink); transition: color 150ms linear; }
 .scroll-story.is-scroll-ready .scroll-story__word:not(.is-revealed) { color: color-mix(in srgb, var(--ink) 18%, var(--ivory)); }
 .scroll-story--static,
 .scroll-story--static .scroll-story__stage { min-height: calc(100svh - 84px); }
-.scroll-story--static .scroll-story__copy { width: min(1200px, 100%); font-size: clamp(28px, 2.3vw, 33px); line-height: 1.15; letter-spacing: -0.025em; }
 .scroll-story__title { margin: 0 0 30px; font-family: var(--body); font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; }
-.scroll-story--static .scroll-story__paragraph + .scroll-story__paragraph { margin-top: 1em; }
-.scroll-story--compact { min-height: 128svh; }
-.scroll-story--compact .scroll-story__copy { width: min(1000px, 100%); font-size: clamp(30px, 3vw, 43px); }
 
 .destination-grid { padding: var(--space-section) 0; overflow: hidden; }
 .destination-grid__title { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 70px; }
@@ -87,25 +83,6 @@
 .stay-feature__stack button:not(.is-active) { opacity: .55; }
 .stay-feature__stack button:hover, .stay-feature__stack button:focus-visible { opacity: 1; }
 .stay-feature__stack button.is-active { border-color: var(--coral); opacity: 1; }
-
-.dining-features { padding-block: clamp(90px, 10vw, 150px); overflow: hidden; }
-.dining-editorial { position: relative; min-height: clamp(700px, 66vw, 880px); }
-.dining-editorial__image { position: absolute; }
-.dining-editorial__image--beans { top: 0; left: 22%; width: 39%; height: 51%; }
-.dining-editorial__image--detail { bottom: 0; left: 0; width: 20%; height: 29%; }
-.dining-editorial__image--coffee { right: 0; bottom: 3%; width: 21%; height: 28%; }
-.dining-editorial__image :is(img, picture) { width: 100%; height: 100%; }
-.dining-editorial__image img { object-fit: cover; }
-.dining-editorial__image--beans img { object-position: 54% center; }
-.dining-editorial__placeholder { position: absolute; top: 10%; right: 0; width: 30%; height: 42%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; padding: 28px; border: 1px solid color-mix(in srgb, var(--navy) 24%, transparent); color: var(--ivory); text-align: center; background: var(--navy); }
-.dining-editorial__placeholder strong { font-family: var(--display); font-size: clamp(28px, 3vw, 42px); font-weight: 400; line-height: 1; }
-.dining-editorial__placeholder span { color: color-mix(in srgb, var(--ivory) 72%, transparent); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
-.dining-editorial__copy { position: absolute; right: 28%; bottom: 2%; width: min(520px, 44%); text-align: center; }
-.dining-editorial__copy h2 { margin: 0 0 16px; font-size: clamp(32px, 3.2vw, 44px); line-height: 1.08; text-wrap: balance; }
-.dining-editorial__copy > p { margin: 0 0 28px; color: var(--muted); font-size: 15px; }
-.dining-editorial__links { display: flex; justify-content: center; gap: 28px; }
-.dining-editorial__links a { padding-bottom: 5px; border-bottom: 1px solid currentColor; color: var(--ink); font-size: 12px; font-weight: 600; text-decoration: none; }
-.dining-editorial__links a:hover, .dining-editorial__links a:focus-visible { border-color: var(--coral); color: var(--coral-deep); }
 
 .adventure-feature { position: relative; min-height: clamp(680px, 92svh, 900px); overflow: hidden; color: white; }
 .adventure-feature__bed { position: absolute; inset: 0; }

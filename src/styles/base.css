@@ -91,10 +91,10 @@ p { max-width: 68ch; }
   min-height: 46px;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--coral);
+  border: 1px solid var(--navy);
   border-radius: 0;
   padding: 0 28px;
-  background: var(--coral);
+  background: var(--navy);
   color: white;
   font-size: var(--control-size);
   font-weight: var(--control-weight);
@@ -103,10 +103,10 @@ p { max-width: 68ch; }
   text-decoration: none;
   transition: color 300ms ease, background 300ms ease, border-color 300ms ease, transform 300ms var(--ease);
 }
-.button:hover, .button:focus-visible { background: var(--coral-deep); border-color: var(--coral-deep); transform: translateY(-2px); }
+.button:hover, .button:focus-visible { background: var(--navy-deep); border-color: var(--navy-deep); transform: translateY(-2px); }
 .button--small { min-height: 42px; padding-inline: 22px; }
 .button--outline { border-color: currentColor; background: transparent; color: var(--ink); }
-.button--outline:hover, .button--outline:focus-visible { border-color: var(--coral); background: var(--coral); color: white; }
+.button--outline:hover, .button--outline:focus-visible { border-color: var(--navy); background: var(--navy); color: white; }
 .button--outline-light { border-color: rgba(255,255,255,.55); background: transparent; color: white; }
 .button--outline-light:hover, .button--outline-light:focus-visible { border-color: white; background: white; color: var(--ink); }
 .button--light { border-color: var(--paper); background: var(--paper); color: var(--ink); }
@@ -308,10 +308,8 @@ p { max-width: 68ch; }
 
 /* --- Footer -------------------------------------------------------------- */
 
-/* The ground deepens toward the bottom the way water does, and an oversized
-   wordmark bleeds off both edges behind the content — the same ghost-type
-   device used behind the Sharky's panel. */
-.site-footer { position: relative; z-index: 4; overflow: hidden; padding: 110px 0 25px; background: linear-gradient(180deg, var(--navy) 0%, #082936 52%, var(--navy-deep) 100%); color: white; }
+/* The footer returns to quiet deep-water ground after the sunset scene. */
+.site-footer { position: relative; z-index: 4; overflow: hidden; padding: 0 0 25px; background: linear-gradient(180deg, var(--navy) 0%, #082936 52%, var(--navy-deep) 100%); color: white; }
 .site-footer > .page-shell { position: relative; z-index: 1; }
 .site-footer__mark {
   position: absolute;
@@ -329,12 +327,7 @@ p { max-width: 68ch; }
   pointer-events: none;
   user-select: none;
 }
-/* Left-aligned on the page grid like every other section, with the CTA sitting
-   on the baseline of the last line rather than centred beneath it. */
-.site-footer__invitation { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: clamp(26px, 3vw, 64px); padding-bottom: var(--space-section); }
-.site-footer__invitation h2 { max-width: 19ch; margin: 0; font-size: var(--type-headline); }
-.site-footer__invitation .button { justify-self: end; }
-.site-footer__main { display: grid; grid-template-columns: 130px 1fr minmax(230px, .65fr); gap: 7vw; align-items: start; padding: 45px 0; border-top: 1px solid rgba(255,255,255,.16); }
+.site-footer__main { display: grid; grid-template-columns: 130px 1fr minmax(230px, .65fr); gap: 7vw; align-items: start; padding: 45px 0; }
 .site-footer__brand { width: 118px; height: 118px; display: block; }
 .site-footer__logo { width: 100%; height: 100%; object-fit: contain; }
 .footer-navigation { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 28px; }

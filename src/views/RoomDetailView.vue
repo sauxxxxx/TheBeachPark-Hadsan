@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import BookingLink from '../components/shared/BookingLink.vue'
 import EditorialImage from '../components/EditorialImage.vue'
 import GalleryLightbox from '../components/gallery/GalleryLightbox.vue'
+import { isRoomBestseller, roomBookingFacts, roomRateLabel } from '../data/roomBookingFacts'
 import { roomAmenities, roomHeroImageUrl, roomImageFiles, roomImageSourceLabel, roomImageUrl, rooms, verifiedImages } from '../data/siteContent'
 
 const route = useRoute()
@@ -17,6 +18,7 @@ const area = computed(() => room.value.size?.unit === 'square_metre' ? `${room.v
 const facts = computed(() => [
   room.value.maxOccupancy ? `Sleeps up to ${room.value.maxOccupancy}` : '',
   area.value,
+  roomRateLabel(room.value),
   room.value.petsAllowed ? 'Pets welcome' : 'No pets',
 ].filter(Boolean))
 const descriptionLines = computed(() => {
@@ -34,7 +36,12 @@ const introDescription = computed(() => {
 const roomDetails = computed(() => [
   { label: 'Capacity', value: room.value.maxOccupancy ? `Up to ${room.value.maxOccupancy} guests` : 'Confirm with the reservations team' },
   { label: 'Floor area', value: area.value || 'Confirm with the reservations team' },
+  { label: 'Starting rate', value: roomRateLabel(room.value) },
   { label: 'Pet policy', value: room.value.petsAllowed ? 'Pets welcome' : 'Pets are not permitted' },
+])
+const publishedAmenities = computed(() => [
+  ...roomAmenities,
+  room.value.petsAllowed ? 'Pets allowed' : 'Pets not allowed',
 ])
 const galleryItems = computed(() => images.value.map((file, index) => ({
   src: roomImageUrl(file),
@@ -83,7 +90,10 @@ function roomMeta(item) {
             <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="m11 4-5 5 5 5" /></svg>
             All rooms
           </RouterLink>
-          <h1>{{ room.name }}</h1>
+          <div class="room-intro__title-row">
+            <h1>{{ room.name }}</h1>
+            <span v-if="isRoomBestseller(room)" class="room-intro__badge">Bestseller</span>
+          </div>
           <ul>
             <li v-for="fact in facts" :key="fact">{{ fact }}</li>
           </ul>
@@ -106,7 +116,7 @@ function roomMeta(item) {
     <section class="room-story page-shell">
       <div class="room-story__copy">
         <h2>A relaxed base by the water.</h2>
-        <p>{{ descriptionLines[0] }}</p>
+        <p v-for="line in descriptionLines" :key="line">{{ line }}</p>
       </div>
       <dl class="room-story__facts">
         <div v-for="detail in roomDetails" :key="detail.label">
@@ -123,7 +133,7 @@ function roomMeta(item) {
           <p>These property amenities are published across The Beach Park stay experience. Specific room arrangements are confirmed during booking.</p>
         </div>
         <ul>
-          <li v-for="amenity in roomAmenities" :key="amenity">
+          <li v-for="amenity in publishedAmenities" :key="amenity">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 12 4 4L19 6" /></svg>
             <span>{{ amenity }}</span>
           </li>
@@ -131,22 +141,10 @@ function roomMeta(item) {
       </div>
     </section>
 
-    <section class="room-experience">
-      <EditorialImage class="room-experience__image" :src="verifiedImages.beachDay" alt="Guests enjoying the shoreline at The Beach Park Hadsan" :width="1800" :height="1300" />
-      <div class="room-experience__copy">
-        <h2>The room is only the beginning.</h2>
-        <p>Step outside into the same easy-going beach setting as shoreline time, café stops, and Waterdog adventures. Current access, schedules, and activity availability can be confirmed before your visit.</p>
-        <div class="room-experience__links">
-          <RouterLink class="text-link" to="/experiences/">Explore beach days</RouterLink>
-          <RouterLink class="text-link" to="/adventures/">See water activities</RouterLink>
-        </div>
-      </div>
-    </section>
-
     <section class="room-booking page-shell">
       <div class="room-booking__copy">
         <h2>Ready to check your dates?</h2>
-        <p>Current availability, rates, inclusions, and booking policies are maintained in the official booking system.</p>
+        <p>{{ roomBookingFacts(room).fromRate ? `${roomRateLabel(room)} is the published starting point. ` : '' }}Current availability, inclusions, and booking policies are maintained in the official booking system.</p>
         <BookingLink label="Check availability" context="room_detail_footer" />
       </div>
       <ul class="room-booking__notes">

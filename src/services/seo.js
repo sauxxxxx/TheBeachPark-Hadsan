@@ -10,7 +10,7 @@ function upsertMeta(selector, attributes) {
 export function applySeo(route) {
   const siteUrl = (import.meta.env.VITE_SITE_URL || window.location.origin).replace(/\/$/, '')
   const title = route.meta.title || 'The Beach Park Hadsan'
-  const description = route.meta.description || 'Stay, eat, and enjoy the water at The Beach Park in Hadsan, Lapu-Lapu City, Cebu.'
+  const description = route.meta.description || 'Stay and enjoy the water at The Beach Park in Hadsan, Lapu-Lapu City, Cebu.'
   const canonicalUrl = `${siteUrl}${route.path}`
 
   document.title = title

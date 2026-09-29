@@ -4,6 +4,7 @@ import DisclosureList from '../components/shared/DisclosureList.vue'
 import EditorialCta from '../components/shared/EditorialCta.vue'
 import ScrollStory from '../components/home/ScrollStory.vue'
 import StayHero from '../components/stay/StayHero.vue'
+import { isRoomBestseller, roomRateLabel, roomRateVerifiedLabel } from '../data/roomBookingFacts'
 import { commonFaqs, roomAmenities, roomHeroImageUrl, rooms } from '../data/siteContent'
 
 const photographed = computed(() => rooms.filter((room) => room.images.length))
@@ -24,14 +25,14 @@ function area(room) {
   <StayHero />
 
   <ScrollStory
-    compact
     label="The feeling of staying at The Beach Park"
-    story="Stay close enough for the beach to set the pace. Wake slowly, step outside, and let a simple room become the place where families, friends, and the whole barkada come back together."
+    title="Stay by the shore."
+    :story="'Stay close enough for the beach to set the pace. Wake slowly, step outside, and let the day begin by the water.\n\nA simple room gives families, friends, and the whole barkada a place to come back together.'"
   />
 
   <section class="page-section page-shell intro-spread">
     <div><h2 data-lines>Thirteen ways to stay.</h2></div>
-    <p data-reveal>Whether you are travelling as a couple, a family, or a barkada, every room sits within the same short walk of the beach. Live rates and availability are held in the booking system rather than fixed here.</p>
+    <p data-reveal>Whether you are travelling as a couple, a family, or a barkada, every room sits within the same short walk of the beach. Published starting rates are shown below; your final quote depends on your dates.</p>
   </section>
 
   <section id="rooms" class="room-grid page-shell" aria-label="Room types" data-sequence>
@@ -39,24 +40,27 @@ function area(room) {
       <RouterLink class="room-card__link" :to="`/stay/room-details/${room.slug}/`">
         <div class="room-card__image" data-image-expand>
           <img :src="roomHeroImageUrl(room)" :alt="`${room.name} at The Beach Park Hadsan`" width="1600" height="1000" loading="lazy" />
+          <span v-if="isRoomBestseller(room)" class="room-card__badge">Bestseller</span>
         </div>
         <p class="room-card__meta">{{ [sleeps(room), area(room)].filter(Boolean).join(' · ') }}</p>
         <h2>{{ room.name }}</h2>
+        <p class="room-card__rate">{{ roomRateLabel(room) }}</p>
         <p v-if="room.description" class="room-card__summary">{{ room.description }}</p>
         <span class="room-card__cta">View room details</span>
       </RouterLink>
     </article>
+    <p class="room-rate-note">Starting rates verified in the official booking listings in {{ roomRateVerifiedLabel }}. Rates and availability vary by date.</p>
   </section>
 
   <section v-if="unphotographed.length" class="page-section page-shell">
     <div class="intro-spread">
-      <div><h2>Also bookable.</h2></div>
-      <p>These room types are available in the booking system. We have not published photographs of them yet.</p>
+      <div><h2>More room options.</h2></div>
+      <p>Photos aren’t available for these rooms yet. Contact our team for details and availability.</p>
     </div>
     <ul class="room-plain" data-sequence>
       <li v-for="room in unphotographed" :key="room.slug">
         <RouterLink :to="`/stay/room-details/${room.slug}/`">
-          <strong>{{ room.name }}</strong>
+          <span class="room-plain__name"><strong>{{ room.name }}</strong><small>{{ roomRateLabel(room) }}</small></span>
           <span>{{ [sleeps(room), area(room)].filter(Boolean).join(' · ') }}</span>
         </RouterLink>
       </li>

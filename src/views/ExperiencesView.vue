@@ -4,6 +4,7 @@ import EditorialImage from '../components/EditorialImage.vue'
 import ExperienceCard from '../components/experiences/ExperienceCard.vue'
 import DayTimeline from '../components/home/DayTimeline.vue'
 import EditorialCta from '../components/shared/EditorialCta.vue'
+import ScrollStory from '../components/home/ScrollStory.vue'
 import {
   experienceFilters,
   experiences,
@@ -16,6 +17,8 @@ const visibleExperiences = computed(() => (
     ? experiences
     : experiences.filter(({ category }) => category === activeFilter.value)
 ))
+
+const introStory = 'Come for open water, a family afternoon, or no plan at all. There is space here to follow the day as it unfolds.\n\nMove between the shore, the pool, and time together. Stay a little longer if you want the beach close by.'
 </script>
 
 <template>
@@ -31,14 +34,13 @@ const visibleExperiences = computed(() => (
     />
     <div class="experiences-hero__wash" aria-hidden="true"></div>
     <div class="experiences-hero__content page-shell">
-      <h1>One park. Many ways to spend the day.</h1>
+      <h1>Make it your day.</h1>
+      <p>Swim, play, or slow down by the shore.</p>
       <a href="#discover-experiences">Discover the experiences <span aria-hidden="true"></span></a>
     </div>
   </header>
 
-  <div class="experiences-intro page-shell" data-reveal>
-    <p>Come for open water, an easy meal, a family afternoon, or no plan at all. The Beach Park brings the shoreline, pool, cafés, activities, and rooms together in one place. Schedules and availability can change, so confirm the details that matter to your visit directly with the property.</p>
-  </div>
+  <ScrollStory title="Your day, your pace." label="The Beach Park experiences" :story="introStory" />
 
   <section id="discover-experiences" class="experiences-discovery" aria-labelledby="experiences-title">
     <header class="experiences-discovery__head page-shell">
@@ -75,7 +77,7 @@ const visibleExperiences = computed(() => (
 
   <EditorialCta
     title="Build the day around your people."
-    copy="Pair the water, cafés, pool, and a room in whatever order feels right. Confirm current access and activity details before arriving."
+    copy="Pair the water, pool, and a room in whatever order feels right. Confirm current access and activity details before arriving."
     context="experiences_footer"
     secondary-label="Talk to the property"
     secondary-to="/explore/contact/"

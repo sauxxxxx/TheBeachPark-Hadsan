@@ -2,6 +2,7 @@
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import SiteFooter from './components/SiteFooter.vue'
+import PreFooterBooking from './components/PreFooterBooking.vue'
 import SiteHeader from './components/SiteHeader.vue'
 import CookieNotice from './components/CookieNotice.vue'
 import { useScrollChoreography } from './composables/useScrollChoreography'
@@ -31,6 +32,7 @@ onMounted(() => router.isReady().then(nextTick).then(scan))
   <main id="main-content" ref="main">
     <RouterView />
   </main>
+  <PreFooterBooking />
   <SiteFooter />
   <CookieNotice />
 </template>

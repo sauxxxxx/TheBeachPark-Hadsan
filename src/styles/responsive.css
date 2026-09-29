@@ -30,10 +30,8 @@
   .proposal-hero__note { display: none; }
 
   .scroll-story { min-height: 140svh; }
-  .scroll-story--compact { min-height: 126svh; }
   .scroll-story__stage { padding-inline: 32px; }
-  .scroll-story__copy { max-width: 760px; font-size: clamp(29px, 4.6vw, 36px); }
-  .scroll-story--static .scroll-story__copy { max-width: 1100px; font-size: clamp(26px, 3.8vw, 31px); }
+  .scroll-story__copy { font-size: clamp(26px, 3.8vw, 31px); }
   .scroll-story--static,
   .scroll-story--static .scroll-story__stage { min-height: calc(100svh - 72px); }
 
@@ -52,13 +50,6 @@
   .stay-feature__stack { position: static; display: grid; grid-template-columns: repeat(3, 1fr); margin-top: -30px; padding-inline: 3vw; }
   .stay-feature__stack button { width: 100%; height: 100px; }
 
-  .dining-editorial { min-height: 720px; }
-  .dining-editorial__image--beans { left: 13%; width: 48%; height: 45%; }
-  .dining-editorial__placeholder { top: 8%; width: 34%; height: 38%; }
-  .dining-editorial__image--detail { width: 24%; height: 27%; }
-  .dining-editorial__image--coffee { width: 24%; height: 26%; }
-  .dining-editorial__copy { right: 25%; bottom: 3%; width: 50%; }
-
   .adventure-feature { min-height: 720px; }
   .adventure-feature > .editorial-image img { object-position: 62% center; }
   .adventure-feature::after { background: linear-gradient(0deg, rgba(4,32,43,.86), rgba(4,32,43,.03) 78%); }
@@ -70,8 +61,6 @@
   .memory-image--kayak { grid-column: 1; grid-row: 3; }
   .memory-image--boat { grid-column: 2; grid-row: 3; }
 
-  .site-footer { padding-top: 85px; }
-  .site-footer__invitation { padding-bottom: 75px; }
   .site-footer__main { grid-template-columns: 90px 1fr; gap: 34px; }
   .footer-navigation { grid-template-columns: repeat(2, 1fr); }
   .footer-contact { grid-column: 2; }
@@ -93,10 +82,8 @@
   .proposal-hero__actions { align-items: center; flex-direction: column; gap: 20px; }
 
   .scroll-story { min-height: 136svh; }
-  .scroll-story--compact { min-height: 124svh; }
   .scroll-story__stage { padding: 84px 22px; }
-  .scroll-story__copy { font-size: clamp(27px, 6.8vw, 31px); line-height: 1.28; }
-  .scroll-story--static .scroll-story__copy { font-size: clamp(24px, 6vw, 28px); line-height: 1.22; }
+  .scroll-story__copy { font-size: clamp(24px, 6vw, 28px); line-height: 1.22; }
   .scroll-story__title { margin-bottom: 24px; font-size: 15px; }
 
   .destination-grid { padding-block: 86px; }
@@ -132,17 +119,6 @@
   .stay-feature__stack { padding: 0; }
   .stay-feature__stack button { height: 76px; }
 
-  .dining-features { padding-block: 82px; }
-  .dining-editorial { min-height: 0; display: grid; grid-template-areas: 'beans beans' 'detail coffee' 'sharkys sharkys' 'copy copy'; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .dining-editorial__image, .dining-editorial__placeholder, .dining-editorial__copy { position: relative; inset: auto; width: auto; height: auto; }
-  .dining-editorial__image--beans { grid-area: beans; aspect-ratio: 4 / 3; }
-  .dining-editorial__image--detail { grid-area: detail; aspect-ratio: 4 / 5; }
-  .dining-editorial__image--coffee { grid-area: coffee; aspect-ratio: 4 / 5; }
-  .dining-editorial__placeholder { grid-area: sharkys; min-height: 230px; }
-  .dining-editorial__copy { grid-area: copy; padding: 54px 10px 58px; }
-  .dining-editorial__copy h2 { font-size: 34px; }
-  .dining-editorial__links { align-items: center; flex-direction: column; gap: 18px; }
-
   .adventure-feature { min-height: 680px; }
   .adventure-feature__content h2 { font-size: 46px; }
   .activity-tabs { gap: 14px; }
@@ -150,9 +126,6 @@
   .memories { grid-template-rows: auto 310px 200px; padding-block: 86px; }
   .memories__copy h2 { font-size: 40px; }
 
-  .site-footer__invitation { grid-template-columns: 1fr; align-items: start; }
-  .site-footer__invitation .button { justify-self: start; }
-  .site-footer__invitation h2 { max-width: none; font-size: clamp(28px, 7vw, 36px); }
   .site-footer__main { grid-template-columns: 1fr; }
   .site-footer__brand { width: 80px; height: 76px; }
   .footer-navigation, .footer-contact { grid-column: 1; }
@@ -161,6 +134,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .proposal-hero__stage { transform: none; }
-  .scroll-story,
-  .scroll-story--compact { min-height: auto; }
+  .scroll-story { min-height: auto; }
 }

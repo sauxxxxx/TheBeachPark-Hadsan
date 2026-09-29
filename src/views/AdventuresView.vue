@@ -3,8 +3,11 @@ import AdventureCatalogue from '../components/adventures/AdventureCatalogue.vue'
 import WaterdogLogo from '../components/adventures/WaterdogLogo.vue'
 import EditorialImage from '../components/EditorialImage.vue'
 import EditorialCta from '../components/shared/EditorialCta.vue'
+import ScrollStory from '../components/home/ScrollStory.vue'
 import adventuresHero from '../assets/images/generated/adventures-hero-v2.webp'
 import { activities, waterdogContact } from '../data/siteContent'
+
+const introStory = 'Take a paddle close to shore, or head out for a faster ride. The water makes room for both kinds of day.\n\nChoose the pace that feels right for you, then check current conditions and ride details with the Waterdog team.'
 </script>
 
 <template>
@@ -20,8 +23,8 @@ import { activities, waterdogContact } from '../data/siteContent'
     />
     <div class="adventures-hero__content page-shell">
       <WaterdogLogo />
-      <h1 data-lines>Take the day offshore.</h1>
-      <p>From a quiet paddle to a faster ride, Waterdog brings a different rhythm to the coast.</p>
+      <h1 data-lines>Out on the water.</h1>
+      <p>Paddle and ride with Waterdog.</p>
       <a class="adventures-hero__jump" href="#choose-your-pace">
         Choose your pace
         <span aria-hidden="true"></span>
@@ -29,9 +32,7 @@ import { activities, waterdogContact } from '../data/siteContent'
     </div>
   </header>
 
-  <section id="choose-your-pace" class="adventures-intro page-shell" data-reveal>
-    <p>The water, at your own pace. Bring the barkada, take the family close to shore, or trade calm water for a little spray. Every activity starts with the same simple decision: how do you want the day to feel? Brochure prices and ride details are listed below. Daily schedules, guest requirements, and weather conditions are confirmed directly with the Waterdog team.</p>
-  </section>
+  <ScrollStory id="choose-your-pace" title="The water, your way." label="Waterdog activities" :story="introStory" />
 
   <AdventureCatalogue :activities="activities" />
 

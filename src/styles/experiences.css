@@ -2,7 +2,8 @@
   position: relative;
   min-height: min(760px, 78svh);
   display: grid;
-  align-items: end;
+  align-items: center;
+  justify-items: center;
   overflow: hidden;
   background: var(--navy-deep);
   color: white;
@@ -26,20 +27,26 @@
 .experiences-hero__wash {
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(3, 31, 53, .74), rgba(3, 31, 53, .12) 70%),
+    linear-gradient(90deg, rgba(3, 31, 53, .52), rgba(3, 31, 53, .34) 70%),
     linear-gradient(0deg, rgba(3, 31, 53, .72), transparent 62%);
 }
 
 .experiences-hero__content {
   position: relative;
   z-index: 2;
-  padding-bottom: clamp(3.75rem, 8vh, 6.25rem);
+  text-align: center;
 }
 
 .experiences-hero h1 {
-  max-width: 11ch;
-  margin: 0 0 1.8rem;
+  max-width: none;
+  margin: 0 auto 1rem;
   font-size: clamp(38px, 4.1vw, 54px);
+}
+
+.experiences-hero__content > p {
+  max-width: 42rem;
+  margin: 0 auto 1.8rem;
+  color: rgba(255, 255, 255, .88);
 }
 
 .experiences-hero__content > a {
@@ -62,19 +69,8 @@
 .experiences-hero__content > a:hover span,
 .experiences-hero__content > a:focus-visible span { width: 5rem; }
 
-.experiences-intro {
-  padding-block: var(--space-section);
-}
-
 .experiences-discovery__head h2 {
   font-size: clamp(28px, 2.6vw, 38px);
-}
-
-.experiences-intro p {
-  max-width: 70ch;
-  margin: 0 auto;
-  color: var(--muted);
-  text-align: center;
 }
 
 .experiences-discovery {
@@ -256,7 +252,7 @@
 }
 
 .experience-card--deep > a { background: var(--navy-deep); }
-.experience-card--sunset > a { background: var(--coral-deep); }
+.experience-card--sunset > a { background: var(--navy); }
 .experience-card--sunset .experience-card__wash,
 .experience-card--deep .experience-card__wash { background: linear-gradient(0deg, rgba(4, 32, 43, .52), transparent 70%); }
 
@@ -281,9 +277,8 @@
 @media (max-width: 640px) {
   .experiences-hero { min-height: max(34rem, 78svh); }
   .experiences-hero__media img { object-position: 62% center; }
-  .experiences-hero__content { padding-bottom: 3.5rem; }
-  .experiences-hero h1 { max-width: 10ch; margin-bottom: 1.4rem; }
-  .experiences-intro { padding-block: 4.75rem; }
+  .experiences-hero__content { padding-block: 3.5rem 0; }
+  .experiences-hero h1 { max-width: none; margin-bottom: 1.4rem; }
   .experiences-discovery { padding-block: 4.5rem; }
   .experiences-discovery__head { margin-bottom: 2rem; }
   .experiences-filters { gap: .15rem 1rem; }

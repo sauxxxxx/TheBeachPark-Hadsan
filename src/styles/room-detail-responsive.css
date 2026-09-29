@@ -9,11 +9,11 @@
   }
 
   .room-intro {
-    padding: clamp(3.5rem, 8vw, 6rem) max(1.25rem, 6vw);
+    padding: clamp(2rem, 5vw, 3rem) max(1.25rem, 6vw);
   }
 
   .room-intro__back {
-    margin-bottom: 2.75rem;
+    margin-bottom: 1.5rem;
   }
 
   .room-story,
@@ -23,13 +23,6 @@
     gap: 3.5rem;
   }
 
-  .room-experience {
-    grid-template-columns: 1fr;
-  }
-
-  .room-experience__image {
-    aspect-ratio: 16 / 10;
-  }
 }
 
 @media (max-width: 760px) {
@@ -42,11 +35,7 @@
   }
 
   .room-intro h1 {
-    font-size: clamp(2.4rem, 11vw, 3.2rem);
-  }
-
-  .room-intro li + li::before {
-    margin-right: 0.65rem;
+    font-size: clamp(2.35rem, 10vw, 3rem);
   }
 
   .room-gallery__open {
@@ -80,14 +69,6 @@
   .room-booking__notes li {
     grid-template-columns: 1fr;
     gap: 0.45rem;
-  }
-
-  .room-experience__image {
-    aspect-ratio: 4 / 3;
-  }
-
-  .room-experience__copy {
-    padding-inline: max(1.25rem, 6vw);
   }
 
   .room-related__grid {

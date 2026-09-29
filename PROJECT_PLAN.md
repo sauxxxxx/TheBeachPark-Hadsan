@@ -15,10 +15,11 @@
 - Map public room content to stable Exely room identifiers
 - Preserve or permanently redirect existing room URLs
 
-## Phase 3 — Dining, adventures, and experiences
+## Phase 3 — Adventures and experiences
 
-- Build Beans & Paddles, Sharky's, Waterdog, day-visit, and experiences sections
-- Replace placeholders only after hours, menus, pricing, booking methods, and assets are approved
+- Build Waterdog, day-visit, and experiences sections
+- Keep Sharky's and Beans & Paddles outside the website scope
+- Replace placeholders only after pricing, booking methods, and assets are approved
 - Separate informational experiences from products actually bookable through Exely
 
 ## Phase 4 — Offers, explore, and content operations

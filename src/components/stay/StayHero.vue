@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import BookingLink from '../shared/BookingLink.vue'
+import BookingEnquiryBar from '../shared/BookingEnquiryBar.vue'
 import poolVilla from '../../assets/images/generated/rooms/pool-villa-4-ai.webp'
 import oceanfrontDeck from '../../assets/images/generated/rooms/oceanfront-deck-room-2-ai.webp'
 import poolsideRoom from '../../assets/images/generated/rooms/pool-side-balcony-room-2-ai.webp'
@@ -130,12 +130,9 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="stay-cinematic-hero__content page-shell">
-      <h1>Choose your room.</h1>
-      <p class="stay-cinematic-hero__lede">Beachside and oceanfront rooms, poolside balconies, a beach house, and barkada rooms that sleep up to ten — every one a short walk from the water.</p>
-      <div class="stay-cinematic-hero__actions">
-        <BookingLink context="stay_hero" />
-        <a class="button button--outline-light" href="#rooms">Explore rooms</a>
-      </div>
+      <h1>Find your room.</h1>
+      <p class="stay-cinematic-hero__lede">Rooms for every kind of beach day.</p>
+      <div class="stay-cinematic-hero__actions"><BookingEnquiryBar /></div>
     </div>
   </section>
 </template>

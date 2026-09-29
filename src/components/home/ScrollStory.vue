@@ -5,11 +5,10 @@ import { onScroll, prefersReducedMotion } from '../../services/scrollEngine'
 const props = defineProps({
   story: {
     type: String,
-    default: 'Set along the shores of Hadsan in Lapu-Lapu City, The Beach Park is a relaxed coastal escape for families, friends, and barkadas. Clear water, sandy shores, and tropical surroundings make room for easy days close to Cebu.\n\nStay by the beach, slow down over coffee, or head out with Waterdog for something faster. From quiet afternoons to sunset gatherings, relaxation, adventure, and warm Cebuano hospitality come together here.',
+    default: 'Set along the shores of Hadsan in Lapu-Lapu City, The Beach Park is a relaxed coastal escape for families, friends, and barkadas. Clear water, sandy shores, and tropical surroundings make room for easy days close to Cebu.\n\nStay by the beach, unwind by the pool, or head out with Waterdog for something faster. From quiet afternoons to sunset gatherings, relaxation, adventure, and warm Cebuano hospitality come together here.',
   },
   label: { type: String, default: 'The Beach Park experience' },
   title: { type: String, default: '' },
-  compact: { type: Boolean, default: false },
   revealWords: { type: Boolean, default: true },
 })
 
@@ -56,7 +55,7 @@ onBeforeUnmount(() => releaseScroll?.())
   <section
     ref="storySection"
     class="scroll-story"
-    :class="{ 'scroll-story--compact': compact, 'scroll-story--static': !revealWords }"
+    :class="{ 'scroll-story--static': !revealWords }"
     :aria-label="label"
   >
     <div class="scroll-story__stage">

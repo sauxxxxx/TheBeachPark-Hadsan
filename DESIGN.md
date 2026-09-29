@@ -37,7 +37,7 @@ spacing:
   section: "96px"
 components:
   button-primary:
-    backgroundColor: "{colors.sun-washed-coral}"
+    backgroundColor: "{colors.deep-water}"
     textColor: "#ffffff"
     typography: "{typography.label}"
     rounded: "{rounded.square}"
@@ -68,7 +68,7 @@ The composition alternates cinematic image fields with quiet editorial passages.
 - Warm paper grounds and deep coastal ink
 - Editorial display type paired with quiet utility labels
 - Asymmetric whitespace and alternating density
-- Restrained coral used for actions and wayfinding
+- Deep-water and light buttons for actions, with restrained coral for small signals
 
 ## Colors
 
@@ -77,7 +77,7 @@ The palette begins with water, sun-warmed paper, and a single coral signal.
 ### Primary
 
 - **Deep Water:** The foundation for footer fields, dark passages, and high-contrast overlays.
-- **Sun-washed Coral:** Reserved for primary actions, selection feedback, and small navigation signals.
+- **Sun-washed Coral:** Reserved for selection feedback and small navigation signals.
 
 ### Secondary
 
@@ -91,7 +91,7 @@ The palette begins with water, sun-warmed paper, and a single coral signal.
 - **Coastal Ink:** Main text and structural line color.
 - **Quiet Text:** Secondary prose and operational notes.
 
-**The Coral Signal Rule.** Coral identifies action or state; it never becomes a large decorative field.
+**The Coral Signal Rule.** Coral identifies small states and accents; it never becomes a button fill or a large decorative field.
 
 **The Real Water Rule.** Blue and aqua atmosphere comes from photography first. Interface color supports the image instead of competing with it.
 
@@ -135,8 +135,8 @@ Corners are square. Thin one-pixel rules divide navigation and operational conte
 ### Buttons
 
 - **Shape:** Square, compact rectangle with a one-pixel border.
-- **Primary:** Coral field with white uppercase label and 26px horizontal padding.
-- **Hover / Focus:** A slight upward translation and deeper coral on hover; a two-pixel sand outline on keyboard focus.
+- **Primary:** Deep-water field with a white label and 26px horizontal padding. On photographs, use a clean-paper field with coastal-ink text.
+- **Hover / Focus:** A slight upward translation and deeper water on hover; a two-pixel sand outline on keyboard focus.
 - **Light:** Clean-paper field over photography with coastal-ink text.
 
 ### Cards / Containers

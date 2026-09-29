@@ -1,7 +1,6 @@
 import bananaBoat from '../assets/images/real/banana-boat-group.webp'
 import beachAerial from '../assets/images/real/beach-aerial.webp'
 import beachDay from '../assets/images/real/beach-day.webp'
-import beansCafe from '../assets/images/real/beans-cafe.jpg'
 import jetski from '../assets/images/real/jetski.webp'
 import kayakFamily from '../assets/images/real/kayak-family.webp'
 import poolside from '../assets/images/real/poolside.webp'
@@ -16,7 +15,6 @@ export const experienceFilters = [
   { value: 'all', label: 'All experiences' },
   { value: 'water', label: 'Water' },
   { value: 'sport', label: 'Sports' },
-  { value: 'food', label: 'Food' },
   { value: 'slow', label: 'Slow moments' },
   { value: 'together', label: 'Together' },
 ]
@@ -65,19 +63,8 @@ export const experiences = [
     to: '/stay/', cta: 'Stay near the pool', layout: 'standard', position: '75% center',
   },
   {
-    id: 'beans-paddles', title: 'Beans & Paddles Café', category: 'food',
-    copy: 'Start slowly, cool down after the water, or stay for one more cup.',
-    image: beansCafe, alt: 'Teal and timber exterior of Beans & Paddles Café at The Beach Park',
-    to: '/eat/beans-and-paddles/', cta: 'Visit the café', layout: 'standard',
-  },
-  {
-    id: 'sharkys', title: 'Sharky’s Café', category: 'food',
-    copy: 'A casual table in the middle of the day. Current menu and hours are confirmed directly.',
-    to: '/eat/sharkys-cafe/', cta: 'Explore Sharky’s', layout: 'standard', theme: 'deep',
-  },
-  {
     id: 'family-barkada', title: 'Family & Barkada Days', category: 'together',
-    copy: 'Beach time, shared food, water rides, and rooms that keep the group close.',
+    copy: 'Beach time, water rides, and rooms that keep the group close.',
     image: beachAerial, alt: 'Families and groups swimming together at The Beach Park Hadsan',
     to: '/stay/', cta: 'Make a day of it', layout: 'wide', position: 'center 30%',
   },

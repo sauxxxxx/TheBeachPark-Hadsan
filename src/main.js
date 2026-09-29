@@ -10,6 +10,8 @@ import './styles/motion.css'
 import './styles/responsive.css'
 import './styles/experiences.css'
 import './styles/stay-hero.css'
+import './styles/booking-enquiry.css'
+import './styles/prefooter-booking.css'
 import './styles/stay.css'
 import './styles/room-detail-responsive.css'
 

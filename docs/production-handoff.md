@@ -2,22 +2,19 @@
 
 ## Public page architecture
 
-The proposal's 14-page sitemap is implemented as:
+The current public page architecture is:
 
 1. `/`
 2. `/stay/`
 3. `/stay/room-details/:slug/`
-4. `/eat/`
-5. `/eat/beans-and-paddles/`
-6. `/eat/sharkys-cafe/`
-7. `/adventures/`
-8. `/adventures/details/:slug/`
-9. `/experiences/`
-10. `/offers/`
-11. `/explore/souvenir-shop/`
-12. `/explore/gallery/`
-13. `/explore/about/`
-14. `/explore/contact/`
+4. `/adventures/`
+5. `/adventures/details/:slug/`
+6. `/experiences/`
+7. `/offers/`
+8. `/explore/souvenir-shop/`
+9. `/explore/gallery/`
+10. `/explore/about/`
+11. `/explore/contact/`
 
 Utility routes: `/booking/`, `/privacy/`, `/terms/`, and the 404 route.
 
@@ -38,7 +35,6 @@ Copy `.env.example` into the deployment environment and provide the approved sit
 - Exely's official custom-site package, exact allowed origins, integration mode, production URL, analytics events, and API scope.
 - Final legal/privacy/cookie text and controller/processor wording.
 - Complete active room list, capacities, amenities, authentic images, and Exely IDs.
-- Current menus and operating details for Sharky's; menu details for Beans & Paddles.
 - Current day-pass, local-discount, furniture/cabana, activity, event, and offer prices/rules.
 - Pet rules, merchandise inventory, ownership clearance for source photography, and final URL migration/redirect matrix.
 - Analytics provider/container ID and stakeholder acceptance criteria.
