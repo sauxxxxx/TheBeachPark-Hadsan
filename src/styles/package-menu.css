@@ -92,7 +92,10 @@
   min-height: 560px;
   place-items: center;
 }
-.package-reader__book { filter: drop-shadow(0 24px 32px rgba(0,0,0,.42)); }
+.package-reader__book {
+  filter: drop-shadow(0 24px 32px rgba(0,0,0,.42));
+  transition: transform 320ms var(--ease);
+}
 .package-reader__book .stf__wrapper,
 .package-reader__book .stf__block { background: transparent; }
 .package-reader__page {
@@ -137,11 +140,20 @@
   .package-reader__topbar > span:first-of-type { justify-self: end; }
   .package-reader__topbar span:last-child { display: none; }
   .package-reader__stage { min-height: min(520px, 128vw); }
+  .package-reader__book {
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+  .package-reader__book.package-reader__book--closed {
+    transform: scale(2);
+    transform-origin: right center;
+  }
   .package-reader__controls { margin-top: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .package-cover__book { transition: none; }
+  .package-reader__book { transition: none; }
   .package-cover:hover .package-cover__book,
   .package-cover:focus-visible .package-cover__book { transform: perspective(1000px) rotateY(0); }
 }

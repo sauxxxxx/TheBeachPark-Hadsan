@@ -7,20 +7,16 @@ const bookElement = ref(null)
 const activeBook = ref(null)
 const currentPage = ref(0)
 const isTurning = ref(false)
-const readerOrientation = ref('landscape')
-const currentSpread = computed(() => {
-  if (readerOrientation.value === 'portrait') return currentPage.value + 1
-  return currentPage.value === 0 ? 1 : Math.floor((currentPage.value + 1) / 2) + 1
-})
-const totalSpreads = computed(() => {
-  if (!activeBook.value) return 0
-  if (readerOrientation.value === 'portrait') return activeBook.value.pages.length
-  return 1 + Math.ceil((activeBook.value.pages.length - 1) / 2)
-})
+const isPreparingOpen = ref(false)
+const currentSpread = computed(() => currentPage.value === 0 ? 1 : Math.floor((currentPage.value + 1) / 2) + 1)
+const totalSpreads = computed(() => activeBook.value ? 1 + Math.ceil((activeBook.value.pages.length - 1) / 2) : 0)
 const isAtLastSpread = computed(() => currentSpread.value >= totalSpreads.value)
 let pageFlip = null
+let openTimer = null
 
 function destroyBook() {
+  window.clearTimeout(openTimer)
+  openTimer = null
   if (!pageFlip) return
   pageFlip.destroy()
   pageFlip = null
@@ -30,6 +26,7 @@ async function openBook(book) {
   destroyBook()
   activeBook.value = book
   currentPage.value = 0
+  isPreparingOpen.value = false
   await nextTick()
 
   pageFlip = new PageFlip(bookElement.value, {
@@ -43,23 +40,18 @@ async function openBook(book) {
     flippingTime: 850,
     maxShadowOpacity: 0.38,
     showCover: true,
-    usePortrait: true,
+    usePortrait: false,
     autoSize: true,
     mobileScrollSupport: false,
     swipeDistance: 28,
   })
 
-  pageFlip.on('init', (event) => {
-    readerOrientation.value = event.data.mode
-  })
   pageFlip.on('flip', (event) => {
     currentPage.value = event.data
+    isPreparingOpen.value = false
   })
   pageFlip.on('changeState', (event) => {
     isTurning.value = event.data === 'flipping'
-  })
-  pageFlip.on('changeOrientation', (event) => {
-    readerOrientation.value = event.data
   })
   const pages = bookElement.value.querySelectorAll('.package-reader__page')
   pageFlip.loadFromHTML(pages)
@@ -69,6 +61,7 @@ function closeBook() {
   destroyBook()
   activeBook.value = null
   currentPage.value = 0
+  isPreparingOpen.value = false
 }
 
 function previousPage() {
@@ -78,7 +71,17 @@ function previousPage() {
 }
 
 function nextPage() {
-  if (!isTurning.value && !isAtLastSpread.value) pageFlip?.flipNext('top')
+  if (isTurning.value || isPreparingOpen.value || isAtLastSpread.value) return
+  if (currentPage.value === 0 && window.matchMedia('(max-width: 700px)').matches) {
+    isPreparingOpen.value = true
+    const openingDelay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 320
+    openTimer = window.setTimeout(() => {
+      openTimer = null
+      pageFlip?.flipNext('top')
+    }, openingDelay)
+    return
+  }
+  pageFlip?.flipNext('top')
 }
 
 function handleKey(event) {
@@ -123,7 +126,12 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="package-reader__stage">
-        <div ref="bookElement" class="package-reader__book" :aria-label="`${activeBook.title} flipbook`">
+        <div
+          ref="bookElement"
+          class="package-reader__book"
+          :class="{ 'package-reader__book--closed': currentPage === 0 && !isPreparingOpen }"
+          :aria-label="`${activeBook.title} flipbook`"
+        >
           <div
             v-for="(page, index) in activeBook.pages"
             :key="page"
@@ -138,7 +146,7 @@ onBeforeUnmount(() => {
       <nav class="package-reader__controls" aria-label="Book page controls">
         <button type="button" :disabled="currentPage === 0 || isTurning" aria-label="Previous page" @click="previousPage">←</button>
         <span>{{ currentSpread }} / {{ totalSpreads }}</span>
-        <button type="button" :disabled="isAtLastSpread || isTurning" aria-label="Next page" @click="nextPage">→</button>
+        <button type="button" :disabled="isAtLastSpread || isTurning || isPreparingOpen" aria-label="Next page" @click="nextPage">→</button>
       </nav>
     </div>
   </section>
