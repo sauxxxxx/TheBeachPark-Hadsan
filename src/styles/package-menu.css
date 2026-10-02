@@ -2,19 +2,13 @@
   min-height: 100svh;
   overflow: hidden;
   padding: 122px max(24px, calc((100vw - 1180px) / 2)) 72px;
-  background: var(--navy-deep);
+  background:
+    linear-gradient(180deg, rgba(2, 31, 42, .72), rgba(2, 31, 42, .88) 72%, rgba(2, 31, 42, .96)),
+    url('../assets/images/real/beach-aerial.webp') center 32% / cover no-repeat;
   color: white;
 }
 
 .package-library__heading { text-align: center; }
-.package-library__heading p {
-  margin: 0 0 7px;
-  color: var(--sand);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-}
 .package-library__heading h1 { margin: 0; font-size: clamp(36px, 5vw, 58px); }
 
 .package-library__shelf {

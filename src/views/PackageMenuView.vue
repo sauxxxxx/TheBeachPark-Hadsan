@@ -98,7 +98,6 @@ onBeforeUnmount(() => {
 <template>
   <section class="package-library" aria-labelledby="package-library-title">
     <header class="package-library__heading">
-      <p>The Beach Park Hadsan</p>
       <h1 id="package-library-title">Choose a menu.</h1>
     </header>
 
