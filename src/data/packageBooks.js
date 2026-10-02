@@ -10,6 +10,8 @@ import tropangSaloSalo from '../../BEACH BARKADA TRAY 1600ml_4-8pax/BBT_(B)-BEAC
 import cebuanoCatch from '../../BEACH BARKADA TRAY 1600ml_4-8pax/BBT_(C)-CEBUANO-CATCH-FEAST.jpeg'
 import fiestaSeafood from '../../BEACH BARKADA TRAY 1600ml_4-8pax/BBT_(D)-FIESTA-SEAFOOD-PACKAGE.jpeg'
 import barkadaSet from '../../BEACH BARKADA TRAY 1600ml_4-8pax/BBT_(E)-BEACH-BARKADA-SET.jpeg'
+import insideCover from '../assets/images/packages/package-inside-cover-v1.webp'
+import backCover from '../assets/images/packages/package-back-cover-v1.webp'
 
 export const packageBooks = [
   {
@@ -17,13 +19,13 @@ export const packageBooks = [
     title: 'Beach Barkada Tray',
     audience: 'For 4–8 guests',
     cover: trayCover,
-    pages: [trayCover, barkadaFeast, tropangSaloSalo, cebuanoCatch, fiestaSeafood, barkadaSet],
+    pages: [trayCover, insideCover, barkadaFeast, tropangSaloSalo, cebuanoCatch, fiestaSeafood, barkadaSet, backCover],
   },
   {
     id: 'beach-barkada',
     title: 'Beach Barkada',
     audience: 'For 15–20 guests',
     cover: barkadaCover,
-    pages: [barkadaCover, familyFiesta, cebuFavorites, premiumFeast, ultimateFeast, seafoodParty],
+    pages: [barkadaCover, insideCover, familyFiesta, cebuFavorites, premiumFeast, ultimateFeast, seafoodParty, backCover],
   },
 ]

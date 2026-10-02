@@ -1,5 +1,5 @@
 <script setup>
-import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { PageFlip } from 'page-flip'
 import { packageBooks } from '../data/packageBooks'
 
@@ -7,6 +7,8 @@ const bookElement = ref(null)
 const activeBook = ref(null)
 const currentPage = ref(0)
 const isTurning = ref(false)
+const currentSpread = computed(() => Math.floor(currentPage.value / 2) + 1)
+const totalSpreads = computed(() => activeBook.value ? Math.ceil(activeBook.value.pages.length / 2) : 0)
 let pageFlip = null
 
 function destroyBook() {
@@ -31,7 +33,7 @@ async function openBook(book) {
     maxHeight: 552,
     flippingTime: 850,
     maxShadowOpacity: 0.38,
-    showCover: true,
+    showCover: false,
     usePortrait: true,
     autoSize: true,
     mobileScrollSupport: false,
@@ -61,7 +63,7 @@ function previousPage() {
 }
 
 function nextPage() {
-  if (!isTurning.value) pageFlip?.flipNext('top')
+  if (!isTurning.value && currentPage.value < activeBook.value.pages.length - 2) pageFlip?.flipNext('top')
 }
 
 function handleKey(event) {
@@ -112,8 +114,8 @@ onBeforeUnmount(() => {
 
       <nav class="package-reader__controls" aria-label="Book page controls">
         <button type="button" :disabled="currentPage === 0 || isTurning" aria-label="Previous page" @click="previousPage">←</button>
-        <span>{{ Math.min(currentPage + 1, activeBook.pages.length) }} / {{ activeBook.pages.length }}</span>
-        <button type="button" :disabled="currentPage >= activeBook.pages.length - 1 || isTurning" aria-label="Next page" @click="nextPage">→</button>
+        <span>{{ currentSpread }} / {{ totalSpreads }}</span>
+        <button type="button" :disabled="currentPage >= activeBook.pages.length - 2 || isTurning" aria-label="Next page" @click="nextPage">→</button>
       </nav>
     </div>
   </section>
