@@ -1,0 +1,121 @@
+.package-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+  gap: clamp(36px, 7vw, 110px);
+  align-items: end;
+  padding-block: var(--space-section) var(--space-block);
+}
+.package-intro h2 { max-width: 15ch; margin: 0; }
+.package-intro > p { margin: 0 0 7px; color: var(--muted); font-size: 16px; }
+.package-families { border-top: 1px solid var(--line); }
+.package-family {
+  display: grid;
+  grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
+  gap: clamp(42px, 7vw, 110px);
+  width: var(--page);
+  margin-inline: auto;
+  padding-block: var(--space-section);
+}
+.package-family + .package-family { border-top: 1px solid var(--line); }
+.package-family--reverse { grid-template-columns: minmax(0, 1.28fr) minmax(300px, .72fr); }
+.package-family--reverse .package-family__visual { order: 2; }
+.package-family__visual {
+  position: sticky;
+  top: 98px;
+  align-self: start;
+  height: min(74svh, 720px);
+  margin: 0;
+  overflow: hidden;
+  background: #f2dfb5;
+}
+.package-family__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms var(--ease);
+}
+.package-family__visual:hover img { transform: scale(1.018); }
+.package-family__content { min-width: 0; }
+.package-family__content > header { max-width: 570px; margin-bottom: 38px; }
+.package-family__content > header h2 { margin: 0 0 12px; font-size: var(--type-display); }
+.package-family__content > header > p:last-child { margin: 0; color: var(--muted); font-size: 16px; }
+.package-family__meta {
+  margin: 0 0 12px;
+  color: var(--coral);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.package-options { border-top: 1px solid var(--line); }
+.package-option { border-bottom: 1px solid var(--line); }
+.package-option summary {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto 24px;
+  gap: 14px;
+  align-items: center;
+  padding: 20px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.package-option summary::-webkit-details-marker { display: none; }
+.package-option summary > span:first-child { color: var(--coral); font-size: 11px; letter-spacing: .08em; }
+.package-option summary strong { font-family: var(--display); font-size: clamp(20px, 2vw, 27px); font-weight: 400; line-height: 1.1; }
+.package-option summary small { color: var(--muted); font-size: 11px; white-space: nowrap; }
+.package-option__mark { position: relative; width: 18px; height: 18px; }
+.package-option__mark::before, .package-option__mark::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 1px;
+  background: currentColor;
+  content: '';
+  transform: translate(-50%, -50%);
+  transition: transform 260ms var(--ease);
+}
+.package-option__mark::after { transform: translate(-50%, -50%) rotate(90deg); }
+.package-option[open] .package-option__mark::after { transform: translate(-50%, -50%) rotate(0); }
+.package-option__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  padding: 0 0 26px 48px;
+}
+.package-option__body h3 {
+  margin: 0 0 9px;
+  color: var(--muted);
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.package-option__body ul { margin: 0; padding: 0; list-style: none; }
+.package-option__body li { color: var(--navy-soft); font-size: 12px; line-height: 1.65; }
+.package-family__action { display: flex; flex-wrap: wrap; gap: 15px 20px; align-items: center; margin-top: 34px; }
+.package-family__action span { color: var(--muted); font-size: 11px; }
+.offer-divider { display: flex; align-items: center; gap: 18px; padding-top: var(--space-block); color: var(--coral); font-size: 11px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }
+.offer-divider::after { height: 1px; flex: 1; background: var(--line); content: ''; }
+
+@media (max-width: 850px) {
+  .package-intro, .package-family, .package-family--reverse { grid-template-columns: 1fr; }
+  .package-family--reverse .package-family__visual { order: 0; }
+  .package-family__visual { position: relative; top: auto; width: min(100%, 520px); height: auto; aspect-ratio: 1414 / 2000; }
+}
+
+@media (max-width: 560px) {
+  .package-intro { gap: 22px; padding-block: 62px 38px; }
+  .package-family { gap: 34px; padding-block: 62px; }
+  .package-family__content > header { margin-bottom: 26px; }
+  .package-option summary { grid-template-columns: 27px minmax(0, 1fr) 18px; gap: 10px; }
+  .package-option summary small { grid-column: 2; }
+  .package-option__mark { grid-column: 3; grid-row: 1 / span 2; }
+  .package-option__body { grid-template-columns: 1fr; gap: 20px; padding-left: 37px; }
+  .package-family__action { align-items: start; flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .package-family__visual img, .package-option__mark::before, .package-option__mark::after { transition: none; }
+  .package-family__visual:hover img { transform: none; }
+}
