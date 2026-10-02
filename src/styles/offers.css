@@ -97,7 +97,6 @@
 .package-family__action span { color: var(--muted); font-size: 11px; }
 .offer-divider { display: flex; align-items: center; gap: 18px; padding-top: var(--space-block); color: var(--coral); font-size: 11px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }
 .offer-divider::after { height: 1px; flex: 1; background: var(--line); content: ''; }
-
 @media (max-width: 850px) {
   .package-intro, .package-family, .package-family--reverse { grid-template-columns: 1fr; }
   .package-family--reverse .package-family__visual { order: 0; }

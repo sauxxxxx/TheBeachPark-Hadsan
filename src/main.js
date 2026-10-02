@@ -16,5 +16,6 @@ import './styles/stay.css'
 import './styles/room-detail-responsive.css'
 import './styles/rates.css'
 import './styles/offers.css'
+import './styles/package-menu.css'
 
 createApp(App).use(router).mount('#app')

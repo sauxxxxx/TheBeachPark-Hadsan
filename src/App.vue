@@ -32,7 +32,7 @@ onMounted(() => router.isReady().then(nextTick).then(scan))
   <main id="main-content" ref="main">
     <RouterView />
   </main>
-  <PreFooterBooking />
+  <PreFooterBooking v-if="!route.meta.immersive" />
   <SiteFooter />
   <CookieNotice />
 </template>
