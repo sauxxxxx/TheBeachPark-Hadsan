@@ -28,7 +28,7 @@ const rentals = computed(() => ['life-vest-rental', 'snorkeling-mask']
   <section id="all-activities" class="adventure-catalogue">
     <header class="adventure-catalogue__intro page-shell">
       <h2 data-lines>Choose your way onto the water.</h2>
-      <p data-reveal>Fourteen ways to go easy, go together, or pick up the pace. Each activity now has its own view, with prices and ride details following the current Waterdog brochure.</p>
+      <p data-reveal>Fourteen ways to go easy, go together, or pick up the pace. Prices from the latest client-provided sheet are shown where listed. <RouterLink to="/rates/#watersports">See the complete water sports rates</RouterLink>.</p>
     </header>
 
     <div class="adventure-catalogue__groups page-shell">
@@ -93,6 +93,6 @@ const rentals = computed(() => ['life-vest-rental', 'snorkeling-mask']
       </aside>
     </div>
 
-    <p class="adventure-catalogue__note page-shell">Price ranges are shown exactly as supplied. The applicable rate can depend on duration, equipment, group size, or operating arrangement; confirm the final selection with Waterdog.</p>
+    <p class="adventure-catalogue__note page-shell">The latest supplied sheet does not list every activity. Unlisted rates are shown as “Rate on request.” Duration, equipment, group size, and weather can affect the final arrangement; confirm with Waterdog.</p>
   </section>
 </template>

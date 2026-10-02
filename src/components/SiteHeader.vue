@@ -15,7 +15,7 @@ const closeButton = ref(null)
 const menuButton = ref(null)
 const hoveredIndex = ref(null)
 
-const utilityRoutes = ['stay', 'booking', 'room-details', 'privacy', 'terms', 'not-found']
+const utilityRoutes = ['stay', 'rates', 'booking', 'room-details', 'privacy', 'terms', 'not-found']
 const isOverlay = computed(() => !utilityRoutes.includes(route.name) && !isScrolled.value && !menuOpen.value)
 
 function matches(item) {

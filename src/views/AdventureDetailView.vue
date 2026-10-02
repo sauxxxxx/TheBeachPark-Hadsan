@@ -46,7 +46,7 @@ const relatedActivities = computed(() => {
     <aside class="activity-detail__facts" data-reveal>
       <dl>
         <div><dt>Activity type</dt><dd>{{ category?.name }}</dd></div>
-        <div><dt>Brochure price</dt><dd>{{ activity.price }}<small v-if="activity.priceNote">{{ activity.priceNote }}</small></dd></div>
+        <div><dt>Current listed rate</dt><dd>{{ activity.price }}<small v-if="activity.priceNote">{{ activity.priceNote }}</small></dd></div>
         <div><dt>Time</dt><dd>{{ activity.duration }}</dd></div>
         <div><dt>Group size</dt><dd>{{ activity.capacity }}</dd></div>
         <div v-if="activity.operator"><dt>Arrangement</dt><dd>{{ activity.operator }}</dd></div>

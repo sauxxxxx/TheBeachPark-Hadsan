@@ -14,5 +14,6 @@ import './styles/booking-enquiry.css'
 import './styles/prefooter-booking.css'
 import './styles/stay.css'
 import './styles/room-detail-responsive.css'
+import './styles/rates.css'
 
 createApp(App).use(router).mount('#app')

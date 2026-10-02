@@ -1,35 +1,29 @@
-// Published room rates and bestseller states verified against the property's
-// official booking listings in September 2026. Final quotes remain date-based.
-const bookingFacts = {
-  'beach-side-room': { fromRate: 2900, bestseller: true },
-  'oceanfront-deck-room': { fromRate: 3200, bestseller: true },
-  'pool-side-balcony-room': { fromRate: 3000 },
-  'barkada-oceanfront-deck': { fromRate: 3472 },
-  'beachside-barkada-room': { fromRate: 4500 },
-  'barkada-beach-house': { fromRate: 6500 },
-  'pool-villa': { fromRate: 5500 },
-  'barkada-poolside-balcony': { fromRate: 4500 },
-  'lagoon-room': { fromRate: 6500 },
-  'oceanfront-deck-deluxe': { fromRate: 3600 },
-}
+import { formatPeso, overnightRooms, rateSheetDate } from './ratesContent'
 
-const peso = new Intl.NumberFormat('en-PH', {
-  style: 'currency',
-  currency: 'PHP',
-  maximumFractionDigits: 0,
-})
+// Rates are supplied by the property. Bestseller status remains from the
+// September 2026 booking listings; booking quotes remain date-based in Exely.
+const bestsellerSlugs = new Set(['beach-side-room', 'oceanfront-deck-room'])
+const ratesBySlug = new Map(overnightRooms.map((room) => [room.slug, room]))
 
-export const roomRateVerifiedLabel = 'September 2026'
+export const roomRateVerifiedLabel = rateSheetDate
 
 export function roomBookingFacts(room) {
-  return bookingFacts[room?.slug] ?? {}
+  const rate = ratesBySlug.get(room?.slug)
+  return {
+    ...(rate ? { fromRate: rate.weekdayRoom, capacity: rate.capacity } : {}),
+    bestseller: bestsellerSlugs.has(room?.slug),
+  }
+}
+
+export function roomCapacity(room) {
+  return roomBookingFacts(room).capacity ?? room?.maxOccupancy
 }
 
 export function roomRateLabel(room) {
   const { fromRate } = roomBookingFacts(room)
-  return fromRate ? `From ${peso.format(fromRate)} / night` : 'Rate on request'
+  return fromRate ? `From ${formatPeso(fromRate)} / night` : 'Rate on request'
 }
 
 export function isRoomBestseller(room) {
-  return Boolean(roomBookingFacts(room).bestseller)
+  return roomBookingFacts(room).bestseller
 }

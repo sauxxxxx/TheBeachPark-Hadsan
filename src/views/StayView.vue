@@ -4,7 +4,7 @@ import DisclosureList from '../components/shared/DisclosureList.vue'
 import EditorialCta from '../components/shared/EditorialCta.vue'
 import ScrollStory from '../components/home/ScrollStory.vue'
 import StayHero from '../components/stay/StayHero.vue'
-import { isRoomBestseller, roomRateLabel, roomRateVerifiedLabel } from '../data/roomBookingFacts'
+import { isRoomBestseller, roomCapacity, roomRateLabel, roomRateVerifiedLabel } from '../data/roomBookingFacts'
 import { commonFaqs, roomAmenities, roomHeroImageUrl, rooms } from '../data/siteContent'
 
 const photographed = computed(() => rooms.filter((room) => room.images.length))
@@ -12,8 +12,9 @@ const unphotographed = computed(() => rooms.filter((room) => !room.images.length
 const noPetsRooms = computed(() => rooms.filter((room) => !room.petsAllowed).map((room) => room.name))
 
 function sleeps(room) {
-  if (!room.maxOccupancy) return ''
-  return room.maxOccupancy === 1 ? 'Sleeps 1' : `Sleeps up to ${room.maxOccupancy}`
+  const capacity = roomCapacity(room)
+  if (!capacity) return ''
+  return capacity === 1 ? 'Sleeps 1' : `Sleeps up to ${capacity}`
 }
 
 function area(room) {
@@ -32,7 +33,7 @@ function area(room) {
 
   <section class="page-section page-shell intro-spread">
     <div><h2 data-lines>Thirteen ways to stay.</h2></div>
-    <p data-reveal>Whether you are travelling as a couple, a family, or a barkada, every room sits within the same short walk of the beach. Published starting rates are shown below; your final quote depends on your dates.</p>
+    <p data-reveal>Whether you are travelling as a couple, a family, or a barkada, every room sits within the same short walk of the beach. Monday–Thursday room-only starting rates are shown below; <RouterLink to="/rates/">see all rate plans</RouterLink> for breakfast, weekends, and day use.</p>
   </section>
 
   <section id="rooms" class="room-grid page-shell" aria-label="Room types" data-sequence>
@@ -49,7 +50,7 @@ function area(room) {
         <span class="room-card__cta">View room details</span>
       </RouterLink>
     </article>
-    <p class="room-rate-note">Starting rates verified in the official booking listings in {{ roomRateVerifiedLabel }}. Rates and availability vary by date.</p>
+    <p class="room-rate-note">Starting rates supplied by The Beach Park in {{ roomRateVerifiedLabel }} for Monday–Thursday room-only stays. <RouterLink to="/rates/">View full rates</RouterLink>. Confirm the final quote and availability with the property.</p>
   </section>
 
   <section v-if="unphotographed.length" class="page-section page-shell">

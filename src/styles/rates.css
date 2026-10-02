@@ -1,0 +1,136 @@
+.rates-page { --rate-sun: #b95e2d; --rate-sun-soft: #f5e5d4; background: var(--ivory); }
+.rates-hero { position: relative; display: flex; align-items: end; min-height: min(66svh, 640px); overflow: hidden; background: var(--navy); color: white; }
+.rates-hero img, .rates-hero__shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+.rates-hero img { object-fit: cover; object-position: center 48%; }
+.rates-hero__shade { background: linear-gradient(0deg, rgba(4, 31, 42, .75), rgba(4, 31, 42, .03) 80%); }
+.rates-hero__content { position: relative; padding-block: 160px 66px; }
+.rates-hero__content { animation: rates-arrive 900ms var(--ease) both; }
+@keyframes rates-arrive { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.rates-hero h1 { max-width: 16ch; margin-bottom: 12px; }
+.rates-hero p { margin: 0; color: rgba(255,255,255,.9); }
+.rates-intro { display: flex; justify-content: space-between; gap: 36px; align-items: center; padding-block: 30px; border-bottom: 1px solid var(--line); }
+.rates-intro p { max-width: 48ch; margin: 0; color: var(--navy-soft); font-size: 13px; }
+.rates-intro nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.rates-intro a { font-size: 12px; text-decoration-color: var(--rate-sun); text-underline-offset: 5px; }
+.rates-section { padding-block: clamp(72px, 7vw, 112px); scroll-margin-top: 72px; }
+.rates-section--paper { background: var(--paper); }
+.rates-section__heading { display: flex; justify-content: space-between; gap: 24px; align-items: baseline; margin-bottom: 32px; }
+.rates-section__heading h2 { max-width: 17ch; margin: 0; }
+.rates-section__heading p { margin: 0; color: var(--rate-sun); font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.rates-section__intro { max-width: 72ch; margin-bottom: 30px; color: var(--navy-soft); }
+.rates-entrance { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); }
+.rates-entrance__item { min-width: 0; }
+.rates-entrance__visual { position: relative; height: clamp(240px, 26vw, 360px); margin: 0 0 28px; overflow: hidden; background: var(--navy-soft); }
+.rates-entrance__visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease); }
+.rates-entrance__visual figcaption { position: absolute; inset: auto 0 0; display: flex; justify-content: space-between; padding: 24px; background: linear-gradient(transparent, rgba(4,31,42,.6)); color: white; font-family: var(--display); font-size: clamp(25px, 3vw, 42px); }
+.rates-entrance__visual figcaption span { align-self: end; font: 11px var(--body); letter-spacing: .1em; }
+.rates-entrance__item:hover .rates-entrance__visual img { transform: scale(1.035); }
+.rates-entrance__item:nth-child(2) .rates-entrance__visual img { object-position: 62% 55%; }
+.rates-entrance__details { max-width: 55ch; }
+.rates-price-feature { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 13px; padding: 20px 0 22px; border-block: 1px solid var(--line); }
+.rates-price-feature span { flex-basis: 100%; margin-bottom: 4px; color: var(--navy-soft); font-size: 12px; }
+.rates-price-feature strong { color: var(--rate-sun); font-family: var(--display); font-size: clamp(48px, 6vw, 76px); font-weight: 400; line-height: 1; font-variant-numeric: tabular-nums; }
+.rates-price-feature small { color: var(--navy-soft); font-size: 13px; }
+.rates-discount { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 9px; margin: 14px 0 0; }
+.rates-discount span { padding: 4px 8px; border-radius: 40px; background: var(--rate-sun-soft); color: #81421f; font-size: 11px; font-weight: 600; }
+.rates-discount strong { color: var(--ink); font-size: 20px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.rates-amenities-layout { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(36px, 5vw, 76px); align-items: start; }
+.rates-amenities__visual { position: sticky; top: 96px; height: min(74svh, 690px); margin: 0; overflow: hidden; background: var(--navy); }
+.rates-amenities__visual img { width: 100%; height: 100%; object-fit: cover; object-position: 48% top; }
+.rates-amenities__visual::after, .rates-action-visual::after, .rates-food__visual::after { position: absolute; inset: 45% 0 0; background: linear-gradient(transparent, rgba(4, 31, 42, .55)); content: ''; pointer-events: none; }
+.rates-amenities__visual figcaption, .rates-action-visual figcaption, .rates-food__visual figcaption { position: absolute; z-index: 1; right: 26px; bottom: 24px; left: 26px; color: white; font-family: var(--display); font-size: clamp(23px, 2.4vw, 36px); font-weight: 300; line-height: 1.1; }
+.rates-amenities__visual figcaption small, .rates-action-visual figcaption small { display: block; margin-top: 8px; font: 12px var(--body); letter-spacing: .07em; text-transform: uppercase; }
+.rates-room-gallery { display: grid; grid-template-columns: 1fr 1.12fr 1fr; gap: 8px; height: clamp(180px, 26vw, 340px); margin: 28px 0 42px; overflow: hidden; }
+.rates-room-gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease); }
+.rates-room-gallery img:hover { transform: scale(1.035); }
+.rates-action-visual { position: relative; height: clamp(310px, 41vw, 540px); margin: 0 0 42px; overflow: hidden; background: var(--navy); }
+.rates-action-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center 58%; }
+.rates-row-list--sports { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(28px, 5vw, 84px); border-top: 0; }
+.rates-row-list--sports .rates-row { display: block; border-top: 1px solid var(--line); border-bottom: 0; }
+.rates-row-list--sports .rates-row h3 { margin-bottom: 7px; }
+.rates-row-list--sports .rates-row strong { color: var(--rate-sun); font-family: var(--display); font-size: clamp(21px, 2vw, 28px); font-weight: 400; line-height: 1.25; }
+.rates-food-layout { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(36px, 5vw, 76px); align-items: start; }
+.rates-food__visual { position: relative; height: min(70svh, 660px); margin: 0; overflow: hidden; background: var(--navy); }
+.rates-food__visual img { width: 100%; height: 100%; object-fit: cover; object-position: center 56%; }
+.rates-food { display: grid; grid-template-columns: 1fr; gap: 42px; }
+.rates-entrance h3, .rates-food h3 { margin-bottom: 22px; }
+.rates-entrance h4 { margin: 28px 0 10px; font-size: 14px; font-weight: 500; }
+.rates-entrance p { color: var(--navy-soft); font-size: 13px; }
+.rates-facts { margin: 0; border-top: 1px solid var(--line); }
+.rates-facts div { display: flex; justify-content: space-between; gap: 20px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.rates-facts dt { color: var(--navy-soft); }
+.rates-facts dd { margin: 0; font-weight: 500; text-align: right; }
+.rates-row-list { border-top: 1px solid var(--line); }
+.rates-row { display: grid; grid-template-columns: minmax(150px, .8fr) minmax(0, 1.2fr); gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.rates-row h3, .rates-row h4 { margin: 0; font-family: var(--display); font-size: 23px; font-weight: 400; letter-spacing: 0; }
+.rates-row__options { display: grid; gap: 13px; }
+.rates-row__options > div { display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; }
+.rates-row strong { color: var(--rate-sun); font-family: var(--display); font-size: 27px; font-weight: 400; font-variant-numeric: tabular-nums; }
+.rates-row span, .rates-row small { color: var(--navy-soft); }
+.rates-row small { display: block; flex-basis: 100%; font-size: 12px; }
+.rates-note { max-width: 80ch; margin: 22px 0 0; color: var(--navy-soft); font-size: 12px; }
+.rates-note a { text-underline-offset: 3px; }
+.rates-table-wrap { overflow-x: auto; }
+.rates-table { width: 100%; border-collapse: collapse; text-align: left; font-variant-numeric: tabular-nums; }
+.rates-table caption { margin-bottom: 14px; font-family: var(--display); font-size: 25px; text-align: left; }
+.rates-table th, .rates-table td { padding: 15px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.rates-table thead { background: var(--navy); color: white; }
+.rates-table thead th { font-size: 12px; font-weight: 500; }
+.rates-table tbody th { width: 32%; font-weight: 500; }
+.rates-table tbody th small { display: block; margin-top: 3px; color: var(--navy-soft); font-weight: 400; }
+.rates-table tbody a { text-underline-offset: 3px; }
+.rates-table tbody tr:nth-child(even) { background: rgba(255,255,255,.4); }
+.rates-table tbody td { color: var(--ink); font-size: 15px; font-weight: 500; }
+.rates-table tbody td:last-child { color: var(--rate-sun); }
+.rates-subsection { display: flex; justify-content: space-between; gap: 20px; align-items: baseline; margin: 72px 0 22px; }
+.rates-subsection h3, .rates-subsection p { margin: 0; }
+.rates-subsection p { color: var(--navy-soft); font-size: 13px; }
+.rates-row--dayroom { align-items: baseline; }
+.rates-row--dayroom p { margin: 4px 0 0; color: var(--navy-soft); font-size: 12px; }
+.rates-row--dayroom > strong { justify-self: end; font-size: 32px; }
+.rates-food .rates-facts { border-top-color: var(--rate-sun); }
+.rates-food .rates-facts div { align-items: baseline; padding-block: 18px; }
+.rates-food .rates-facts dd { color: var(--rate-sun); font-family: var(--display); font-size: clamp(23px, 2.5vw, 34px); font-weight: 400; white-space: nowrap; }
+.rates-food .rates-facts dd::after { display: block; color: var(--navy-soft); content: 'per person'; font-family: var(--body); font-size: 11px; font-weight: 400; }
+.rates-food ul { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; margin: 0; padding-left: 18px; }
+.rates-end { padding-block: 84px; background: var(--navy); color: white; }
+.rates-end h2 { margin-bottom: 8px; }
+.rates-end p { color: rgba(255,255,255,.84); }
+.rates-end .button { margin-top: 12px; }
+@media (max-width: 800px) {
+  .rates-intro, .rates-section__heading, .rates-subsection { display: block; }
+  .rates-intro nav { margin-top: 18px; }
+  .rates-section__heading p { margin-top: 12px; }
+  .rates-amenities-layout, .rates-food-layout { grid-template-columns: 1fr; }
+  .rates-amenities__visual { position: relative; top: auto; height: 380px; }
+  .rates-food__visual { height: 390px; }
+  .rates-subsection p { margin-top: 8px; }
+}
+@media (max-width: 600px) {
+  .rates-hero { min-height: 54svh; }
+  .rates-hero__content { padding-block: 120px 48px; }
+  .rates-entrance, .rates-row-list--sports { grid-template-columns: 1fr; }
+  .rates-entrance { gap: 48px; }
+  .rates-entrance__visual { height: 230px; margin-bottom: 20px; }
+  .rates-amenities__visual { height: 300px; }
+  .rates-action-visual { height: 260px; margin-bottom: 26px; }
+  .rates-food__visual { height: 330px; }
+  .rates-room-gallery { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 76vw; height: 230px; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .rates-room-gallery img { scroll-snap-align: start; }
+  .rates-row { grid-template-columns: 1fr; gap: 8px; }
+  .rates-row--dayroom > strong { justify-self: start; }
+  .rates-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+  .rates-table, .rates-table tbody, .rates-table tr, .rates-table th, .rates-table td { display: block; width: 100%; }
+  .rates-table caption { display: block; width: 100%; }
+  .rates-table tbody th { width: 100%; }
+  .rates-table tbody tr { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .rates-table th, .rates-table td { padding: 3px 0; border: 0; }
+  .rates-table td { display: flex; justify-content: space-between; gap: 16px; }
+  .rates-table td::before { content: attr(data-label); color: var(--navy-soft); }
+  .rates-food ul { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rates-hero__content { animation: none; }
+  .rates-entrance__visual img, .rates-room-gallery img { transition: none; }
+  .rates-entrance__item:hover .rates-entrance__visual img, .rates-room-gallery img:hover { transform: none; }
+}

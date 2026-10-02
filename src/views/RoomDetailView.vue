@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router'
 import BookingLink from '../components/shared/BookingLink.vue'
 import EditorialImage from '../components/EditorialImage.vue'
 import GalleryLightbox from '../components/gallery/GalleryLightbox.vue'
-import { isRoomBestseller, roomBookingFacts, roomRateLabel } from '../data/roomBookingFacts'
+import { isRoomBestseller, roomBookingFacts, roomCapacity, roomRateLabel } from '../data/roomBookingFacts'
 import { roomAmenities, roomHeroImageUrl, roomImageFiles, roomImageSourceLabel, roomImageUrl, rooms, verifiedImages } from '../data/siteContent'
 
 const route = useRoute()
@@ -16,7 +16,7 @@ const images = computed(() => roomImageFiles(room.value))
 const heroImage = computed(() => images.value.length ? roomImageUrl(images.value[0]) : verifiedImages.poolside)
 const area = computed(() => room.value.size?.unit === 'square_metre' ? `${room.value.size.value} m²` : '')
 const facts = computed(() => [
-  room.value.maxOccupancy ? `Sleeps up to ${room.value.maxOccupancy}` : '',
+  roomCapacity(room.value) ? `Sleeps up to ${roomCapacity(room.value)}` : '',
   area.value,
   roomRateLabel(room.value),
   room.value.petsAllowed ? 'Pets welcome' : 'No pets',
@@ -25,7 +25,7 @@ const descriptionLines = computed(() => {
   const text = (room.value.description || '').trim()
   if (text) return text.split(/\n+/).map((line) => line.trim()).filter(Boolean)
   const size = area.value ? `A ${area.value} room` : 'A practical room'
-  const capacity = room.value.maxOccupancy ? ` for up to ${room.value.maxOccupancy} guests` : ''
+  const capacity = roomCapacity(room.value) ? ` for up to ${roomCapacity(room.value)} guests` : ''
   return [`${size}${capacity}, within easy reach of the beach and the rest of the property.`]
 })
 const introDescription = computed(() => {
@@ -34,9 +34,9 @@ const introDescription = computed(() => {
   return sentenceEnd === -1 ? text : text.slice(0, sentenceEnd + 1)
 })
 const roomDetails = computed(() => [
-  { label: 'Capacity', value: room.value.maxOccupancy ? `Up to ${room.value.maxOccupancy} guests` : 'Confirm with the reservations team' },
+  { label: 'Capacity', value: roomCapacity(room.value) ? `Up to ${roomCapacity(room.value)} guests` : 'Confirm with the reservations team' },
   { label: 'Floor area', value: area.value || 'Confirm with the reservations team' },
-  { label: 'Starting rate', value: roomRateLabel(room.value) },
+  { label: 'Mon–Thu room-only rate', value: roomRateLabel(room.value) },
   { label: 'Pet policy', value: room.value.petsAllowed ? 'Pets welcome' : 'Pets are not permitted' },
 ])
 const publishedAmenities = computed(() => [
@@ -71,7 +71,7 @@ function openGallery(index = 0) {
 }
 
 function roomMeta(item) {
-  const capacity = item.maxOccupancy ? `Sleeps up to ${item.maxOccupancy}` : ''
+  const capacity = roomCapacity(item) ? `Sleeps up to ${roomCapacity(item)}` : ''
   const size = item.size?.unit === 'square_metre' ? `${item.size.value} m²` : ''
   return [capacity, size].filter(Boolean).join(' · ')
 }
@@ -144,7 +144,7 @@ function roomMeta(item) {
     <section class="room-booking page-shell">
       <div class="room-booking__copy">
         <h2>Ready to check your dates?</h2>
-        <p>{{ roomBookingFacts(room).fromRate ? `${roomRateLabel(room)} is the published starting point. ` : '' }}Current availability, inclusions, and booking policies are maintained in the official booking system.</p>
+        <p>{{ roomBookingFacts(room).fromRate ? `${roomRateLabel(room)} is the client-supplied Monday–Thursday room-only starting point. ` : '' }}<RouterLink to="/rates/">See breakfast, weekend, and day-use rates</RouterLink>. Confirm the final quote, availability, and terms with the property.</p>
         <BookingLink label="Check availability" context="room_detail_footer" />
       </div>
       <ul class="room-booking__notes">
