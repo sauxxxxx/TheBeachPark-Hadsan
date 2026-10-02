@@ -7,8 +7,17 @@ const bookElement = ref(null)
 const activeBook = ref(null)
 const currentPage = ref(0)
 const isTurning = ref(false)
-const currentSpread = computed(() => Math.floor(currentPage.value / 2) + 1)
-const totalSpreads = computed(() => activeBook.value ? Math.ceil(activeBook.value.pages.length / 2) : 0)
+const readerOrientation = ref('landscape')
+const currentSpread = computed(() => {
+  if (readerOrientation.value === 'portrait') return currentPage.value + 1
+  return currentPage.value === 0 ? 1 : Math.floor((currentPage.value + 1) / 2) + 1
+})
+const totalSpreads = computed(() => {
+  if (!activeBook.value) return 0
+  if (readerOrientation.value === 'portrait') return activeBook.value.pages.length
+  return 1 + Math.ceil((activeBook.value.pages.length - 1) / 2)
+})
+const isAtLastSpread = computed(() => currentSpread.value >= totalSpreads.value)
 let pageFlip = null
 
 function destroyBook() {
@@ -33,15 +42,15 @@ async function openBook(book) {
     maxHeight: 552,
     flippingTime: 850,
     maxShadowOpacity: 0.38,
-    showCover: false,
+    showCover: true,
     usePortrait: true,
     autoSize: true,
     mobileScrollSupport: false,
     swipeDistance: 28,
   })
 
-  pageFlip.on('init', () => {
-    window.setTimeout(() => pageFlip?.flipNext('top'), 260)
+  pageFlip.on('init', (event) => {
+    readerOrientation.value = event.data.mode
   })
   pageFlip.on('flip', (event) => {
     currentPage.value = event.data
@@ -49,7 +58,11 @@ async function openBook(book) {
   pageFlip.on('changeState', (event) => {
     isTurning.value = event.data === 'flipping'
   })
-  pageFlip.loadFromImages(book.pages)
+  pageFlip.on('changeOrientation', (event) => {
+    readerOrientation.value = event.data
+  })
+  const pages = bookElement.value.querySelectorAll('.package-reader__page')
+  pageFlip.loadFromHTML(pages)
 }
 
 function closeBook() {
@@ -59,11 +72,13 @@ function closeBook() {
 }
 
 function previousPage() {
-  if (!isTurning.value) pageFlip?.flipPrev('top')
+  if (isTurning.value || !pageFlip) return
+  const bounds = pageFlip.getBoundsRect()
+  pageFlip.getFlipController().flip({ x: bounds.left + 10, y: 1 })
 }
 
 function nextPage() {
-  if (!isTurning.value && currentPage.value < activeBook.value.pages.length - 2) pageFlip?.flipNext('top')
+  if (!isTurning.value && !isAtLastSpread.value) pageFlip?.flipNext('top')
 }
 
 function handleKey(event) {
@@ -109,13 +124,22 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="package-reader__stage">
-        <div ref="bookElement" class="package-reader__book" :aria-label="`${activeBook.title} flipbook`"></div>
+        <div ref="bookElement" class="package-reader__book" :aria-label="`${activeBook.title} flipbook`">
+          <div
+            v-for="(page, index) in activeBook.pages"
+            :key="page"
+            class="package-reader__page"
+            :data-density="index === 0 || index === activeBook.pages.length - 1 ? 'hard' : 'soft'"
+          >
+            <img :src="page" alt="" width="1414" height="2000" />
+          </div>
+        </div>
       </div>
 
       <nav class="package-reader__controls" aria-label="Book page controls">
         <button type="button" :disabled="currentPage === 0 || isTurning" aria-label="Previous page" @click="previousPage">←</button>
         <span>{{ currentSpread }} / {{ totalSpreads }}</span>
-        <button type="button" :disabled="currentPage >= activeBook.pages.length - 2 || isTurning" aria-label="Next page" @click="nextPage">→</button>
+        <button type="button" :disabled="isAtLastSpread || isTurning" aria-label="Next page" @click="nextPage">→</button>
       </nav>
     </div>
   </section>
