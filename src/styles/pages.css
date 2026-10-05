@@ -214,7 +214,14 @@ body.lightbox-is-open { overflow: hidden; }
 .contact-grid article { flex: 1; display: flex; flex-direction: column; gap: 16px; }
 .contact-grid a:not(.text-link), .contact-grid strong { font-family: var(--display); font-size: clamp(24px, 2.6vw, 36px); font-weight: 500; line-height: 1.08; overflow-wrap: anywhere; text-decoration: none; }
 .contact-grid p:last-child { color: var(--muted); }
-.direction-panel { padding-top: 10px; }
+.contact-map { padding-bottom: var(--space-section); }
+.contact-map__header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 50px; align-items: end; padding-bottom: 32px; }
+.contact-map__header h2 { max-width: 12ch; margin: 0; font-size: var(--type-headline); }
+.contact-map__address { display: grid; justify-items: end; gap: 12px; text-align: right; }
+.contact-map__address p { margin: 0; color: var(--muted); }
+.contact-map__frame { height: clamp(360px, 42vw, 520px); overflow: hidden; border: 1px solid var(--line); background: #e8e2d7; }
+.contact-map__frame iframe { width: 100%; height: 100%; display: block; border: 0; }
+.direction-panel { padding-top: 0; }
 
 .disclosures { display: grid; grid-template-columns: .7fr 1.3fr; gap: 8vw; padding-block: var(--space-section); }
 .disclosures h2 { font-size: var(--type-headline); }
@@ -275,6 +282,8 @@ body.lightbox-is-open { overflow: hidden; }
   .gallery-journal .gallery-journal__frame { grid-column: auto; grid-row: auto; }
   .gallery-journal .gallery-journal__frame:nth-child(1), .gallery-journal .gallery-journal__frame:nth-child(4), .gallery-journal .gallery-journal__frame:nth-child(7) { grid-column: 1 / -1; }
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .contact-map__header { grid-template-columns: 1fr; gap: 22px; }
+  .contact-map__address { justify-items: start; text-align: left; }
 }
 
 @media (max-width: 560px) {
@@ -296,6 +305,9 @@ body.lightbox-is-open { overflow: hidden; }
   .gallery-lightbox__controls { right: 15px; bottom: 20px; }
   .value-band > div { flex-direction: column; gap: 15px; }
   .contact-grid { grid-template-columns: 1fr; gap: 45px; }
+  .contact-map { padding-bottom: 62px; }
+  .contact-map__header { padding-bottom: 24px; }
+  .contact-map__frame { width: 100%; height: 390px; }
   .mood-switcher__visual { min-height: 290px; }
   .mood-switcher__body { padding: 48px 18px; }
   .mood-switcher__choices button { font-size: 26px; }

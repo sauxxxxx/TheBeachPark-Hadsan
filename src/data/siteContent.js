@@ -34,6 +34,7 @@ export const property = {
   email: 'thebeachpark.reservations@gmail.com',
   emailHref: 'mailto:thebeachpark.reservations@gmail.com',
   googleMapsUrl: 'https://share.google/z2ZxNGa5HnjPQwSuq',
+  googleMapsEmbedUrl: 'https://www.google.com/maps?q=10.2788644,123.9948348&z=16&output=embed',
   exelyPropertyId: '507010',
 }
 
