@@ -33,6 +33,7 @@ export const property = {
   phoneHref: 'tel:+639173030755',
   email: 'thebeachpark.reservations@gmail.com',
   emailHref: 'mailto:thebeachpark.reservations@gmail.com',
+  googleMapsUrl: 'https://share.google/z2ZxNGa5HnjPQwSuq',
   exelyPropertyId: '507010',
 }
 

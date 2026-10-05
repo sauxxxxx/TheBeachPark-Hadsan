@@ -2,6 +2,7 @@
 import AdventureFeature from '../components/home/AdventureFeature.vue'
 import DayTimeline from '../components/home/DayTimeline.vue'
 import DestinationGrid from '../components/home/DestinationGrid.vue'
+import GoogleReviews from '../components/home/GoogleReviews.vue'
 import HomeEntrance from '../components/home/HomeEntrance.vue'
 import HomepageHero from '../components/home/HomepageHero.vue'
 import MemoriesCollage from '../components/home/MemoriesCollage.vue'
@@ -19,5 +20,6 @@ import StayFeature from '../components/home/StayFeature.vue'
     <StayFeature />
     <AdventureFeature />
     <MemoriesCollage />
+    <GoogleReviews />
   </div>
 </template>

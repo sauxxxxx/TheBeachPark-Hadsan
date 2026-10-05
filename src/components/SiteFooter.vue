@@ -17,7 +17,7 @@ import { primaryNavigation, property } from '../data/siteContent'
       <address class="footer-contact">
         <a :href="property.phoneHref">{{ property.phone }}</a>
         <a :href="property.emailHref">{{ property.email }}</a>
-        <span>{{ property.location }}</span>
+        <a :href="property.googleMapsUrl" target="_blank" rel="noopener noreferrer">{{ property.location }} ↗</a>
       </address>
     </div>
     <!-- A real element rather than a ::before so it can be hidden from screen
