@@ -10,16 +10,6 @@ const canGoPrevious = ref(false)
 const canGoNext = ref(false)
 const controller = new AbortController()
 
-const ratingLabel = computed(() => {
-  const rating = reviewsData.value?.rating
-  return rating ? `${rating.toFixed(1)} out of 5` : 'Google reviews'
-})
-
-const ratingPercent = computed(() => {
-  const rating = reviewsData.value?.rating || 0
-  return `${Math.min(100, Math.max(0, (rating / 5) * 100))}%`
-})
-
 const googleMapsUrl = computed(() => reviewsData.value?.googleMapsUrl || property.googleMapsUrl)
 
 function updateControls() {
@@ -64,15 +54,6 @@ onBeforeUnmount(() => {
         <div class="google-reviews__intro">
           <p class="overline">Guest notes</p>
           <h2 id="google-reviews-title" data-lines>In their own words.</h2>
-        </div>
-
-        <div v-if="reviewsData?.rating" class="google-reviews__score" :aria-label="ratingLabel">
-          <strong>{{ reviewsData.rating.toFixed(1) }}</strong>
-          <div>
-            <span class="google-reviews__stars" :style="{ '--rating-fill': ratingPercent }" aria-hidden="true">★★★★★</span>
-            <small>{{ reviewsData.reviewCount.toLocaleString() }} guest reviews</small>
-            <span class="google-reviews__attribution" translate="no">Google Maps</span>
-          </div>
         </div>
 
         <div v-if="reviewsData?.reviews?.length > 1" class="google-reviews__controls" aria-label="Browse guest reviews">
