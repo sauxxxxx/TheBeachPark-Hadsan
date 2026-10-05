@@ -81,7 +81,7 @@ export async function GET() {
       reviews: (place.reviews || [])
         .map(normalizeReview)
         .filter((review) => review.text)
-        .slice(0, 3),
+        .slice(0, 5),
     }, 200, {
       'Cache-Control': 'private, no-store',
     })
