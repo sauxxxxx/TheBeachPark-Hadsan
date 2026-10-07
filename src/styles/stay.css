@@ -49,6 +49,22 @@
   display:flex
 }
 
+.room-hero--text-only {
+  grid-template-columns:minmax(0,1fr);
+  height:auto
+}
+
+.room-hero--text-only .room-intro {
+  width:100%;
+  max-width:48rem;
+  margin-inline:auto;
+  padding:clamp(2rem,5vw,4rem) 0 0
+}
+
+.room-hero--text-only h1 {
+  max-width:none
+}
+
 .room-intro__back {
   color:var(--muted);
   letter-spacing:.1em;

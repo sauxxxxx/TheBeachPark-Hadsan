@@ -5,7 +5,7 @@ import BookingLink from '../components/shared/BookingLink.vue'
 import EditorialImage from '../components/EditorialImage.vue'
 import GalleryLightbox from '../components/gallery/GalleryLightbox.vue'
 import { isRoomBestseller, roomBookingFacts, roomCapacity, roomRateLabel } from '../data/roomBookingFacts'
-import { roomAmenities, roomHeroImageUrl, roomImageFiles, roomImageSourceLabel, roomImageUrl, rooms, verifiedImages } from '../data/siteContent'
+import { roomAmenities, roomHeroImageUrl, roomImageFiles, roomImageSourceLabel, roomImageUrl, rooms } from '../data/siteContent'
 
 const route = useRoute()
 const room = computed(() => rooms.find((item) => item.slug === route.params.slug) || rooms[0])
@@ -13,7 +13,7 @@ const activeIndex = ref(0)
 const lightboxOpen = ref(false)
 
 const images = computed(() => roomImageFiles(room.value))
-const heroImage = computed(() => images.value.length ? roomImageUrl(images.value[0]) : verifiedImages.poolside)
+const heroImage = computed(() => roomHeroImageUrl(room.value))
 const area = computed(() => room.value.size?.unit === 'square_metre' ? `${room.value.size.value} m²` : '')
 const facts = computed(() => [
   roomCapacity(room.value) ? `Sleeps up to ${roomCapacity(room.value)}` : '',
@@ -80,8 +80,8 @@ function roomMeta(item) {
 <template>
   <article class="room-page">
     <div class="room-visual-lead page-shell">
-      <header class="room-hero">
-        <button class="room-hero__media" type="button" :aria-label="`Open photograph 1 of ${Math.max(images.length, 1)}`" :disabled="!galleryItems.length" @click="openGallery(0)">
+      <header class="room-hero" :class="{ 'room-hero--text-only': !heroImage }">
+        <button v-if="heroImage" class="room-hero__media" type="button" :aria-label="`Open photograph 1 of ${images.length}`" @click="openGallery(0)">
           <EditorialImage :src="heroImage" :alt="`${room.name} at The Beach Park Hadsan`" :width="2000" :height="1500" eager />
         </button>
 
