@@ -1,7 +1,12 @@
 <script setup>
-import { exelyConfig } from '../services/exely'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { exelyConfig, getOfferBookingTarget } from '../services/exely'
 import { property } from '../data/siteContent'
 import { trackEvent } from '../services/analytics'
+
+const route = useRoute()
+const bookingTarget = computed(() => getOfferBookingTarget(route.query['special-offer']))
 </script>
 
 <template>
@@ -13,7 +18,7 @@ import { trackEvent } from '../services/analytics'
       <div v-if="exelyConfig.isConfigured" class="integration-placeholder">
         <span>Official booking connection</span>
         <strong>Continue to current availability and rates.</strong>
-        <a class="button" :href="exelyConfig.bookingUrl" rel="noopener" @click="trackEvent('exely_booking_open', { property_id: property.exelyPropertyId })">Open secure booking</a>
+        <a class="button" :href="bookingTarget" rel="noopener" @click="trackEvent('exely_booking_open', { property_id: property.exelyPropertyId })">Open secure booking</a>
       </div>
       <div v-else class="integration-placeholder">
         <span>Connection pending</span>

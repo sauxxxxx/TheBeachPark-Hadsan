@@ -16,3 +16,12 @@ export function getBookingTarget() {
 export function isExternalBookingTarget() {
   return /^https?:\/\//i.test(getBookingTarget())
 }
+
+/** Keep the selected promotion when handing off to the configured engine. */
+export function getOfferBookingTarget(offerId) {
+  const target = getBookingTarget()
+  if (typeof offerId !== 'string' || !/^\d+$/.test(offerId)) return target
+  const url = new URL(target, window.location.origin)
+  url.searchParams.set('special-offer', offerId)
+  return /^https?:\/\//i.test(target) ? url.href : `${url.pathname}${url.search}${url.hash}`
+}

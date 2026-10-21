@@ -7,6 +7,7 @@ const props = defineProps({
   label: { type: String, default: 'Book your stay' },
   context: { type: String, default: 'general' },
   variant: { type: String, default: '' },
+  to: { type: [String, Object], default: '/booking/' },
 })
 
 const classes = computed(() => ['button', props.variant && `button--${props.variant}`])
@@ -17,5 +18,5 @@ function trackBooking() {
 </script>
 
 <template>
-  <RouterLink :class="classes" to="/booking/" @click="trackBooking">{{ label }}</RouterLink>
+  <RouterLink :class="classes" :to="to" @click="trackBooking">{{ label }}</RouterLink>
 </template>

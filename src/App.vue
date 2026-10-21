@@ -5,6 +5,7 @@ import SiteFooter from './components/SiteFooter.vue'
 import PreFooterBooking from './components/PreFooterBooking.vue'
 import SiteHeader from './components/SiteHeader.vue'
 import CookieNotice from './components/CookieNotice.vue'
+import BookingPromotions from './components/promotions/BookingPromotions.vue'
 import { useScrollChoreography } from './composables/useScrollChoreography'
 import { registerScrollSource } from './services/scrollEngine'
 import { destroySmoothScroll, initSmoothScroll } from './services/smoothScroll'
@@ -35,4 +36,5 @@ onMounted(() => router.isReady().then(nextTick).then(scan))
   <PreFooterBooking v-if="!route.meta.immersive" />
   <SiteFooter />
   <CookieNotice />
+  <BookingPromotions />
 </template>
