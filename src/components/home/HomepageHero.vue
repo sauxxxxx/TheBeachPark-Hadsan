@@ -3,7 +3,7 @@ import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import BookingEnquiryBar from '../shared/BookingEnquiryBar.vue'
 
 const posterSrc = '/media/hero-poster.webp'
-const videoSrc = '/media/hero-hadsan-last.mp4'
+const videoSrc = '/media/hero-hadsan-nasad.mp4'
 
 // The hero video is earned rather than assumed: wide viewports only, and never
 // against the user's stated preferences. Phones, Save-Data and
