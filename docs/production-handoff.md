@@ -31,6 +31,19 @@ Utility routes: `/booking/`, `/privacy/`, `/terms/`, and the 404 route.
 
 Copy `.env.example` into the deployment environment and provide the approved site origin and Exely booking target. The host must serve `index.html` for unknown paths; `public/_redirects` covers hosts supporting Netlify-style rewrite rules.
 
+## Featured Google reviews
+
+`server/reviews/selectFeaturedReviews.js` selects manually checked, positive
+4–5-star reviews from the live Google response. Each approval pairs the original
+Google review link with a SHA-256 hash of its full, unmodified text. Review the
+complete wording before adding a link/hash pair; a high rating alone is not
+enough. Edited reviews require a fresh check and hash. Author details, ratings,
+wording, and source links continue to come from Google.
+
+Only approved reviews present in the current response appear. If none qualify,
+the section links guests to the official Google listing. Do not fill gaps with
+unapproved reviews or change the property's overall Google rating.
+
 ## Still requiring approval
 
 - Exely's official custom-site package, exact allowed origins, integration mode, production URL, analytics events, and API scope.

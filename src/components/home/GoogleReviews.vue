@@ -70,7 +70,7 @@ onBeforeUnmount(() => {
         <span>Loading guest reviews…</span>
       </div>
 
-      <div v-else-if="reviewsData?.reviews?.length" ref="rail" class="google-reviews__list" aria-label="Google Maps guest reviews" data-sequence @scroll.passive="updateControls">
+      <div v-else-if="reviewsData?.reviews?.length" ref="rail" class="google-reviews__list" :class="{ 'google-reviews__list--single': reviewsData.reviews.length === 1 }" aria-label="Google Maps guest reviews" data-sequence @scroll.passive="updateControls">
         <article v-for="(review, index) in reviewsData.reviews" :key="`${review.author}-${review.published}`" class="google-review sequence-item">
           <div class="google-review__meta">
             <span class="google-review__number" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span>
@@ -103,7 +103,7 @@ onBeforeUnmount(() => {
         <a class="google-reviews__all" :href="googleMapsUrl" target="_blank" rel="noopener noreferrer">
           All reviews on Google Maps <span aria-hidden="true">↗</span>
         </a>
-        <p>Reviews are selected and ordered by Google Maps based on relevance.</p>
+        <p>Selected guest reviews from Google Maps</p>
       </div>
     </div>
   </section>

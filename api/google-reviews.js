@@ -1,3 +1,5 @@
+import { selectFeaturedReviews } from '../server/reviews/selectFeaturedReviews.js'
+
 const PLACE_QUERY = 'The Beach Park-Hadsan, Hadsan, Agus, Lapu-Lapu City, Cebu, Philippines'
 const PLACES_ENDPOINT = 'https://places.googleapis.com/v1/places:searchText'
 const RESPONSE_FIELDS = [
@@ -78,10 +80,7 @@ export async function GET() {
       rating: Number(place.rating) || 0,
       reviewCount: Number(place.userRatingCount) || 0,
       googleMapsUrl: place.googleMapsUri || '',
-      reviews: (place.reviews || [])
-        .map(normalizeReview)
-        .filter((review) => review.text)
-        .slice(0, 5),
+      reviews: selectFeaturedReviews((place.reviews || []).map(normalizeReview)),
     }, 200, {
       'Cache-Control': 'private, no-store',
     })

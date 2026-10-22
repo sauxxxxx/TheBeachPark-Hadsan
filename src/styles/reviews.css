@@ -53,6 +53,7 @@
   scrollbar-width: none;
 }
 .google-reviews__list::-webkit-scrollbar { display: none; }
+.google-reviews__list.google-reviews__list--single { grid-auto-columns: 100%; }
 
 .google-review {
   min-width: 0;
