@@ -78,7 +78,7 @@ onBeforeUnmount(() => {
               <span aria-hidden="true">{{ '★'.repeat(Math.round(review.rating)) }}</span>
               <span class="sr-only">{{ review.rating }} out of 5 stars</span>
             </span>
-            <small>{{ review.published }}</small>
+            <small v-if="review.published">{{ review.published }}</small>
           </div>
           <blockquote>“{{ review.text }}”</blockquote>
           <footer>
@@ -103,7 +103,7 @@ onBeforeUnmount(() => {
         <a class="google-reviews__all" :href="googleMapsUrl" target="_blank" rel="noopener noreferrer">
           All reviews on Google Maps <span aria-hidden="true">↗</span>
         </a>
-        <p>Selected guest reviews from Google Maps</p>
+        <p>Selected positive 4–5-star guest reviews from Google Maps</p>
       </div>
     </div>
   </section>

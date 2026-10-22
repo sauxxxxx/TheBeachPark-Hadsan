@@ -33,16 +33,22 @@ Copy `.env.example` into the deployment environment and provide the approved sit
 
 ## Featured Google reviews
 
-`server/reviews/selectFeaturedReviews.js` selects manually checked, positive
-4–5-star reviews from the live Google response. Each approval pairs the original
-Google review link with a SHA-256 hash of its full, unmodified text. Review the
-complete wording before adding a link/hash pair; a high rating alone is not
-enough. Edited reviews require a fresh check and hash. Author details, ratings,
-wording, and source links continue to come from Google.
+`server/reviews/featuredReviews.js` contains five positive five-star reviews
+checked against the public Google Maps listing on 22 October 2026. Preserve each
+review's full original wording, Google review ID, rating, author profile, avatar,
+and individual source link. The array defines the editorial display order. Review
+complete wording before adding an entry; a high rating alone is not enough.
 
-Only approved reviews present in the current response appear. If none qualify,
-the section links guests to the official Google listing. Do not fill gaps with
-unapproved reviews or change the property's overall Google rating.
+The Places API only returns up to five reviews, sorted by relevance. The selector
+retains checked entries absent from that batch and also works during API outages.
+When Google returns a matching review, current metadata is used only if the text
+still matches and the rating is 4–5 stars. Changed wording or lower ratings remove
+that entry until checked again. Recheck the catalogue periodically for edits or
+removals outside the limited API batch, and update `reviewSelectionCheckedAt`.
+Publication dates are omitted where only a relative date was available; do not
+store a relative date that will become stale. The footer discloses the selection
+criteria and retains the link to all reviews. Overall ratings and review counts
+are only supplied when the live Google request succeeds.
 
 ## Still requiring approval
 

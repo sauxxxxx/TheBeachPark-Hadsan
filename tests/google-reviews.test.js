@@ -1,49 +1,72 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { featuredReviews } from '../server/reviews/featuredReviews.js'
 import { selectFeaturedReviews } from '../server/reviews/selectFeaturedReviews.js'
 
-const approvedReview = {
-  author: 'Evelyn Vilbar',
-  rating: 5,
-  text: 'We had so much fun here! The place is very accessible if you are staying around Mactan or Lapu-Lapu. The beach is clean and safe for kids. They have AC rooms for day-use and will give you discounted price for entrance if you get an AC room. The AC was working which allowed yung kids na kasama namen na magnap. They also have barbecue place! Kayak was so much fun too! We loved our stay! 🌊🥰🫶',
-  googleMapsUrl: 'https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21RNVl6WlBVa1U0VFhWNlZWa3plR0YxT0ZZMGEzYxAB!2m1!1s0x33a990b6506606b7:0xf2e0a1870f2cd598',
-}
+const approvedReview = featuredReviews[0]
+const containsReview = (reviews, id) => reviews.some((review) => review.id === id)
 
-test('features checked positive reviews without changing their content or attribution', () => {
-  const result = selectFeaturedReviews([approvedReview])
-  assert.deepEqual(result, [approvedReview])
-  assert.equal(result[0], approvedReview)
+test('keeps five checked reviews when Google returns an empty or different batch', () => {
+  assert.equal(selectFeaturedReviews().length, 5)
+  assert.equal(selectFeaturedReviews([]).length, 5)
+  assert.equal(selectFeaturedReviews([{ id: 'unapproved', rating: 1, text: 'Poor.' }]).length, 5)
 })
 
-test('only permits four- and five-star ratings, even for an approved source', () => {
-  for (const rating of [0, 1, 2, 3, 6, NaN]) {
-    assert.deepEqual(selectFeaturedReviews([{ ...approvedReview, rating }]), [])
+test('every featured review has a positive rating, original attribution and an individual source', () => {
+  assert.equal(new Set(featuredReviews.map((review) => review.id)).size, 5)
+  for (const review of featuredReviews) {
+    assert.ok([4, 5].includes(review.rating))
+    assert.ok(review.text.trim())
+    assert.match(review.authorUrl, /^https:\/\/www\.google\.com\/maps\/contrib\//)
+    assert.match(review.authorPhotoUrl, /^https:\/\/lh3\.googleusercontent\.com\//)
+    assert.match(review.googleMapsUrl, /^https:\/\/(www\.google\.com\/maps\/reviews\/|maps\.app\.goo\.gl\/)/)
+    assert.equal(review.published, '')
   }
-  assert.equal(selectFeaturedReviews([{ ...approvedReview, rating: 4 }]).length, 1)
 })
 
-test('a high rating does not automatically approve mixed or unreviewed comments', () => {
+test('refreshes current metadata without losing other checked reviews', () => {
+  const current = { ...approvedReview, published: '5 months ago', authorPhotoUrl: 'updated-avatar' }
+  const result = selectFeaturedReviews([current])
+  assert.equal(result.length, 5)
+  assert.deepEqual(result[0], current)
+  assert.equal(result[1].author, 'Aldrin Solayao')
+})
+
+test('matches the existing Google API source URL when a review has no explicit ID', () => {
+  const { id, ...current } = approvedReview
+  const result = selectFeaturedReviews([{ ...current, published: 'Latest metadata' }])
+  assert.equal(result[0].id, id)
+  assert.equal(result[0].published, 'Latest metadata')
+})
+
+test('removes a checked review if its current rating drops below four', () => {
+  for (const rating of [0, 1, 2, 3, 6, NaN]) {
+    const result = selectFeaturedReviews([{ ...approvedReview, rating }])
+    assert.equal(result.length, 4)
+    assert.equal(containsReview(result, approvedReview.id), false)
+  }
+  assert.equal(selectFeaturedReviews([{ ...approvedReview, rating: 4 }]).length, 5)
+})
+
+test('does not automatically feature an unreviewed five-star comment', () => {
   const mixedReview = {
-    rating: 5,
-    googleMapsUrl: 'https://www.google.com/maps/reviews/unapproved',
+    id: 'unapproved', rating: 5,
     text: 'Great for family, but the room needs repair and there were brownouts.',
   }
-  assert.deepEqual(selectFeaturedReviews([mixedReview, approvedReview]), [approvedReview])
+  assert.equal(containsReview(selectFeaturedReviews([mixedReview]), mixedReview.id), false)
 })
 
-test('requires another check if an approved guest changes their wording', () => {
-  const editedReview = { ...approvedReview, text: 'Our latest visit was disappointing.' }
-  assert.deepEqual(selectFeaturedReviews([editedReview]), [])
-})
-
-test('does not reuse approved wording from a different source', () => {
-  const copiedReview = { ...approvedReview, googleMapsUrl: 'https://example.com/review' }
-  assert.deepEqual(selectFeaturedReviews([copiedReview]), [])
-})
-
-test('returns no featured reviews when the feed has no eligible comments', () => {
-  assert.deepEqual(selectFeaturedReviews(), [])
-  for (const text of ['', '   ', undefined]) {
-    assert.deepEqual(selectFeaturedReviews([{ ...approvedReview, text }]), [])
+test('requires another check when a known guest changes or removes their wording', () => {
+  for (const text of ['Our latest visit was disappointing.', '', '   ', undefined]) {
+    const result = selectFeaturedReviews([{ ...approvedReview, text }])
+    assert.equal(result.length, 4)
+    assert.equal(containsReview(result, approvedReview.id), false)
   }
+})
+
+test('does not mutate the catalogue or expose its records to mutation by consumers', () => {
+  const before = structuredClone(featuredReviews)
+  const result = selectFeaturedReviews()
+  result[0].text = 'Changed by a consumer'
+  assert.deepEqual(featuredReviews, before)
 })

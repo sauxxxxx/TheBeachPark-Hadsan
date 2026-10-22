@@ -1,4 +1,5 @@
 import { selectFeaturedReviews } from '../server/reviews/selectFeaturedReviews.js'
+import { googleMapsListingUrl, reviewSelectionCheckedAt } from '../server/reviews/featuredReviews.js'
 
 const PLACE_QUERY = 'The Beach Park-Hadsan, Hadsan, Agus, Lapu-Lapu City, Cebu, Philippines'
 const PLACES_ENDPOINT = 'https://places.googleapis.com/v1/places:searchText'
@@ -19,6 +20,7 @@ const json = (body, status = 200, headers = {}) => Response.json(body, {
 })
 
 const normalizeReview = (review) => ({
+  id: review.name?.split('/').pop() || '',
   author: review.authorAttribution?.displayName || 'Google user',
   authorUrl: review.authorAttribution?.uri || '',
   authorPhotoUrl: review.authorAttribution?.photoUri || '',
@@ -33,13 +35,24 @@ const normalizeReview = (review) => ({
   googleMapsUrl: review.googleMapsUri || '',
 })
 
+function featuredResponse(place) {
+  return json({
+    name: place?.displayName?.text || 'The Beach Park-Hadsan',
+    ...(place && {
+      rating: Number(place.rating) || 0,
+      reviewCount: Number(place.userRatingCount) || 0,
+    }),
+    googleMapsUrl: place?.googleMapsUri || googleMapsListingUrl,
+    selectionCheckedAt: reviewSelectionCheckedAt,
+    reviews: selectFeaturedReviews((place?.reviews || []).map(normalizeReview)),
+  }, 200, { 'Cache-Control': 'private, no-store' })
+}
+
 export async function GET() {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY
 
   if (!apiKey) {
-    return json({ error: 'Google reviews are not configured.' }, 503, {
-      'Cache-Control': 'no-store',
-    })
+    return featuredResponse()
   }
 
   try {
@@ -61,33 +74,19 @@ export async function GET() {
 
     if (!googleResponse.ok) {
       console.error(`Google Places request failed with status ${googleResponse.status}.`)
-      return json({ error: 'Google reviews are temporarily unavailable.' }, 502, {
-        'Cache-Control': 'no-store',
-      })
+      return featuredResponse()
     }
 
     const payload = await googleResponse.json()
     const place = payload.places?.[0]
 
     if (!place) {
-      return json({ error: 'The Google business listing could not be found.' }, 404, {
-        'Cache-Control': 'no-store',
-      })
+      return featuredResponse()
     }
 
-    return json({
-      name: place.displayName?.text || 'The Beach Park-Hadsan',
-      rating: Number(place.rating) || 0,
-      reviewCount: Number(place.userRatingCount) || 0,
-      googleMapsUrl: place.googleMapsUri || '',
-      reviews: selectFeaturedReviews((place.reviews || []).map(normalizeReview)),
-    }, 200, {
-      'Cache-Control': 'private, no-store',
-    })
+    return featuredResponse(place)
   } catch (error) {
     console.error('Google Places request failed.', error instanceof Error ? error.message : error)
-    return json({ error: 'Google reviews are temporarily unavailable.' }, 502, {
-      'Cache-Control': 'no-store',
-    })
+    return featuredResponse()
   }
 }
