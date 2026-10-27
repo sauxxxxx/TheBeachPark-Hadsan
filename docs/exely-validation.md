@@ -12,8 +12,8 @@ The frontend uses the supplied context `BE-INT-thebeachpark_2026-10-22`, propert
 The approved closing mockup is implemented as a cream testimonial carousel and
 a 320px desktop beach-photo booking banner. Three short checked reviews share
 the same public catalogue as the server selector; the existing review tests pass
-after that catalogue was moved to `src/data/featuredReviews.js`. The shared Stay
-prefooter is omitted to avoid a second photo booking section. Browser access was
+after that catalogue was moved to `src/data/featuredReviews.js`. The original
+sunset prefooter and glass booking search are retained on Stay. Browser access was
 disabled in Work settings during this revision, so visual QA of this closing
 layout remains pending. Automated tests and the production build pass.
 

@@ -36,7 +36,7 @@ Utility routes: `/booking/`, `/privacy/`, `/terms/`, and the 404 route.
   banner. Three short reviews come from the shared checked Google catalogue;
   successful API responses refresh or remove these entries. Author and original
   review links are retained. The review button opens Exely's full review view.
-  Stay omits the shared prefooter banner to avoid duplicate booking sections.
+  Stay also retains the shared sunset prefooter with its glass booking search.
   The provider badge is not embedded below the hero. Exely controls its own
   aggregate score and review publishing; the home Google carousel is retained.
 - The booking page omits the prefooter search/banner, site footer and marketing
