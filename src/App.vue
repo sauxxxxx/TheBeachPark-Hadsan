@@ -9,6 +9,7 @@ import BookingPromotions from './components/promotions/BookingPromotions.vue'
 import { useScrollChoreography } from './composables/useScrollChoreography'
 import { registerScrollSource } from './services/scrollEngine'
 import { destroySmoothScroll, initSmoothScroll } from './services/smoothScroll'
+import { initializeExely } from './services/exelyRuntime'
 
 const route = useRoute()
 const router = useRouter()
@@ -25,6 +26,7 @@ const { scan } = useScrollChoreography(main, () => route.fullPath)
 
 // The first view resolves after mount; arm it once the router has settled.
 onMounted(() => router.isReady().then(nextTick).then(scan))
+onMounted(() => initializeExely().catch((error) => console.warn(error.message)))
 </script>
 
 <template>
@@ -33,8 +35,8 @@ onMounted(() => router.isReady().then(nextTick).then(scan))
   <main id="main-content" ref="main">
     <RouterView />
   </main>
-  <PreFooterBooking v-if="!route.meta.immersive" />
-  <SiteFooter />
+  <PreFooterBooking v-if="!route.meta.immersive && route.name !== 'booking'" />
+  <SiteFooter v-if="route.name !== 'booking'" />
   <CookieNotice />
-  <BookingPromotions />
+  <BookingPromotions v-if="route.name !== 'booking'" />
 </template>

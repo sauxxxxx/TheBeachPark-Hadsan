@@ -21,10 +21,21 @@ Utility routes: `/booking/`, `/privacy/`, `/terms/`, and the 404 route.
 
 ## Exely boundary
 
-- Property ID `507010` remains fixed in `src/services/exely.js`.
-- `/booking/` remains the stable first-party booking path.
-- The adapter reads `VITE_EXELY_BOOKING_URL` and does not invent an Exely URL.
-- Until an official URL/package is configured, the booking route shows direct reservation contact options instead of a simulated booking form.
+- Property ID `507010`, integration context `BE-INT-thebeachpark_2026-10-22`,
+  loader hosts, 13 room IDs and three offer IDs come from the supplied Exely ZIPs
+  and are maintained in `src/data/exelyIntegration.js`.
+- `/booking/` embeds the official engine. Booking links use document navigation
+  so Exely receives the complete dates/guests/room/offer query at initialization.
+- Search widgets in the home/Stay heroes and prefooter have unique containers.
+  Vue mounts enqueue embeds through Exely's supplied command-queue protocol;
+  the shared loader and context initialize once per document, with fallback hosts.
+- The Stay page shows the official reputation badge below its hero. Its aggregate
+  score and review-publishing settings belong to Exely Reputation Manager. The
+  separate manually checked Google review carousel is retained.
+- The booking page omits the prefooter search/banner, site footer and marketing
+  popups. A compact reservation contact and legal links remain below the engine.
+- Provider widgets are not subject to the site's optional analytics choice;
+  Exely's own policies and storage behaviour are disclosed on the privacy page.
 - Live room rates, inventory, rate plans, reservations, payment data, cancellation rules, guest profiles, and loyalty remain Exely responsibilities. The public `/rates/` guide displays the client's October 2026 supplied figures; it is not a live Exely quote.
 
 ## Production configuration
@@ -52,7 +63,8 @@ are only supplied when the live Google request succeeds.
 
 ## Still requiring approval
 
-- Exely's official custom-site package, exact allowed origins, integration mode, production URL, analytics events, and API scope.
+- Exely's post-installation quality check, final production-domain configuration,
+  account-side reputation publishing preferences, and any separate analytics setup.
 - Final legal/privacy/cookie text and controller/processor wording.
 - Complete active room list, capacities, amenities, authentic images, and Exely IDs.
 - Reconcile the client-supplied October 2026 rate guide with Exely before enabling live booking. The child-height brackets overlap at exactly 4.5 ft, and the small floating mat duration was not specified.

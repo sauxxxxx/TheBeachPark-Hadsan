@@ -4,6 +4,8 @@ import DisclosureList from '../components/shared/DisclosureList.vue'
 import EditorialCta from '../components/shared/EditorialCta.vue'
 import ScrollStory from '../components/home/ScrollStory.vue'
 import StayHero from '../components/stay/StayHero.vue'
+import BookingLink from '../components/shared/BookingLink.vue'
+import ExelyReputation from '../components/shared/ExelyReputation.vue'
 import { isRoomBestseller, roomCapacity, roomRateLabel, roomRateVerifiedLabel } from '../data/roomBookingFacts'
 import { commonFaqs, roomAmenities, roomHeroImageUrl, rooms } from '../data/siteContent'
 
@@ -24,6 +26,8 @@ function area(room) {
 
 <template>
   <StayHero />
+
+  <div class="stay-reputation page-shell"><ExelyReputation /></div>
 
   <ScrollStory
     label="The feeling of staying at The Beach Park"
@@ -49,6 +53,7 @@ function area(room) {
         <p v-if="room.description" class="room-card__summary">{{ room.description }}</p>
         <span class="room-card__cta">View room details</span>
       </RouterLink>
+      <BookingLink label="Check availability" :room-type="room.slug" context="stay_room_card" variant="outline" />
     </article>
     <p class="room-rate-note">Starting rates supplied by The Beach Park in {{ roomRateVerifiedLabel }} for Monday–Thursday room-only stays. <RouterLink to="/rates/">View full rates</RouterLink>. Confirm the final quote and availability with the property.</p>
   </section>
@@ -64,6 +69,7 @@ function area(room) {
           <span class="room-plain__name"><strong>{{ room.name }}</strong><small>{{ roomRateLabel(room) }}</small></span>
           <span>{{ [sleeps(room), area(room)].filter(Boolean).join(' · ') }}</span>
         </RouterLink>
+        <BookingLink label="Check availability" :room-type="room.slug" context="stay_room_list" variant="outline" />
       </li>
     </ul>
   </section>

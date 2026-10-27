@@ -98,7 +98,7 @@ function roomMeta(item) {
             <li v-for="fact in facts" :key="fact">{{ fact }}</li>
           </ul>
           <p>{{ introDescription }}</p>
-          <BookingLink label="Check availability" context="room_detail_intro" />
+          <BookingLink label="Check availability" :room-type="room.slug" context="room_detail_intro" />
         </div>
       </header>
 
@@ -145,7 +145,7 @@ function roomMeta(item) {
       <div class="room-booking__copy">
         <h2>Ready to check your dates?</h2>
         <p>{{ roomBookingFacts(room).fromRate ? `${roomRateLabel(room)} is the client-supplied Monday–Thursday room-only starting point. ` : '' }}<RouterLink to="/rates/">See breakfast, weekend, and day-use rates</RouterLink>. Confirm the final quote, availability, and terms with the property.</p>
-        <BookingLink label="Check availability" context="room_detail_footer" />
+        <BookingLink label="Check availability" :room-type="room.slug" context="room_detail_footer" />
       </div>
       <ul class="room-booking__notes">
         <li><strong>Live availability</strong><span>See current dates and rates in Exely.</span></li>

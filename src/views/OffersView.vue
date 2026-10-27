@@ -78,7 +78,7 @@ function packageEnquiryHref(packageName) {
         <ul v-if="offer.includes.length" class="plain-list">
           <li v-for="item in offer.includes" :key="item">{{ item }}</li>
         </ul>
-        <BookingLink label="Book now" context="offer_card" variant="outline" />
+        <BookingLink label="Book now" :offer-id="offer.slug" context="offer_card" variant="outline" />
       </div>
     </article>
   </section>

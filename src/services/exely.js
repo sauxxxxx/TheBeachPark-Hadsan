@@ -1,27 +1,41 @@
-const configuredUrl = import.meta.env.VITE_EXELY_BOOKING_URL?.trim() || ''
-const configuredMode = import.meta.env.VITE_EXELY_INTEGRATION_MODE?.trim() || 'pending'
+import { exelyIntegration, offerIds, roomTypeIds } from '../data/exelyIntegration.js'
 
 export const exelyConfig = Object.freeze({
-  propertyId: '507010',
-  localPath: '/booking/',
-  mode: configuredMode,
-  bookingUrl: configuredUrl,
-  isConfigured: Boolean(configuredUrl),
+  propertyId: exelyIntegration.propertyId,
+  localPath: exelyIntegration.bookingPath,
+  mode: 'embedded',
+  bookingUrl: exelyIntegration.bookingPath,
+  isConfigured: true,
 })
 
 export function getBookingTarget() {
-  return exelyConfig.isConfigured ? exelyConfig.bookingUrl : exelyConfig.localPath
+  return exelyConfig.localPath
 }
 
 export function isExternalBookingTarget() {
   return /^https?:\/\//i.test(getBookingTarget())
 }
 
-/** Keep the selected promotion when handing off to the configured engine. */
+const bookingParameters = new Set([
+  'date', 'nights', 'adults', 'children-age', 'access-code',
+  'room-type', 'special-offer', 'hotel_id', 'currency', 'language', 'be-lng',
+])
+
+export function getBookingHref({ query = {}, roomType, offerId } = {}) {
+  const params = new URLSearchParams()
+  for (const [key, value] of Object.entries(query)) {
+    if (bookingParameters.has(key) && value != null && !Array.isArray(value)) {
+      params.set(key, String(value))
+    }
+  }
+  const room = roomTypeIds[roomType] || (/^\d+$/.test(roomType || '') ? roomType : '')
+  const offer = offerIds[offerId] || (/^\d+$/.test(offerId || '') ? offerId : '')
+  if (room) params.set('room-type', room)
+  if (offer) params.set('special-offer', offer)
+  const search = params.toString()
+  return `${exelyConfig.localPath}${search ? `?${search}` : ''}`
+}
+
 export function getOfferBookingTarget(offerId) {
-  const target = getBookingTarget()
-  if (typeof offerId !== 'string' || !/^\d+$/.test(offerId)) return target
-  const url = new URL(target, window.location.origin)
-  url.searchParams.set('special-offer', offerId)
-  return /^https?:\/\//i.test(target) ? url.href : `${url.pathname}${url.search}${url.hash}`
+  return getBookingHref({ offerId })
 }

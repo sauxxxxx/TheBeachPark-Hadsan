@@ -1,32 +1,20 @@
 <script setup>
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { exelyConfig, getOfferBookingTarget } from '../services/exely'
+import ExelyWidget from '../components/shared/ExelyWidget.vue'
 import { property } from '../data/siteContent'
-import { trackEvent } from '../services/analytics'
-
-const route = useRoute()
-const bookingTarget = computed(() => getOfferBookingTarget(route.query['special-offer']))
 </script>
 
 <template>
-  <section class="booking-view">
-    <div class="booking-view__inner">
-      <p class="eyebrow">Exely booking engine</p>
-      <h1>Book your stay.</h1>
-      <p>Current availability, room rates, reservation terms, and booking data remain with Exely for property <strong>{{ property.exelyPropertyId }}</strong>.</p>
-      <div v-if="exelyConfig.isConfigured" class="integration-placeholder">
-        <span>Official booking connection</span>
-        <strong>Continue to current availability and rates.</strong>
-        <a class="button" :href="bookingTarget" rel="noopener" @click="trackEvent('exely_booking_open', { property_id: property.exelyPropertyId })">Open secure booking</a>
-      </div>
-      <div v-else class="integration-placeholder">
-        <span>Connection pending</span>
-        <strong>The official Exely custom-site package still needs to be installed.</strong>
-        <small>No replacement form or simulated booking engine is shown. Until the production connection is configured, please contact reservations directly.</small>
-        <div class="button-row"><a class="button" :href="property.phoneHref">Call reservations</a><a class="button button--outline" :href="property.emailHref">Email the team</a></div>
-      </div>
-      <RouterLink class="text-link" to="/">← Return to the website</RouterLink>
-    </div>
+  <section class="exely-booking-page" aria-labelledby="booking-title">
+    <header class="exely-booking-page__heading">
+      <p class="overline">The Beach Park Hadsan</p>
+      <h1 id="booking-title">Book your stay.</h1>
+    </header>
+    <ExelyWidget type="booking-form" label="Room booking" />
+    <footer class="exely-booking-page__help">
+      <span>Need a hand with your reservation?</span>
+      <a :href="property.phoneHref">{{ property.phone }}</a>
+      <RouterLink to="/privacy/">Privacy</RouterLink>
+      <RouterLink to="/terms/">Terms</RouterLink>
+    </footer>
   </section>
 </template>

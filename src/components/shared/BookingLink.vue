@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
-import { exelyConfig } from '../../services/exely'
+import { useRoute, useRouter } from 'vue-router'
+import { exelyConfig, getBookingHref } from '../../services/exely'
 import { trackEvent } from '../../services/analytics'
 
 const props = defineProps({
@@ -8,9 +9,21 @@ const props = defineProps({
   context: { type: String, default: 'general' },
   variant: { type: String, default: '' },
   to: { type: [String, Object], default: '/booking/' },
+  roomType: { type: String, default: '' },
+  offerId: { type: String, default: '' },
 })
 
+const route = useRoute()
+const router = useRouter()
 const classes = computed(() => ['button', props.variant && `button--${props.variant}`])
+const destination = computed(() => {
+  const target = router.resolve(props.to)
+  return getBookingHref({
+    query: { ...route.query, ...target.query },
+    roomType: props.roomType,
+    offerId: props.offerId,
+  })
+})
 
 function trackBooking() {
   trackEvent('booking_cta_click', { context: props.context, destination: 'booking_route', exely_configured: exelyConfig.isConfigured })
@@ -18,5 +31,7 @@ function trackBooking() {
 </script>
 
 <template>
-  <RouterLink :class="classes" :to="to" @click="trackBooking">{{ label }}</RouterLink>
+  <!-- A document navigation gives the reservation engine its complete query
+       string before initialization, including dates, room and offer filters. -->
+  <a :class="classes" :href="destination" @click="trackBooking">{{ label }}</a>
 </template>
