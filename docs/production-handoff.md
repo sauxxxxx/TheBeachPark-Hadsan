@@ -32,10 +32,13 @@ Utility routes: `/booking/`, `/privacy/`, `/terms/`, and the 404 route.
   selection, and missing child ages must be completed before continuing.
 - The booking mount uses Exely's supplied command-queue protocol;
   the shared loader and context initialize once per document, with fallback hosts.
-- The Stay page has a compact guest-review section before its final booking CTA.
-  Its link opens Exely's official standalone reviews view in a new tab. The
-  provider badge is not embedded below the hero. Aggregate scores and review
-  publishing remain controlled by Exely; the checked Google carousel is retained.
+- Stay ends with a cream testimonial carousel and a compact photographic booking
+  banner. Three short reviews come from the shared checked Google catalogue;
+  successful API responses refresh or remove these entries. Author and original
+  review links are retained. The review button opens Exely's full review view.
+  Stay omits the shared prefooter banner to avoid duplicate booking sections.
+  The provider badge is not embedded below the hero. Exely controls its own
+  aggregate score and review publishing; the home Google carousel is retained.
 - The booking page omits the prefooter search/banner, site footer and marketing
   popups. A compact reservation contact and legal links remain below the engine.
 - Provider widgets are not subject to the site's optional analytics choice;
@@ -51,7 +54,8 @@ and the checks required before activating this branch in production.
 
 ## Featured Google reviews
 
-`server/reviews/featuredReviews.js` contains five positive five-star reviews
+`src/data/featuredReviews.js` contains five positive five-star reviews, re-exported
+by `server/reviews/featuredReviews.js` for the server selector. These reviews were
 checked against the public Google Maps listing on 22 October 2026. Preserve each
 review's full original wording, Google review ID, rating, author profile, avatar,
 and individual source link. The array defines the editorial display order. Review

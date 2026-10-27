@@ -35,7 +35,7 @@ onMounted(() => initializeExely().catch((error) => console.warn(error.message)))
   <main id="main-content" ref="main">
     <RouterView />
   </main>
-  <PreFooterBooking v-if="!route.meta.immersive && route.name !== 'booking'" />
+  <PreFooterBooking v-if="!route.meta.immersive && !['booking', 'stay'].includes(route.name)" />
   <SiteFooter v-if="route.name !== 'booking'" />
   <CookieNotice />
   <BookingPromotions v-if="route.name !== 'booking'" />

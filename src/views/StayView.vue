@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import DisclosureList from '../components/shared/DisclosureList.vue'
-import EditorialCta from '../components/shared/EditorialCta.vue'
+import StayBookingBanner from '../components/stay/StayBookingBanner.vue'
 import ScrollStory from '../components/home/ScrollStory.vue'
 import StayHero from '../components/stay/StayHero.vue'
 import BookingLink from '../components/shared/BookingLink.vue'
@@ -89,5 +89,5 @@ function area(room) {
 
   <DisclosureList title="Before you book" :items="commonFaqs" />
   <GuestReviews />
-  <EditorialCta title="Make the beach part of the stay." copy="Check current room availability, rates, inclusions, and policies for your dates." context="stay_footer" />
+  <StayBookingBanner />
 </template>

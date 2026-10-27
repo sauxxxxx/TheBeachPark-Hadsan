@@ -9,6 +9,14 @@ The frontend uses the supplied context `BE-INT-thebeachpark_2026-10-22`, propert
 
 ## Branded search and catalogue update
 
+The approved closing mockup is implemented as a cream testimonial carousel and
+a 320px desktop beach-photo booking banner. Three short checked reviews share
+the same public catalogue as the server selector; the existing review tests pass
+after that catalogue was moved to `src/data/featuredReviews.js`. The shared Stay
+prefooter is omitted to avoid a second photo booking section. Browser access was
+disabled in Work settings during this revision, so visual QA of this closing
+layout remains pending. Automated tests and the production build pass.
+
 The under-hero reputation badge has been removed. A compact guest-review section
 near the end of Stay links to Exely's standalone full-review view. That page was
 verified in Ugsimar Chrome to show the property rating and individual guest reviews.

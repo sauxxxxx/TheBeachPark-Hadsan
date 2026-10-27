@@ -7,10 +7,6 @@
 .exely-widget__fallback button,
 .exely-widget__fallback a { margin-right: 18px; color: inherit; font: inherit; }
 .exely-widget__fallback button { padding: 0; border: 0; border-bottom: 1px solid; background: transparent; cursor: pointer; }
-.stay-guest-reviews { display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; padding-block: clamp(32px, 4vw, 56px); border-top: 1px solid var(--line); scroll-margin-top: 100px; }
-.stay-guest-reviews h2 { margin: 0; font-size: var(--type-headline); }
-.stay-guest-reviews p { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
-.stay-guest-reviews > a { flex-shrink: 0; min-height: 44px; }
 
 .exely-booking-page {
   min-height: 100svh;
@@ -26,7 +22,6 @@
 #tl-booking-cart { z-index: 1 !important; }
 
 @media (max-width: 760px) {
-  .stay-guest-reviews { align-items: flex-start; flex-direction: column; gap: 18px; }
   .exely-booking-page { padding: 112px 12px 28px; }
   .exely-booking-page__heading { margin-bottom: 24px; padding-inline: 8px; }
   .exely-booking-page > .exely-widget { min-height: 440px; }
