@@ -9,6 +9,10 @@ The frontend uses the supplied context `BE-INT-thebeachpark_2026-10-22`, propert
 
 ## Branded search and catalogue update
 
+The under-hero reputation badge has been removed. A compact guest-review section
+near the end of Stay links to Exely's standalone full-review view. That page was
+verified in Ugsimar Chrome to show the property rating and individual guest reviews.
+
 The Exely search embeds have been replaced with first-party Vue forms on home,
 Stay and the prefooter. Custom calendars enforce check-out after check-in;
 guest controls collect each child's age. A shared session selection also flows

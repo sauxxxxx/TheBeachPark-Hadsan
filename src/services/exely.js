@@ -39,3 +39,8 @@ export function getBookingHref({ query = {}, roomType, offerId } = {}) {
 export function getOfferBookingTarget(offerId) {
   return getBookingHref({ offerId })
 }
+
+export function getGuestReviewsUrl() {
+  const { loaderHosts, language, context } = exelyIntegration
+  return `https://${loaderHosts[0]}/integration/widget/reviews-widget/${language}/${context}`
+}

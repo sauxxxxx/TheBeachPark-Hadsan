@@ -30,11 +30,12 @@ Utility routes: `/booking/`, `/privacy/`, `/terms/`, and the 404 route.
   guests, child ages and a promo code through `useBookingSearch`. Session storage
   retains that selection during the visit. Room and offer links use the same
   selection, and missing child ages must be completed before continuing.
-- The booking/reputation mounts use Exely's supplied command-queue protocol;
+- The booking mount uses Exely's supplied command-queue protocol;
   the shared loader and context initialize once per document, with fallback hosts.
-- The Stay page shows the official reputation badge below its hero. Its aggregate
-  score and review-publishing settings belong to Exely Reputation Manager. The
-  separate manually checked Google review carousel is retained.
+- The Stay page has a compact guest-review section before its final booking CTA.
+  Its link opens Exely's official standalone reviews view in a new tab. The
+  provider badge is not embedded below the hero. Aggregate scores and review
+  publishing remain controlled by Exely; the checked Google carousel is retained.
 - The booking page omits the prefooter search/banner, site footer and marketing
   popups. A compact reservation contact and legal links remain below the engine.
 - Provider widgets are not subject to the site's optional analytics choice;

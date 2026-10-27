@@ -5,7 +5,7 @@ import EditorialCta from '../components/shared/EditorialCta.vue'
 import ScrollStory from '../components/home/ScrollStory.vue'
 import StayHero from '../components/stay/StayHero.vue'
 import BookingLink from '../components/shared/BookingLink.vue'
-import ExelyReputation from '../components/shared/ExelyReputation.vue'
+import GuestReviews from '../components/stay/GuestReviews.vue'
 import { isRoomBestseller, roomCapacity, roomRateLabel, roomRateVerifiedLabel } from '../data/roomBookingFacts'
 import { commonFaqs, roomAmenities, roomHeroImageUrl, rooms } from '../data/siteContent'
 
@@ -26,8 +26,6 @@ function area(room) {
 
 <template>
   <StayHero />
-
-  <div class="stay-reputation page-shell"><ExelyReputation /></div>
 
   <ScrollStory
     label="The feeling of staying at The Beach Park"
@@ -90,5 +88,6 @@ function area(room) {
   </section>
 
   <DisclosureList title="Before you book" :items="commonFaqs" />
+  <GuestReviews />
   <EditorialCta title="Make the beach part of the stay." copy="Check current room availability, rates, inclusions, and policies for your dates." context="stay_footer" />
 </template>

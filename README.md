@@ -24,7 +24,8 @@ widgets. Their property context, loader hosts, room IDs, and offer IDs are in
 `src/data/exelyIntegration.js`; the provider renders availability, pricing and
 checkout on `/booking/`. No booking API credentials are needed in the frontend.
 
-The shared runtime loads Exely once for its booking and reputation widgets.
+The shared runtime loads Exely once for its booking widget. The Stay page links
+to Exely's full guest-review view near its final booking section.
 Our Vue search forms use branded calendars, guest controls and promo-code entry;
 they share a selection remembered in session storage. General searches and
 room/offer links use normal page navigation to `/booking/`, preserving dates,
