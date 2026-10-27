@@ -61,21 +61,22 @@ function submit() {
   <form class="booking-enquiry" aria-label="Find a room" @submit.prevent="submit">
     <div class="booking-enquiry__fields">
       <button type="button" class="booking-enquiry__field" :aria-expanded="activePanel === 'checkIn'" aria-haspopup="dialog" @click="openPanel('checkIn', $event)">
-        <span class="booking-enquiry__label">Check-in</span><span class="booking-enquiry__value">{{ formatBookingDate(selection.checkIn) }}</span>
+        <span class="booking-enquiry__label">Arrival</span><span class="booking-enquiry__value">{{ formatBookingDate(selection.checkIn) }}</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 2v6m10-6v6M3 11h18"/></svg>
       </button>
       <button ref="checkoutButton" type="button" class="booking-enquiry__field" :aria-expanded="activePanel === 'checkOut'" aria-haspopup="dialog" @click="openPanel('checkOut', $event)">
-        <span class="booking-enquiry__label">Check-out</span><span class="booking-enquiry__value">{{ formatBookingDate(selection.checkOut) }}</span>
+        <span class="booking-enquiry__label">Departure</span><span class="booking-enquiry__value">{{ formatBookingDate(selection.checkOut) }}</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M7 2v6m10-6v6M3 11h18"/></svg>
       </button>
       <button ref="guestsButton" type="button" class="booking-enquiry__field" :aria-expanded="activePanel === 'guests'" aria-haspopup="dialog" @click="openPanel('guests', $event)">
         <span class="booking-enquiry__label">Guests</span><span class="booking-enquiry__value">{{ guestLabel }}</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg>
       </button>
-      <button type="submit" class="booking-enquiry__submit">Find a room <span aria-hidden="true">↗</span></button>
+      <button type="submit" class="booking-enquiry__submit" aria-label="Find a room">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      </button>
     </div>
     <div class="booking-enquiry__extra">
-      <span>Find your place by the shore.</span>
       <button type="button" :aria-expanded="showPromo" :aria-controls="`${id}-promo`" @click="togglePromo">{{ showPromo ? 'Remove promo code' : 'Have a promo code?' }}</button>
     </div>
     <div v-if="showPromo" :id="`${id}-promo`" class="booking-enquiry__promo"><label :for="`${id}-promo-input`">Promo code</label><input :id="`${id}-promo-input`" ref="promoCode" v-model="selection.promoCode" type="text" maxlength="80" autocomplete="off" placeholder="Enter your code" /></div>

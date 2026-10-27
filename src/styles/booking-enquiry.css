@@ -1,54 +1,48 @@
 .booking-enquiry {
-  width: min(100%, 1062px);
+  position: relative;
+  width: min(100%, 700px);
   margin: 0 auto;
-  padding: 14px 16px 10px;
-  border: 1px solid rgba(255,255,255,.7);
-  background: var(--paper);
-  color: var(--ink);
+  padding: 4px;
+  border: 1px solid rgba(255,255,255,.55);
+  background: rgba(5,39,53,.62);
+  color: white;
   text-align: left;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
-.booking-enquiry__fields { display: grid; grid-template-columns: 1fr 1fr 1.15fr 190px; align-items: center; }
-.booking-enquiry__field { position: relative; display: grid; gap: 5px; min-width: 0; padding: 7px 42px 7px 22px; border: 0; border-right: 1px solid var(--line); background: transparent; color: inherit; text-align: left; cursor: pointer; }
-.booking-enquiry__field:first-child { padding-left: 10px; }
-.booking-enquiry__field svg { position: absolute; right: 18px; top: 24px; width: 18px; height: 18px; color: var(--navy-soft); }
-.booking-enquiry__label { color: var(--coral-deep); font-size: 10px; line-height: 1.3; letter-spacing: .1em; text-transform: uppercase; }
-.booking-enquiry__value { font-size: 16px; font-weight: 500; line-height: 1.6; white-space: nowrap; }
-.booking-enquiry__field:hover .booking-enquiry__value { color: var(--coral-deep); }
-.booking-enquiry__submit { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 58px; margin-left: 20px; padding: 0 22px; border: 1px solid var(--navy); background: var(--navy); color: white; font-size: 13px; cursor: pointer; transition: background 200ms ease; }
-.booking-enquiry__submit:hover { background: var(--navy-deep); }
-.booking-enquiry__submit span { font-size: 20px; }
-.booking-enquiry__extra { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 6px 0 10px; color: var(--muted); font-size: 11px; }
-.booking-enquiry__extra button { min-height: 28px; padding: 0; border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--ink); font-size: 11px; cursor: pointer; }
-.booking-enquiry__promo { display: flex; align-items: center; gap: 14px; padding: 12px 10px 6px; font-size: 12px; }
-.booking-enquiry__promo input { width: min(240px, 65%); min-height: 40px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 0; background: white; color: var(--ink); font: inherit; }
+.booking-enquiry__fields { display: grid; grid-template-columns: 1fr 1fr 1fr 58px; align-items: center; }
+.booking-enquiry__field { display: grid; align-content: center; gap: 4px; min-width: 0; min-height: 54px; padding: 6px 16px; border: 0; border-right: 1px solid rgba(255,255,255,.4); background: transparent; color: inherit; text-align: left; cursor: pointer; }
+.booking-enquiry__field:nth-child(3) { border-right: 0; }
+.booking-enquiry__field > svg { display: none; }
+.booking-enquiry__label { color: rgba(255,255,255,.86); font-size: 10px; line-height: 1.3; }
+.booking-enquiry__value { font-size: 12px; font-weight: 500; line-height: 1.45; white-space: nowrap; }
+.booking-enquiry__field:hover { background: rgba(255,255,255,.06); }
+.booking-enquiry__submit { display: grid; place-items: center; width: 58px; min-height: 54px; padding: 0; border: 1px solid var(--paper); background: var(--paper); color: var(--ink); cursor: pointer; transition: background 200ms ease; }
+.booking-enquiry__submit:hover { background: white; }
+.booking-enquiry__submit svg { width: 20px; height: 20px; }
+.booking-enquiry__extra { position: absolute; top: calc(100% + 5px); right: 0; }
+.booking-enquiry__extra button { min-height: 28px; padding: 0; border: 0; border-bottom: 1px solid rgba(255,255,255,.35); background: none; color: rgba(255,255,255,.88); font-size: 10px; cursor: pointer; }
+.booking-enquiry__promo { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-top: 1px solid rgba(255,255,255,.3); font-size: 12px; }
+.booking-enquiry__promo input { width: min(240px, 65%); min-height: 40px; padding: 8px 12px; border: 1px solid rgba(255,255,255,.5); border-radius: 0; background: rgba(255,255,255,.08); color: white; font: inherit; }
+.booking-enquiry__promo input::placeholder { color: rgba(255,255,255,.65); }
 .booking-enquiry__error { margin: 12px 10px 4px; color: var(--coral-deep); font-size: 13px; }
-.booking-enquiry button:focus-visible, .booking-panel button:focus-visible, .booking-panel select:focus-visible, .booking-enquiry input:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
-.proposal-hero__content { width: min(1062px, calc(100vw - 48px)); }
+.booking-enquiry > .booking-enquiry__error { color: #ffd5c7; }
+.booking-enquiry button:focus-visible, .booking-enquiry input:focus-visible { outline: 2px solid white; outline-offset: -3px; }
+.booking-panel button:focus-visible, .booking-panel select:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+.proposal-hero__content { width: min(900px, calc(100vw - 48px)); }
 .proposal-hero__actions, .stay-cinematic-hero__actions { width: 100%; }
-.prefooter-booking .booking-enquiry { width: min(1062px, 100%); }
+.prefooter-booking .booking-enquiry { width: min(700px, 100%); }
 
-@media (max-width: 1020px) and (min-width: 761px) {
-  .booking-enquiry__fields { grid-template-columns: 1fr 1fr 1.1fr 155px; }
-  .booking-enquiry__field { padding-left: 14px; padding-right: 28px; }
-  .booking-enquiry__field svg { right: 8px; width: 15px; }
-  .booking-enquiry__value { font-size: 14px; }
-  .booking-enquiry__submit { margin-left: 12px; padding-inline: 14px; }
-}
 @media (max-width: 760px) {
-  .booking-enquiry { max-width: 460px; padding: 16px; }
+  .booking-enquiry { max-width: 460px; }
   .booking-enquiry__fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .booking-enquiry__field, .booking-enquiry__field:first-child { min-height: 72px; padding: 10px 22px 12px 6px; }
-  .booking-enquiry__field:nth-child(2) { padding-left: 14px; border-right: 0; }
-  .booking-enquiry__field:nth-child(3) { grid-column: 1 / -1; min-height: 70px; border-top: 1px solid var(--line); border-right: 0; }
-  .booking-enquiry__field svg { right: 8px; width: 15px; }
-  .booking-enquiry__value { font-size: 14px; }
-  .booking-enquiry__submit { grid-column: 1 / -1; min-height: 50px; margin: 4px 0 0; padding-inline: 18px; }
-  .booking-enquiry__extra { padding: 10px 0 0; font-size: 10px; gap: 8px; }
-  .booking-enquiry__extra > span { display: none; }
-  .booking-enquiry__extra button { margin-left: auto; }
-  .proposal-hero__content { bottom: 24px; }
+  .booking-enquiry__field { min-height: 56px; padding-inline: 14px; }
+  .booking-enquiry__field:nth-child(2) { border-right: 0; }
+  .booking-enquiry__field:nth-child(3) { grid-column: 1; min-height: 58px; border-top: 1px solid rgba(255,255,255,.4); border-right: 0; }
+  .booking-enquiry__submit { grid-column: 2; justify-self: end; width: 58px; min-height: 54px; margin-top: 4px; }
+  .booking-enquiry__promo { padding-inline: 10px; }
+  .proposal-hero__content { bottom: 48px; }
   .proposal-hero h1 { margin-bottom: 16px; }
-  .proposal-hero__intro { margin-bottom: 20px; }
-  .stay-cinematic-hero { min-height: max(42rem, 100svh); }
-  .stay-cinematic-hero__content { bottom: 32px; }
+  .proposal-hero__intro { margin-bottom: 24px; }
+  .stay-cinematic-hero__content { bottom: 64px; }
 }
