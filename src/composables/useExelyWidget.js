@@ -14,9 +14,11 @@ export function useExelyWidget(type) {
 
   function inspect() {
     if (!active || !container.value) return
+    const frames = [...container.value.querySelectorAll('iframe')]
     const rendered = type === 'booking-form'
-      ? [...container.value.querySelectorAll('iframe[src]')].some((frame) => frame.getBoundingClientRect().height > 200)
-      : Boolean(container.value.querySelector('iframe, form, input, button, a'))
+      ? frames.some((frame) => frame.hasAttribute('src') && frame.getBoundingClientRect().height > 200)
+      : frames.some((frame) => frame.getBoundingClientRect().height > 1)
+        || Boolean(container.value.querySelector('form, input, button, a'))
     // The engine first inserts a loading frame and a one-pixel reservation
     // frame. Wait for the latter to resize after its provider handshake.
     if (!rendered) return

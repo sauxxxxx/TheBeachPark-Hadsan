@@ -32,3 +32,5 @@ search profile resolves its booking target against the current host.
 Run `npm test` for booking-link, loader-queue, fallback-host, and review tests.
 Verify real widgets in a browser before publishing, including direct booking links,
 multiple search forms, route changes, calendars, children ages, and mobile widths.
+Current validation and the embedded provider connection blocker are recorded in
+`docs/exely-validation.md`.

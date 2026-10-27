@@ -40,7 +40,10 @@ Utility routes: `/booking/`, `/privacy/`, `/terms/`, and the 404 route.
 
 ## Production configuration
 
-Copy `.env.example` into the deployment environment and provide the approved site origin and Exely booking target. The host must serve `index.html` for unknown paths; `public/_redirects` covers hosts supporting Netlify-style rewrite rules.
+Copy `.env.example` into the deployment environment and provide the approved site origin. Exely's supplied context and first-party booking path are configured in source. The host must serve `index.html` for unknown paths; `public/_redirects` covers hosts supporting Netlify-style rewrite rules.
+
+See `docs/exely-validation.md` for the unresolved embedded provider connection
+and the checks required before activating this branch in production.
 
 ## Featured Google reviews
 
