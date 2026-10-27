@@ -20,4 +20,7 @@ import './styles/rates.css'
 import './styles/offers.css'
 import './styles/package-menu.css'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App).use(router)
+// Resolve the first route before mounting widgets, so a direct booking visit
+// cannot queue a footer search that is immediately removed.
+router.isReady().then(() => app.mount('#app'))

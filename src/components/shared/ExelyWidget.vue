@@ -10,7 +10,7 @@ const { container, containerId, loading, unavailable, retry } = useExelyWidget(p
 </script>
 
 <template>
-  <div class="exely-widget" :class="{ 'is-loading': loading }" :aria-label="label" :aria-busy="loading" data-lenis-prevent>
+  <div class="exely-widget" :class="{ 'is-loading': loading, 'is-unavailable': unavailable }" :aria-label="label" :aria-busy="loading" data-lenis-prevent>
     <div :id="containerId" ref="container" class="exely-widget__mount"></div>
     <p v-if="loading" class="exely-widget__status" role="status">Loading {{ label.toLowerCase() }}…</p>
     <div v-if="unavailable" class="exely-widget__fallback" role="status">

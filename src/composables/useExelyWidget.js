@@ -13,7 +13,13 @@ export function useExelyWidget(type) {
   let retryCount = 0
 
   function inspect() {
-    if (!active || !container.value?.querySelector('iframe, form, input, button, a')) return
+    if (!active || !container.value) return
+    const rendered = type === 'booking-form'
+      ? [...container.value.querySelectorAll('iframe[src]')].some((frame) => frame.getBoundingClientRect().height > 200)
+      : Boolean(container.value.querySelector('iframe, form, input, button, a'))
+    // The engine first inserts a loading frame and a one-pixel reservation
+    // frame. Wait for the latter to resize after its provider handshake.
+    if (!rendered) return
     loading.value = false
     unavailable.value = false
     window.clearTimeout(timer)
@@ -24,7 +30,7 @@ export function useExelyWidget(type) {
     unavailable.value = false
     observer?.disconnect()
     observer = new MutationObserver(inspect)
-    observer.observe(container.value, { childList: true, subtree: true })
+    observer.observe(container.value, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'height', 'src'] })
     timer = window.setTimeout(() => {
       if (!active || !loading.value) return
       loading.value = false

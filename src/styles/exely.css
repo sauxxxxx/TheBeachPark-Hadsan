@@ -1,5 +1,6 @@
 .exely-widget { min-width: 0; }
 .exely-widget__mount { min-width: 0; width: 100%; }
+.exely-widget.is-unavailable .exely-widget__mount { max-height: 0; overflow: hidden; }
 .exely-widget__status { margin: 0; padding: 24px 0; font-size: 13px; }
 .exely-widget__fallback { padding: 24px 0; font-size: 13px; }
 .exely-widget__fallback p { margin: 0 0 12px; }
