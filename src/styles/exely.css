@@ -9,8 +9,6 @@
 .exely-widget__fallback button { padding: 0; border: 0; border-bottom: 1px solid; background: transparent; cursor: pointer; }
 .exely-reputation { width: min(100%, 277px); }
 .stay-reputation { display: flex; justify-content: center; padding-block: 28px; }
-.room-card > .button { margin-top: 18px; }
-.room-plain li > .button { margin-block: 8px; }
 
 .exely-booking-page {
   min-height: 100svh;

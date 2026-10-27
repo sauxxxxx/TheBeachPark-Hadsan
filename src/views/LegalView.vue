@@ -15,6 +15,7 @@ const isPrivacy = computed(() => route.meta.legal === 'privacy')
     <template v-if="isPrivacy">
       <h2>Website data</h2><p>This front-end may collect consent preferences and anonymous interaction events. Production analytics must not run until the visitor has granted the relevant consent.</p>
       <h2>Booking data</h2><p>When a visitor continues to the Exely booking experience, reservation, payment, and guest data are handled under the policies shown by the official booking provider.</p>
+      <p>Your selected dates, guest counts, children’s ages and promo code are remembered in this browser tab during your visit so you can compare rooms without entering them again.</p>
       <h2>Exely widgets</h2><p>Room searches, reservations, and the guest-rating widget load services from Exely. Those services may use cookies or browser storage for their functionality and process technical request data under the policies provided by Exely.</p>
       <h2>Google Maps content</h2><p>Google Maps provides the rating and guest reviews displayed on this website. Review profile images are loaded from Google, and Google may process technical request data under the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.</p>
       <h2>Contact</h2><p>Questions may be sent to <a :href="property.emailHref">{{ property.email }}</a>.</p>

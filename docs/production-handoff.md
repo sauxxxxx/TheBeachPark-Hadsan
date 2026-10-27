@@ -26,8 +26,11 @@ Utility routes: `/booking/`, `/privacy/`, `/terms/`, and the 404 route.
   and are maintained in `src/data/exelyIntegration.js`.
 - `/booking/` embeds the official engine. Booking links use document navigation
   so Exely receives the complete dates/guests/room/offer query at initialization.
-- Search widgets in the home/Stay heroes and prefooter have unique containers.
-  Vue mounts enqueue embeds through Exely's supplied command-queue protocol;
+- Branded Vue search forms in the home/Stay heroes and prefooter share dates,
+  guests, child ages and a promo code through `useBookingSearch`. Session storage
+  retains that selection during the visit. Room and offer links use the same
+  selection, and missing child ages must be completed before continuing.
+- The booking/reputation mounts use Exely's supplied command-queue protocol;
   the shared loader and context initialize once per document, with fallback hosts.
 - The Stay page shows the official reputation badge below its hero. Its aggregate
   score and review-publishing settings belong to Exely Reputation Manager. The

@@ -7,7 +7,23 @@ previous release until the embedded booking engine passes its connection check.
 The frontend uses the supplied context `BE-INT-thebeachpark_2026-10-22`, property
 `507010`, official loaders, 13 room identifiers and three offer identifiers.
 
-## Passed
+## Branded search and catalogue update
+
+The Exely search embeds have been replaced with first-party Vue forms on home,
+Stay and the prefooter. Custom calendars enforce check-out after check-in;
+guest controls collect each child's age. A shared session selection also flows
+into room-specific buttons, offer links and the header booking action.
+
+Room cards now stack photographs and descriptions vertically with a compact
+action row below, restoring the full image width. Unphotographed room entries
+also keep their availability buttons separate from the room-detail link.
+
+The search/date and query tests bring the suite to 25 passing tests. Browser QA
+confirmed general navigation and a room-specific handoff for 15–18 November,
+three adults, children aged seven and eight, and a promo code containing `&`.
+These frontend handoffs do not establish successful booking inside Exely.
+
+## Original integration checks
 
 - All 19 automated tests and the production build.
 - Independent search widgets in the Stay hero and page footer.

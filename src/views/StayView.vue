@@ -51,9 +51,11 @@ function area(room) {
         <h2>{{ room.name }}</h2>
         <p class="room-card__rate">{{ roomRateLabel(room) }}</p>
         <p v-if="room.description" class="room-card__summary">{{ room.description }}</p>
-        <span class="room-card__cta">View room details</span>
       </RouterLink>
-      <BookingLink label="Check availability" :room-type="room.slug" context="stay_room_card" variant="outline" />
+      <div class="room-card__actions">
+        <BookingLink label="Check availability" :room-type="room.slug" context="stay_room_card" />
+        <RouterLink class="room-card__cta" :to="`/stay/room-details/${room.slug}/`">Room details <span aria-hidden="true">↗</span></RouterLink>
+      </div>
     </article>
     <p class="room-rate-note">Starting rates supplied by The Beach Park in {{ roomRateVerifiedLabel }} for Monday–Thursday room-only stays. <RouterLink to="/rates/">View full rates</RouterLink>. Confirm the final quote and availability with the property.</p>
   </section>
@@ -65,7 +67,7 @@ function area(room) {
     </div>
     <ul class="room-plain" data-sequence>
       <li v-for="room in unphotographed" :key="room.slug">
-        <RouterLink :to="`/stay/room-details/${room.slug}/`">
+        <RouterLink class="room-plain__details" :to="`/stay/room-details/${room.slug}/`">
           <span class="room-plain__name"><strong>{{ room.name }}</strong><small>{{ roomRateLabel(room) }}</small></span>
           <span>{{ [sleeps(room), area(room)].filter(Boolean).join(' · ') }}</span>
         </RouterLink>
