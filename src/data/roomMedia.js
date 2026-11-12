@@ -97,6 +97,9 @@ const roomImageOrderOverrides = {
     'barkada-poolside-balcony-1.webp',
     'barkada-poolside-balcony-2.webp',
   ],
+  'double-deluxe': ['double-deluxe-2.webp', 'double-deluxe-3.webp', 'double-deluxe-1.webp'],
+  'double-room': ['double-room-3.webp', 'double-room-2.webp', 'double-room-1.webp'],
+  'lagoon-room': ['lagoon-room-3.webp', 'lagoon-room-2.webp', 'lagoon-room-1.webp'],
   'oceanfront-deck-room': [
     'oceanfront-deck-room-2.webp',
     'oceanfront-deck-room-1.webp',
