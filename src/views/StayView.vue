@@ -6,15 +6,15 @@ import ScrollStory from '../components/home/ScrollStory.vue'
 import StayHero from '../components/stay/StayHero.vue'
 import BookingLink from '../components/shared/BookingLink.vue'
 import GuestReviews from '../components/stay/GuestReviews.vue'
-import { useRoomPhotos } from '../composables/useRoomPhotos'
+import { useRoomCatalog } from '../composables/useRoomCatalog'
 import { isRoomBestseller, roomCapacity, roomRateLabel, roomRateVerifiedLabel } from '../data/roomBookingFacts'
-import { commonFaqs, roomAmenities, rooms } from '../data/siteContent'
+import { commonFaqs, roomAmenities } from '../data/siteContent'
 
-const { coverFor, useBundledPhotos } = useRoomPhotos()
-const roomCards = computed(() => rooms.map((room) => ({ room, cover: coverFor(room) })))
+const { rooms, coverFor, useBundledPhotos } = useRoomCatalog()
+const roomCards = computed(() => rooms.value.map((room) => ({ room, cover: coverFor(room) })))
 const photographed = computed(() => roomCards.value.filter(({ cover }) => cover))
 const unphotographed = computed(() => roomCards.value.filter(({ cover }) => !cover))
-const noPetsRooms = computed(() => rooms.filter((room) => !room.petsAllowed).map((room) => room.name))
+const noPetsRooms = computed(() => rooms.value.filter((room) => room.petsAllowed === false).map((room) => room.name))
 
 function sleeps(room) {
   const capacity = roomCapacity(room)
@@ -37,8 +37,8 @@ function area(room) {
   />
 
   <section class="page-section page-shell intro-spread">
-    <div><h2 data-lines>Thirteen ways to stay.</h2></div>
-    <p data-reveal>Whether you are travelling as a couple, a family, or a barkada, every room sits within the same short walk of the beach. Monday–Thursday room-only starting rates are shown below; <RouterLink to="/rates/">see all rate plans</RouterLink> for breakfast, weekends, and day use.</p>
+    <div><h2 data-lines>Explore our rooms.</h2></div>
+    <p data-reveal>Whether you are travelling as a couple, a family, or a barkada, every room sits within the same short walk of the beach. See <RouterLink to="/rates/">our rate guide</RouterLink> for breakfast, weekends, and day use, or check availability for a live quote.</p>
   </section>
 
   <section id="rooms" class="room-grid page-shell" aria-label="Room types" data-sequence>
@@ -54,11 +54,11 @@ function area(room) {
         <p v-if="room.description" class="room-card__summary">{{ room.description }}</p>
       </RouterLink>
       <div class="room-card__actions">
-        <BookingLink label="Check availability" :room-type="room.slug" context="stay_room_card" />
+        <BookingLink label="Check availability" :room-type="room.id" context="stay_room_card" />
         <RouterLink class="room-card__cta" :to="`/stay/room-details/${room.slug}/`">Room details <span aria-hidden="true">↗</span></RouterLink>
       </div>
     </article>
-    <p class="room-rate-note">Starting rates supplied by The Beach Park in {{ roomRateVerifiedLabel }} for Monday–Thursday room-only stays. <RouterLink to="/rates/">View full rates</RouterLink>. Confirm the final quote and availability with the property.</p>
+    <p class="room-rate-note">Where shown, starting rates are for Monday–Thursday room-only stays, supplied by The Beach Park in {{ roomRateVerifiedLabel }}. <RouterLink to="/rates/">View the rate guide</RouterLink>. Confirm the final quote and availability with the property.</p>
   </section>
 
   <section v-if="unphotographed.length" class="page-section page-shell">
@@ -72,7 +72,7 @@ function area(room) {
           <span class="room-plain__name"><strong>{{ room.name }}</strong><small>{{ roomRateLabel(room) }}</small></span>
           <span>{{ [sleeps(room), area(room)].filter(Boolean).join(' · ') }}</span>
         </RouterLink>
-        <BookingLink label="Check availability" :room-type="room.slug" context="stay_room_list" variant="outline" />
+        <BookingLink label="Check availability" :room-type="room.id" context="stay_room_list" variant="outline" />
       </li>
     </ul>
   </section>

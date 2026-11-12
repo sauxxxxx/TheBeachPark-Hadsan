@@ -1,5 +1,3 @@
-import { exelyIntegration, roomTypeIds } from '../data/exelyIntegration.js'
-
 const photoOrigin = 'https://cdn.behopenapi.com'
 const bathroomPhotos = {
   'double-room': '639300768302597908-b4f31dbc-8f77-44db-bd21-836b63e285c7',
@@ -16,9 +14,10 @@ function photoId(image, roomId) {
   return /^[\w-]+$/.test(id) ? id : null
 }
 
-function roomPhotos(slug, roomId, images) {
+export function normalizeRoomPhotos(slug, roomId, images) {
+  if (!Array.isArray(images)) return undefined
   const ids = [...new Set(images.map((image) => photoId(image, roomId)).filter(Boolean))]
-  if (images.length && !ids.length) return null
+  if (images.length && !ids.length) return undefined
 
   if (ids.length > 1 && ids[0] === bathroomPhotos[slug]) {
     ids.push(ids.shift())
@@ -35,28 +34,4 @@ function roomPhotos(slug, roomId, images) {
     canBeCover: id !== bathroomPhotos[slug],
     sourceLabel: 'Property photograph',
   }))
-}
-
-export async function getExelyRoomPhotos({ signal } = {}) {
-  const { propertyId, loaderHosts } = exelyIntegration
-  const url = new URL('/ApiWebDistribution/BookingForm/hotel_info', `https://${loaderHosts[0]}`)
-  url.search = new URLSearchParams({ 'hotels[0].code': propertyId, language: 'en-gb' })
-  const response = await fetch(url, { cache: 'no-cache', signal })
-  if (!response.ok) throw new Error(`Exely room photos request failed (${response.status})`)
-
-  const payload = await response.json()
-  const hotel = payload.hotels?.find((item) => String(item?.code) === propertyId)
-  if (!Array.isArray(hotel?.room_types) || !hotel.room_types.length) {
-    throw new Error('Exely room photos response is missing room types')
-  }
-
-  const roomsById = new Map(hotel.room_types.map((room) => [String(room?.code), room]))
-  const photosByRoom = {}
-  for (const [slug, id] of Object.entries(roomTypeIds)) {
-    const images = roomsById.get(id)?.images
-    if (!Array.isArray(images)) continue
-    const photos = roomPhotos(slug, id, images)
-    if (photos) photosByRoom[slug] = photos
-  }
-  return photosByRoom
 }

@@ -4,23 +4,28 @@ import { useRoute } from 'vue-router'
 import BookingLink from '../components/shared/BookingLink.vue'
 import EditorialImage from '../components/EditorialImage.vue'
 import GalleryLightbox from '../components/gallery/GalleryLightbox.vue'
-import { useRoomPhotos } from '../composables/useRoomPhotos'
+import { useRoomCatalog } from '../composables/useRoomCatalog'
 import { isRoomBestseller, roomBookingFacts, roomCapacity, roomRateLabel } from '../data/roomBookingFacts'
-import { roomAmenities, rooms } from '../data/siteContent'
+import { roomAmenities } from '../data/siteContent'
 
 const route = useRoute()
-const { photosFor, coverFor, useBundledPhotos } = useRoomPhotos()
-const room = computed(() => rooms.find((item) => item.slug === route.params.slug) || rooms[0])
+const { rooms, status, photosFor, coverFor, useBundledPhotos } = useRoomCatalog()
+const room = computed(() => rooms.value.find((item) => item.slug === route.params.slug))
 const activeIndex = ref(0)
 const lightboxOpen = ref(false)
 
 const heroImage = computed(() => coverFor(room.value)?.src)
 const area = computed(() => room.value.size?.unit === 'square_metre' ? `${room.value.size.value} m²` : '')
+const petPolicy = computed(() => {
+  if (room.value.petsAllowed === true) return 'Pets welcome'
+  if (room.value.petsAllowed === false) return 'No pets'
+  return ''
+})
 const facts = computed(() => [
   roomCapacity(room.value) ? `Sleeps up to ${roomCapacity(room.value)}` : '',
   area.value,
   roomRateLabel(room.value),
-  room.value.petsAllowed ? 'Pets welcome' : 'No pets',
+  petPolicy.value,
 ].filter(Boolean))
 const descriptionLines = computed(() => {
   const text = (room.value.description || '').trim()
@@ -38,25 +43,29 @@ const roomDetails = computed(() => [
   { label: 'Capacity', value: roomCapacity(room.value) ? `Up to ${roomCapacity(room.value)} guests` : 'Confirm with the reservations team' },
   { label: 'Floor area', value: area.value || 'Confirm with the reservations team' },
   { label: 'Mon–Thu room-only rate', value: roomRateLabel(room.value) },
-  { label: 'Pet policy', value: room.value.petsAllowed ? 'Pets welcome' : 'Pets are not permitted' },
+  { label: 'Pet policy', value: petPolicy.value || 'Confirm with the reservations team' },
 ])
 const publishedAmenities = computed(() => [
   ...roomAmenities,
-  room.value.petsAllowed ? 'Pets allowed' : 'Pets not allowed',
-])
-const galleryItems = computed(() => photosFor(room.value).map((photo, index) => ({
-  ...photo,
-  alt: `${room.value.name} at The Beach Park Hadsan, photograph ${index + 1}`,
-  title: room.value.name,
-})))
+  petPolicy.value,
+].filter(Boolean))
+const galleryItems = computed(() => {
+  const item = room.value
+  if (!item) return []
+  return photosFor(item).map((photo, index) => ({
+    ...photo,
+    alt: `${item.name} at The Beach Park Hadsan, photograph ${index + 1}`,
+    title: item.name,
+  }))
+})
 const galleryPreviewItems = computed(() => galleryItems.value.slice(0, 4))
-const otherRooms = computed(() => rooms
+const otherRooms = computed(() => rooms.value
   .filter((item) => item.slug !== room.value.slug)
   .map((item) => ({ item, cover: coverFor(item) }))
   .filter(({ cover }) => cover)
   .slice(0, 3))
 
-watch(() => room.value.slug, () => {
+watch(() => room.value?.slug, () => {
   activeIndex.value = 0
   lightboxOpen.value = false
 })
@@ -85,7 +94,7 @@ function roomMeta(item) {
 </script>
 
 <template>
-  <article class="room-page">
+  <article v-if="room" class="room-page">
     <div class="room-visual-lead page-shell">
       <header class="room-hero" :class="{ 'room-hero--text-only': !heroImage }">
         <button v-if="heroImage" class="room-hero__media" type="button" :aria-label="`Open photograph 1 of ${galleryItems.length}`" @click="openGallery(0)">
@@ -105,7 +114,7 @@ function roomMeta(item) {
             <li v-for="fact in facts" :key="fact">{{ fact }}</li>
           </ul>
           <p>{{ introDescription }}</p>
-          <BookingLink label="Check availability" :room-type="room.slug" context="room_detail_intro" />
+          <BookingLink label="Check availability" :room-type="room.id" context="room_detail_intro" />
         </div>
       </header>
 
@@ -152,7 +161,7 @@ function roomMeta(item) {
       <div class="room-booking__copy">
         <h2>Ready to check your dates?</h2>
         <p>{{ roomBookingFacts(room).fromRate ? `${roomRateLabel(room)} is the client-supplied Monday–Thursday room-only starting point. ` : '' }}<RouterLink to="/rates/">See breakfast, weekend, and day-use rates</RouterLink>. Confirm the final quote, availability, and terms with the property.</p>
-        <BookingLink label="Check availability" :room-type="room.slug" context="room_detail_footer" />
+        <BookingLink label="Check availability" :room-type="room.id" context="room_detail_footer" />
       </div>
       <ul class="room-booking__notes">
         <li><strong>Live availability</strong><span>See current dates and rates in Exely.</span></li>
@@ -177,4 +186,10 @@ function roomMeta(item) {
 
     <GalleryLightbox v-if="lightboxOpen" :images="galleryItems" :active-index="activeIndex" @close="lightboxOpen = false" @change="showImage" @image-error="useBundledPhotos(room, $event)" />
   </article>
+  <section v-else class="not-found page-shell" aria-live="polite">
+    <h1 v-if="status === 'idle' || status === 'loading'">Loading room details…</h1>
+    <h1 v-else-if="status === 'unavailable'">Room details are temporarily unavailable.</h1>
+    <h1 v-else>Room type unavailable.</h1>
+    <RouterLink class="button" to="/stay/">View all rooms</RouterLink>
+  </section>
 </template>
