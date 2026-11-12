@@ -165,7 +165,11 @@ export const rooms = [
     "maxOccupancy": 2,
     "size": null,
     "petsAllowed": false,
-    "images": []
+    "images": [
+      "double-room-1.webp",
+      "double-room-2.webp",
+      "double-room-3.webp"
+    ]
   },
   {
     "slug": "double-deluxe",
@@ -174,7 +178,11 @@ export const rooms = [
     "maxOccupancy": 2,
     "size": null,
     "petsAllowed": true,
-    "images": []
+    "images": [
+      "double-deluxe-1.webp",
+      "double-deluxe-2.webp",
+      "double-deluxe-3.webp"
+    ]
   },
   {
     "slug": "lagoon-room",
@@ -183,7 +191,11 @@ export const rooms = [
     "maxOccupancy": 8,
     "size": null,
     "petsAllowed": true,
-    "images": []
+    "images": [
+      "lagoon-room-1.webp",
+      "lagoon-room-2.webp",
+      "lagoon-room-3.webp"
+    ]
   },
   {
     "slug": "oceanfront-deck-deluxe",
@@ -192,7 +204,10 @@ export const rooms = [
     "maxOccupancy": 4,
     "size": null,
     "petsAllowed": true,
-    "images": []
+    "images": [
+      "oceanfront-deck-deluxe-1.webp",
+      "oceanfront-deck-deluxe-2.webp"
+    ]
   }
 ]
 
