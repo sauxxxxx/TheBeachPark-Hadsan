@@ -4,16 +4,17 @@ import { useRoute } from 'vue-router'
 import BookingLink from '../components/shared/BookingLink.vue'
 import EditorialImage from '../components/EditorialImage.vue'
 import GalleryLightbox from '../components/gallery/GalleryLightbox.vue'
+import { useRoomPhotos } from '../composables/useRoomPhotos'
 import { isRoomBestseller, roomBookingFacts, roomCapacity, roomRateLabel } from '../data/roomBookingFacts'
-import { roomAmenities, roomHeroImageUrl, roomImageFiles, roomImageSourceLabel, roomImageUrl, rooms } from '../data/siteContent'
+import { roomAmenities, rooms } from '../data/siteContent'
 
 const route = useRoute()
+const { photosFor, coverFor, useBundledPhotos } = useRoomPhotos()
 const room = computed(() => rooms.find((item) => item.slug === route.params.slug) || rooms[0])
 const activeIndex = ref(0)
 const lightboxOpen = ref(false)
 
-const images = computed(() => roomImageFiles(room.value))
-const heroImage = computed(() => roomHeroImageUrl(room.value))
+const heroImage = computed(() => coverFor(room.value)?.src)
 const area = computed(() => room.value.size?.unit === 'square_metre' ? `${room.value.size.value} m²` : '')
 const facts = computed(() => [
   roomCapacity(room.value) ? `Sleeps up to ${roomCapacity(room.value)}` : '',
@@ -43,15 +44,16 @@ const publishedAmenities = computed(() => [
   ...roomAmenities,
   room.value.petsAllowed ? 'Pets allowed' : 'Pets not allowed',
 ])
-const galleryItems = computed(() => images.value.map((file, index) => ({
-  src: roomImageUrl(file),
+const galleryItems = computed(() => photosFor(room.value).map((photo, index) => ({
+  ...photo,
   alt: `${room.value.name} at The Beach Park Hadsan, photograph ${index + 1}`,
   title: room.value.name,
-  sourceLabel: roomImageSourceLabel(file),
 })))
 const galleryPreviewItems = computed(() => galleryItems.value.slice(0, 4))
 const otherRooms = computed(() => rooms
-  .filter((item) => item.slug !== room.value.slug && item.images.length)
+  .filter((item) => item.slug !== room.value.slug)
+  .map((item) => ({ item, cover: coverFor(item) }))
+  .filter(({ cover }) => cover)
   .slice(0, 3))
 
 watch(() => room.value.slug, () => {
@@ -59,8 +61,13 @@ watch(() => room.value.slug, () => {
   lightboxOpen.value = false
 })
 
+watch(() => galleryItems.value.length, (count) => {
+  if (!count) lightboxOpen.value = false
+  if (activeIndex.value >= count) activeIndex.value = 0
+})
+
 function showImage(index) {
-  const count = images.value.length
+  const count = galleryItems.value.length
   if (!count) return
   activeIndex.value = (index + count) % count
 }
@@ -81,8 +88,8 @@ function roomMeta(item) {
   <article class="room-page">
     <div class="room-visual-lead page-shell">
       <header class="room-hero" :class="{ 'room-hero--text-only': !heroImage }">
-        <button v-if="heroImage" class="room-hero__media" type="button" :aria-label="`Open photograph 1 of ${images.length}`" @click="openGallery(0)">
-          <EditorialImage :src="heroImage" :alt="`${room.name} at The Beach Park Hadsan`" :width="2000" :height="1500" eager />
+        <button v-if="heroImage" class="room-hero__media" type="button" :aria-label="`Open photograph 1 of ${galleryItems.length}`" @click="openGallery(0)">
+          <EditorialImage :src="heroImage" :alt="`${room.name} at The Beach Park Hadsan`" :width="2000" :height="1500" eager @error="useBundledPhotos(room, $event)" />
         </button>
 
         <div class="room-intro">
@@ -106,7 +113,7 @@ function roomMeta(item) {
         <button type="button" class="room-gallery__open" @click="openGallery(0)">View all {{ galleryItems.length }} photos</button>
         <div class="room-gallery__grid" :class="`has-${galleryPreviewItems.length}`">
           <button v-for="(item, index) in galleryPreviewItems" :key="item.src" type="button" :aria-label="`Open photograph ${index + 1} of ${galleryItems.length}`" @click="openGallery(index)">
-            <EditorialImage :src="item.src" :alt="item.alt" :width="index === 0 ? 1600 : 900" :height="index === 0 ? 1800 : 700" />
+            <EditorialImage :src="item.src" :alt="item.alt" :width="index === 0 ? 1600 : 900" :height="index === 0 ? 1800 : 700" @error="useBundledPhotos(room, $event)" />
             <span>{{ String(index + 1).padStart(2, '0') }} / {{ String(galleryItems.length).padStart(2, '0') }}</span>
           </button>
         </div>
@@ -160,14 +167,14 @@ function roomMeta(item) {
         <RouterLink class="text-link" to="/stay/">View all rooms</RouterLink>
       </div>
       <div class="room-related__grid">
-        <RouterLink v-for="item in otherRooms" :key="item.slug" :to="`/stay/room-details/${item.slug}/`">
-          <EditorialImage :src="roomHeroImageUrl(item)" :alt="`${item.name} at The Beach Park Hadsan`" :width="1000" :height="750" />
+        <RouterLink v-for="{ item, cover } in otherRooms" :key="item.slug" :to="`/stay/room-details/${item.slug}/`">
+          <EditorialImage :src="cover.thumbnail" :alt="`${item.name} at The Beach Park Hadsan`" :width="1000" :height="750" @error="useBundledPhotos(item, $event)" />
           <span>{{ roomMeta(item) }}</span>
           <h3>{{ item.name }}</h3>
         </RouterLink>
       </div>
     </section>
 
-    <GalleryLightbox v-if="lightboxOpen" :images="galleryItems" :active-index="activeIndex" @close="lightboxOpen = false" @change="showImage" />
+    <GalleryLightbox v-if="lightboxOpen" :images="galleryItems" :active-index="activeIndex" @close="lightboxOpen = false" @change="showImage" @image-error="useBundledPhotos(room, $event)" />
   </article>
 </template>

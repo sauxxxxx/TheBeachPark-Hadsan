@@ -6,11 +6,14 @@ import ScrollStory from '../components/home/ScrollStory.vue'
 import StayHero from '../components/stay/StayHero.vue'
 import BookingLink from '../components/shared/BookingLink.vue'
 import GuestReviews from '../components/stay/GuestReviews.vue'
+import { useRoomPhotos } from '../composables/useRoomPhotos'
 import { isRoomBestseller, roomCapacity, roomRateLabel, roomRateVerifiedLabel } from '../data/roomBookingFacts'
-import { commonFaqs, roomAmenities, roomHeroImageUrl, rooms } from '../data/siteContent'
+import { commonFaqs, roomAmenities, rooms } from '../data/siteContent'
 
-const photographed = computed(() => rooms.filter((room) => room.images.length))
-const unphotographed = computed(() => rooms.filter((room) => !room.images.length))
+const { coverFor, useBundledPhotos } = useRoomPhotos()
+const roomCards = computed(() => rooms.map((room) => ({ room, cover: coverFor(room) })))
+const photographed = computed(() => roomCards.value.filter(({ cover }) => cover))
+const unphotographed = computed(() => roomCards.value.filter(({ cover }) => !cover))
 const noPetsRooms = computed(() => rooms.filter((room) => !room.petsAllowed).map((room) => room.name))
 
 function sleeps(room) {
@@ -39,10 +42,10 @@ function area(room) {
   </section>
 
   <section id="rooms" class="room-grid page-shell" aria-label="Room types" data-sequence>
-    <article v-for="room in photographed" :key="room.slug" class="room-card">
+    <article v-for="{ room, cover } in photographed" :key="room.slug" class="room-card">
       <RouterLink class="room-card__link" :to="`/stay/room-details/${room.slug}/`">
         <div class="room-card__image" data-image-expand>
-          <img :src="roomHeroImageUrl(room)" :alt="`${room.name} at The Beach Park Hadsan`" width="1600" height="1000" loading="lazy" />
+          <img :src="cover.thumbnail" :alt="`${room.name} at The Beach Park Hadsan`" width="1600" height="1000" loading="lazy" @error="useBundledPhotos(room, $event)" />
           <span v-if="isRoomBestseller(room)" class="room-card__badge">Bestseller</span>
         </div>
         <p class="room-card__meta">{{ [sleeps(room), area(room)].filter(Boolean).join(' · ') }}</p>
@@ -64,7 +67,7 @@ function area(room) {
       <p>Photos aren’t available for these rooms yet. Contact our team for details and availability.</p>
     </div>
     <ul class="room-plain" data-sequence>
-      <li v-for="room in unphotographed" :key="room.slug">
+      <li v-for="{ room } in unphotographed" :key="room.slug">
         <RouterLink class="room-plain__details" :to="`/stay/room-details/${room.slug}/`">
           <span class="room-plain__name"><strong>{{ room.name }}</strong><small>{{ roomRateLabel(room) }}</small></span>
           <span>{{ [sleeps(room), area(room)].filter(Boolean).join(' · ') }}</span>

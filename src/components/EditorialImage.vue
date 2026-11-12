@@ -1,4 +1,6 @@
 <script setup>
+const emit = defineEmits(['error'])
+
 defineProps({
   src: { type: String, required: true },
   alt: { type: String, required: true },
@@ -18,6 +20,7 @@ defineProps({
       :loading="eager ? 'eager' : 'lazy'"
       :fetchpriority="eager ? 'high' : 'auto'"
       decoding="async"
+      @error="emit('error', $event)"
     />
   </picture>
 </template>

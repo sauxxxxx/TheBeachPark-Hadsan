@@ -6,7 +6,7 @@ const props = defineProps({
   activeIndex: { type: Number, required: true },
 })
 
-const emit = defineEmits(['close', 'change'])
+const emit = defineEmits(['close', 'change', 'image-error'])
 const dialog = ref(null)
 const closeButton = ref(null)
 const returnFocus = document.activeElement
@@ -73,7 +73,7 @@ onBeforeUnmount(() => {
       </button>
 
       <figure>
-        <img :src="images[activeIndex].src" :alt="images[activeIndex].alt" />
+        <img :src="images[activeIndex].src" :alt="images[activeIndex].alt" @error="emit('image-error', $event)" />
         <figcaption>
           <div>
             <span>{{ images[activeIndex].sourceLabel }}</span>

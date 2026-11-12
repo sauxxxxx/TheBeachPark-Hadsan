@@ -127,11 +127,6 @@ export function roomImageFiles(room) {
   return [...preferred, ...remaining]
 }
 
-export function roomHeroImageUrl(room) {
-  const [heroFile] = roomImageFiles(room)
-  return heroFile ? roomImageUrl(heroFile) : null
-}
-
 export function roomImageSourceLabel(file) {
   return roomImageOverrides[file]
     ? 'Room view'

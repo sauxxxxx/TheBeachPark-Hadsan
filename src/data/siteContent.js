@@ -142,7 +142,7 @@ export const footerNavigation = [
 // Room facts come from the booking system; see scripts/sync-rooms.mjs. The
 // media layer can safely apply approved presentation imagery without editing
 // the generated booking-data file or replacing the verified source photos.
-export { roomHeroImageUrl, roomImageFiles, roomImageSourceLabel, roomImageUrl, rooms } from './roomMedia'
+export { rooms } from './roomMedia'
 
 // Standard inclusions as published on the property's services page. The booking
 // system only populates an amenity list on one room type, so these are stated at
